@@ -1,9 +1,11 @@
 # Criando um ambiente virtual venv
 
 ## Criação do ambiente virtual: 
+> O ambiente virtual será criado no diretório o terminal está aberto. <br>
+> O último argumento "venv" se refere ao nome do ambiente virtual, podendo ser alterado conforme o critério do desenvolvedor.
 ### Windows:
 ```sh
-py -m venv %HOMEPATH%\project-path\venv
+py -m venv venv
 ```
 ### Linux/MacOS:
 ```sh
@@ -22,7 +24,11 @@ chmod +7 ./venv/bin/activate
 ## Ativar ambiente virtual, execução do arquivo activate:
 ### Windows:
 ```sh
-source ~\project-path\Scripts\Activate
+source .\venv\Scripts\Activate
+```
+ou
+```sh
+.\venv\Scripts\Activate
 ```
 ### Linux/MacOS:
 ```sh

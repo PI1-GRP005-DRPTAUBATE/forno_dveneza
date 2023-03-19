@@ -22,22 +22,34 @@ python -m django --version
 
 ## Projeto
 ### Criar projeto Django:
+#### Windows
+```sh
+django-admin startproject nome_projeto .
+```
 #### Linux/MacOS:
 ```sh
 django-admin startproject nome_projeto .
 ```
 
 ### Executar servidor de desenvolvimento:
+#### Windows
+```sh
+py .\manage.py runserver
+```
 #### Linux/MacOS:
 ```sh
-python3 manage.py runserver
+python manage.py runserver
 ```
 
 ## App
 ### Criar app dentro do projeto:
+#### Windows
+```sh
+py .\manage.py startapp nome_app
+```
 #### Linux/MacOS:
 ```sh
-python3 manage.py startapp nome_app
+python manage.py startapp nome_app
 ```
 
 ## Migrations
@@ -49,7 +61,7 @@ py manage.py makemigrations
 
 #### Linux/MacOS:
 ```sh
-python3 manage.py makemigrations
+python manage.py makemigrations
 ```
 ### Aplicar mudanças ao banco de dados:
 #### Windows:
@@ -58,7 +70,7 @@ py manage.py migrate
 ```
 ### Linux/MacOS:
 ```sh
-python3 manage.py migrate
+python manage.py migrate
 ```
 
 ## Users
@@ -69,6 +81,6 @@ py manage.py createsuperuser
 ```
 ### Linux/MacOS:
 ```sh
-python3 manage.py createsuperuser 
+python manage.py createsuperuser 
 
 ```
