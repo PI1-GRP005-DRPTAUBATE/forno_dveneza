@@ -1,5 +1,31 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block body %}
-  Login
+<section>
+  <main class="form-signin w-25 m-auto mt-5 text-center">
+      <form method='POST' action='{{ login }}'> {% csrf_token %}
+      <i class="bi bi-person-circle display-1"></i>
+        <h1 class="h3 mb-3 fw-normal">Login</h1>
+    
+        <div class="form-floating my-2">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Nome de usuário" name="nome">
+          <label for="floatingInput">Nome de usuário</label>
+        </div>
+        <div class="form-floating my-2">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="senha">
+          <label for="floatingPassword">Senha</label>
+        </div>
+    
+        <div class="checkbox my-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Lembrar
+          </label>
+        </div>
+        <button class="w-100 btn btn-lg" type="submit">Entrar</button>
+        <div class="my-3">
+          <span>Não tem cadastro? Clique <a href="{% url 'cadastro' %}">aqui</a></span>
+        </div>
+      </form>
+    </main>
+  </section>
 {% endblock body %}

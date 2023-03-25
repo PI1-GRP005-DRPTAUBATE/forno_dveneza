@@ -1,5 +1,26 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block body %}
-  Cadastro
+<section>
+  <main class="form-signin w-25 m-auto mt-5 text-center">
+      <form method='POST' action='{{ cadastro }}'> {% csrf_token %}
+      <i class="bi bi-person-circle display-1"></i>
+        <h1 class="h3 mb-3 fw-normal">Cadastro de usuário</h1>
+    
+        <div class="form-floating my-2">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Nome de usuário" name="nome">
+          <label for="floatingInput">Nome de usuário</label>
+        </div>
+        <div class="form-floating my-2">
+          <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email">
+          <label for="floatingInput">Email</label>
+        </div>
+        <div class="form-floating my-2">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="senha">
+          <label for="floatingPassword">Senha</label>
+        </div>
+        <button class="w-100 btn btn-lg" type="submit">Cadastrar</button>
+      </form>
+    </main>
+  </section>
 {% endblock body %}
