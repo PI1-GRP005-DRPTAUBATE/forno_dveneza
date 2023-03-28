@@ -21,6 +21,11 @@
         </div>
         <button class="w-100 btn btn-lg" type="submit">Cadastrar</button>
       </form>
+      {% if aviso %}
+        <div>
+          <span>aviso.mensagem</span>
+        </div>
+      {% endif %}
     </main>
   </section>
 {% endblock body %}

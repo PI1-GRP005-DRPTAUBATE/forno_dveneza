@@ -1,2 +1,2 @@
 # forno_dveneza
-Repositório para o projeto da Pizzaria Forno D' Veneza
+Branch com implementações iniciais do Front-end da aplicação Web.
