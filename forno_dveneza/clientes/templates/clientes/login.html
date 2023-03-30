@@ -27,5 +27,11 @@
         </div>
       </form>
     </main>
+    {% if aviso %}
+        <div class="my-3 text-center">
+          <span class="text-danger">{{ aviso }}</span>
+        </div>
+    {% endif %}
   </section>
+
 {% endblock body %}

@@ -26,7 +26,27 @@
         border-radius: 0;
         border-top: 1px solid rgba(0, 0, 0, 0.151);
     }
-    
+    .flex-row {
+        flex-wrap: wrap;
+    }
+
+    .flex-row > .flex-column {
+        margin: auto;
+        width: 90%;
+    }
+    .edit-perfil-button {
+        text-align: center !important;
+        margin-bottom: 15px;
+    }
+
+    footer > .col-md-4 {
+        width: 100%;
+        text-align: center;
+    }
+    footer > .nav {
+        width: 100%;
+        justify-content: center !important;
+    }
 }
 
 body {

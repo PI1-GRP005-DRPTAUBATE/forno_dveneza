@@ -24,26 +24,36 @@
     
               <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
                 <li>
-                  <a href="{% url 'index' %}" class="nav-link text-white" />
+                  <a href="{% url 'index' %}" class="nav-link text-white">
                     Home
                   </a>
                 </li>
                 <li>
-                  <a href="{% url 'todos_produtos' %}" class="nav-link text-white" />
+                  <a href="{% url 'todos_produtos' %}" class="nav-link text-white">
                     Cardápio
                   </a>
                 </li>
                 <li>
-                  <a href="{% url 'carrinho' %}" class="nav-link text-white" />
+                  <a href="{% url 'carrinho' %}" class="nav-link text-white">
                     Carrinho
                   </a>
                 </li>
-                <li>
-                  <a href="{% url 'login' %}" class="nav-link text-white" />
-                    Login
+                  <li>
+                  <a href="{% url 'minha_area' %}" class="nav-link text-white">
+                    Minha área
                   </a>
                 </li>
-                
+                <li>
+                  {% if user.is_authenticated %}
+                    <a href="{% url 'sair' %}" class="nav-link text-white">
+                        Sair
+                    </a>
+                  {% else %}
+                    <a href="{% url 'login' %}" class="nav-link text-white">
+                      Entrar
+                    </a>
+                  {% endif %}
+                </li>
               </ul>
             </div>
           </div>
