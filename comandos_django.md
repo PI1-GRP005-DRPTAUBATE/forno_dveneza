@@ -6,7 +6,7 @@
 ```sh
 py -m pip install Django
 ```
-#### Linux/MacOS ou Debian:
+#### Linux/MacOS ou Debian (3.2.18):
 ```sh
 python -m pip install Django
 ou
