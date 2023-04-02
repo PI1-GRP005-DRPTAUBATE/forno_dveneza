@@ -114,3 +114,4 @@ wxPython==4.2.0
 xdg==5
 yt-dlp==2023.3.4
 zipp==1.0.0
+
