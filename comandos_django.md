@@ -6,9 +6,10 @@
 ```sh
 py -m pip install Django
 ```
-#### Linux/MacOS:
+#### Linux/MacOS ou Debian:
 ```sh
 python -m pip install Django
+apt install python3-django
 ```
 ## Verificando a versão do Django
 #### Windows:
