@@ -17,9 +17,11 @@ apt install python3-django
 ```sh
 py -m django --version
 ```
-#### Linux/MacOS:
+#### Linux/MacOS ou Debian:
 ```sh
 python -m django --version
+ou
+apt show python3-django
 ```
 
 ## Projeto
