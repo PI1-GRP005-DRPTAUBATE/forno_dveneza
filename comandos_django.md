@@ -6,18 +6,22 @@
 ```sh
 py -m pip install Django
 ```
-#### Linux/MacOS:
+#### Linux/MacOS ou Debian (3.2.18):
 ```sh
 python -m pip install Django
+ou
+apt install python3-django
 ```
 ## Verificando a versão do Django
 #### Windows:
 ```sh
 py -m django --version
 ```
-#### Linux/MacOS:
+#### Linux/MacOS ou Debian:
 ```sh
 python -m django --version
+ou
+apt show python3-django
 ```
 
 ## Projeto

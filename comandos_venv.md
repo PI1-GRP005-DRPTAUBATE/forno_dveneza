@@ -11,6 +11,10 @@ py -m venv venv
 ```sh
 python3 -m venv venv
 ```
+### Debian:
+```sh
+apt install python3.11-venv
+```
 ## Permissão de execução para o arquivo activate:
 ### Windows:
 ```sh

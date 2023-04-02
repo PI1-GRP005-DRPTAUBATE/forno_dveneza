@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block body %}
+
+    <div class="d-flex flex-row w-100">
+        <div class="d-flex flex-column flex-shrink-0 p-3" style="min-width: 280px;">
+            <ul class="nav nav-pills flex-column mb-auto text-center">
+            <li>
+                <a href="#seu-perfil" class="btn w-100 mb-3" aria-current="page">
+                Perfil
+                </a>
+            </li>
+            <li>
+                <a href="#seus-pedidos" class="btn w-100">
+                Pedidos
+                </a>
+            </li>
+            </ul>
+        </div>
+        <div class="container w-100 mx-3">
+            <div class="w-100">
+                <h4 class="my-3" id="seu-perfil">Meu perfil</h4>
+                <div>
+                    <div class="row mx-2">
+                        <div class="col">
+                            <label for="campo-nome-usuario">Nome de usuário</label>
+                            <input type="text" id="campo-nome-usuario" disabled class="form-control" placeholder="{{ user.username }}">
+                        </div>
+                        <div class="col">
+                            <label for="campo-email">Email</label>
+                            <input type="text" id="campo-email" disabled class="form-control" placeholder="{{ user.email }}">
+                        </div>
+                    </div>
+                </div>
+                <form class="row g-3 mt-3 mx-2" method="POST" action="{{ minha_area }}"> {% csrf_token %}
+                    <div class="col-md-6">
+                        <label for="campo-nome" class="form-label">Nome</label>
+                        <input type="text" name="campo-nome" id="campo-nome" class="form-control" value="{{ cliente.nome }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="campo-sobrenome" class="form-label">Sobrenome</label>
+                        <input type="text" name="campo-sobrenome" id="campo-sobrenome" class="form-control" value="{{ cliente.sobrenome }}">
+                    </div>
+
+                    <div class="w-100 text-end edit-perfil-button">
+                        <button type="submit" class="btn mx-5">Editar perfil</button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <h4 class="" id="seus-pedidos">Meus pedidos</h4>
+            </div>
+        </div>
+    </div>
+    {% if dados_salvos == True %}
+        <script>
+            window.alert('Dados salvos com sucesso.')
+        </script>
+    {% endif %}
+{% endblock body %}

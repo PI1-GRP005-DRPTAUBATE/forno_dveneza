@@ -1,0 +1,132 @@
+@media (max-width: 600px) {
+    header .nav {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    header ul > li {
+        width: 100%;
+        text-align: center;
+    }
+    .form-signin {
+        width: 90% !important;
+    }
+    .form-group {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+
+    .input-field {
+        width: 90% !important;
+    }
+    .cardapio > .card {
+        width: 100% !important;
+        border: none;
+        border-radius: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.151);
+    }
+    .flex-row {
+        flex-wrap: wrap;
+    }
+
+    .flex-row > .flex-column {
+        margin: auto;
+        width: 90%;
+    }
+    .edit-perfil-button {
+        text-align: center !important;
+        margin-bottom: 15px;
+    }
+
+    footer > .col-md-4 {
+        width: 100%;
+        text-align: center;
+    }
+    footer > .nav {
+        width: 100%;
+        justify-content: center !important;
+    }
+}
+
+body {
+    min-height: 100vh;
+}
+
+a {
+    color: #1ABC9C;
+}
+
+header {
+    background-color: #E74C3C;
+}
+
+li:hover {
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.25);
+    transition: 1s;
+}
+
+form > i {
+    color: #1ABC9C;
+}
+
+form .form-secao {
+    text-transform: uppercase;
+}
+
+.cadastro {
+    width: 90%;
+}
+
+.cadastro .btn-secondary {
+    background-color: #D1D5D8;
+    border: none;
+}
+
+.cadastro .btn-secondary:hover {
+    background-color: #E74C3C;
+}
+
+.btn, .btn:hover {
+    color: #FFFFFF ;
+    background-color: #1ABC9C;
+}
+
+.btn:hover {
+    background-color: #1abc9cb2;
+}
+
+.card {
+    border-color: #e74d3c69;
+}
+
+.card:hover {
+    background-color: #e74d3c0e;
+}
+
+.cardapio-img {
+    height: 100px;
+}
+
+.carrinho {
+    min-height: 90vh;
+}
+
+footer {
+    bottom: 0;
+    width: 80%;
+    margin-left: 10%;
+}
+
+footer i {
+    font-size: 1.5rem;
+    padding: 5px;
+}
+
+footer i:hover {
+    text-align: end;
+    transition: 0.5s;
+    border-radius: 50%;
+    color: #1ABC9C;
+}
