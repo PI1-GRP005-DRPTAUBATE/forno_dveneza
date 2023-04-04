@@ -1,7 +1,29 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block body %}
-  <section>
-    <img src="{% static 'base/img/banner.png' %}" alt="" class="img-fluid rounded my-5 m-auto d-block">
-  </section>
+    <section>
+        <figure>
+            <img src="{% static 'base/img/banner.png' %}" alt="Banner com o logo da pizzaria, desenho de um pizzaiolo segurando uma pizza" class="img-fluid rounded my-5 m-auto d-block">
+        </figure>
+    </section>
+    <section>
+        <h4 class="text-center">Nossas Redes</h4>
+        <ul class="nav mx-4 justify-content-center list-unstyled d-flex mt-3   ">
+            <li class="ms-3 d-flex flex-column text-center mb-5"><a class="text-muted social-link p-2" target="_blank" href="https://www.instagram.com/fornod_veneza/">
+                <p>Forno D'Veneza no Instagram</p>
+                <i class="bi bi-instagram"></i>
+            </a></li>
+            <li class="ms-3 d-flex flex-column text-center mb-5"><a class="text-muted social-link p-2" target="_blank" href="https://api.whatsapp.com/send?phone=5512981537944&text=Ol%C3%A1%20seja%20bem%20vindo%20a%20pizzaria%20Forno%20D%27%20Veneza%2C%20aguarde%20por%20favor%20um%20instante%20que%20j%C3%A1%20vamos%20te%20atender%F0%9F%98%89">
+                <p>Forno D'Veneza no WhatsApp</p>
+                <i class="bi bi-whatsapp"></i>
+            </a></li>
+        </ul>
+    </section>
+    <section>
+        <div class="mapa d-flex flex-column text-center m-auto mb-5">
+            <h4>Nossa localização</h4>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3664.589126865572!2d-45.965365782556155!3d-23.294374599999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cdcb4033eecb29%3A0x81be4f08050dadc3!2sAv.%20Avarei%2C%20613%20-%20Jardim%20Santa%20Maria%2C%20Jacare%C3%AD%20-%20SP%2C%2012328-000!5e0!3m2!1spt-BR!2sbr!4v1680573873327!5m2!1spt-BR!2sbr"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
 {% endblock body %}

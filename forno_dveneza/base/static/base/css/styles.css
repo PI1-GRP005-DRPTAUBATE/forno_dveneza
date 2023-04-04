@@ -1,16 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
 @media (max-width: 600px) {
     header .nav {
         flex-direction: column;
         align-items: center;
     }
-    
+
     header ul > li {
         width: 100%;
         text-align: center;
     }
+
+    .mapa {
+        width: 100%;
+    }
+
     .form-signin {
         width: 90% !important;
     }
+
     .form-group {
         display: flex;
         flex-wrap: wrap;
@@ -20,12 +28,14 @@
     .input-field {
         width: 90% !important;
     }
+
     .cardapio > .card {
         width: 100% !important;
         border: none;
         border-radius: 0;
         border-top: 1px solid rgba(0, 0, 0, 0.151);
     }
+
     .flex-row {
         flex-wrap: wrap;
     }
@@ -34,6 +44,7 @@
         margin: auto;
         width: 90%;
     }
+
     .edit-perfil-button {
         text-align: center !important;
         margin-bottom: 15px;
@@ -43,6 +54,7 @@
         width: 100%;
         text-align: center;
     }
+
     footer > .nav {
         width: 100%;
         justify-content: center !important;
@@ -50,6 +62,7 @@
 }
 
 body {
+    font-family: 'Poppins', sans-serif;
     min-height: 100vh;
 }
 
@@ -59,6 +72,27 @@ a {
 
 header {
     background-color: #E74C3C;
+}
+
+.mapa {
+    width: 80%;
+}
+
+.mapa > iframe {
+    height: 300px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-top: 5px;
+}
+
+.social-link {
+    text-decoration: none;
+    border: 1px solid rgba(26, 188, 156, 0.5);
+    border-radius: 5px;
+}
+
+.social-link:hover {
+    background-color: rgba(26, 188, 156, 0.5);
+    transition: 0.9s;
 }
 
 li:hover {
@@ -119,14 +153,7 @@ footer {
     margin-left: 10%;
 }
 
-footer i {
-    font-size: 1.5rem;
+i {
+    font-size: 2rem;
     padding: 5px;
-}
-
-footer i:hover {
-    text-align: end;
-    transition: 0.5s;
-    border-radius: 50%;
-    color: #1ABC9C;
 }
