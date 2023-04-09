@@ -1,0 +1,11 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block body %}
+    <form action="{% url 'editar-perfil' %}" method="POST" class="d-flex justify-content-center">
+        <div class="w-50">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Salvar" class="btn btn-success mt-3">
+        </div>
+    </form>
+{% endblock %}

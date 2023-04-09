@@ -20,32 +20,17 @@
         <div class="container w-100 mx-3">
             <div class="w-100">
                 <h4 class="my-3" id="seu-perfil">Meu perfil</h4>
-                <div>
-                    <div class="row mx-2">
-                        <div class="col">
-                            <label for="campo-nome-usuario">Nome de usuário</label>
-                            <input type="text" id="campo-nome-usuario" disabled class="form-control" placeholder="{{ user.username }}">
-                        </div>
-                        <div class="col">
-                            <label for="campo-email">Email</label>
-                            <input type="text" id="campo-email" disabled class="form-control" placeholder="{{ user.email }}">
-                        </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span>Nome de usuário:</span>
+                        {{ user.username }}
+                        <span>Nome:</span>
+                        {{ cliente.nome }}
+                        <span>Sobrenome:</span>
+                        {{ cliente.sobrenome }}
                     </div>
                 </div>
-                <form class="row g-3 mt-3 mx-2" method="POST" action="{{ minha_area }}"> {% csrf_token %}
-                    <div class="col-md-6">
-                        <label for="campo-nome" class="form-label">Nome</label>
-                        <input type="text" name="campo-nome" id="campo-nome" class="form-control" value="{{ cliente.nome }}">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="campo-sobrenome" class="form-label">Sobrenome</label>
-                        <input type="text" name="campo-sobrenome" id="campo-sobrenome" class="form-control" value="{{ cliente.sobrenome }}">
-                    </div>
-
-                    <div class="w-100 text-end edit-perfil-button">
-                        <button type="submit" class="btn mx-5">Editar perfil</button>
-                    </div>
-                </form>
+                 <button type="submit" onclick="location.href='{% url 'editar-perfil' %}'" class="btn btn-primary">Atualizar dados</button>
             </div>
             <div>
                 <h4 class="" id="seus-pedidos">Meus pedidos</h4>

@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from .models import Cliente
+from .forms import ClienteForm
 
 
 def login(request):
@@ -60,37 +61,86 @@ def cadastro(request):
 
 @login_required(login_url='login')
 def minha_area(request):
+    return render(request, 'clientes/area-cliente.html', {
+        'user': request.user,
+        'cliente': Cliente.objects.filter(usuario=request.user).first(),
+        'dados_salvos': False
+    })
+
+@login_required(login_url='login')
+def editar_perfil(request):
     if request.method == 'GET':
-        return render(request, 'clientes/area-cliente.html', {
-            'user': request.user,
-            'cliente': Cliente.objects.filter(usuario=request.user).first(),
-            'dados_salvos': False
-        })
+        cliente = Cliente.objects.filter(usuario=request.user).first()
+        if cliente:
+            form = ClienteForm(instance=cliente)
+        else:
+            form = ClienteForm()
+        context = {
+            'form': form
+        }
+        return render(request, 'clientes/editar-perfil.html', context=context)
     else:
         cliente = Cliente.objects.filter(usuario=request.user).first()
-        campo_nome = request.POST.get('campo-nome')
-        campo_sobrenome = request.POST.get('campo-sobrenome')
-        if cliente:
-            cliente.nome = campo_nome
-            cliente.sobrenome = campo_sobrenome
-        else:
-            cliente = Cliente()
-            cliente.nome = campo_nome
-            cliente.sobrenome = campo_sobrenome
-            cliente.usuario = request.user
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            novo_nome = form.cleaned_data['nome']
+            novo_sobrenome = form.cleaned_data['sobrenome']
+            novo_sexo = form.cleaned_data['sexo']
+            novo_data_nascimento = form.cleaned_data['data_nascimento']
+            novo_cep = form.cleaned_data['cep']
+            novo_cpf = form.cleaned_data['cpf']
+            novo_endereco = form.cleaned_data['endereco']
+            novo_bairro = form.cleaned_data['bairro']
+            novo_cidade = form.cleaned_data['cidade']
+            novo_estado = form.cleaned_data['estado']
+            novo_telefone = form.cleaned_data['telefone']
+            novo_celular = form.cleaned_data['celular']
 
-        cliente.save()
+            if cliente:
+                cliente.nome = novo_nome
+                cliente.sobrenome = novo_sobrenome
+                cliente.sexo = novo_sexo
+                cliente.data_nascimento = novo_data_nascimento
+                cliente.cep = novo_cep
+                cliente.cpf = novo_cpf
+                cliente.endereco = novo_endereco
+                cliente.bairro = novo_bairro
+                cliente.cidade = novo_cidade
+                cliente.estado = novo_estado
+                cliente.telefone = novo_telefone
+                cliente.celular = novo_celular
 
-        return render(request, 'clientes/area-cliente.html', {
-            'user': request.user,
-            'cliente': Cliente.objects.filter(usuario=request.user).first(),
-            'dados_salvos': True
-        })
+                cliente.save()
+            else:
+                cliente = Cliente(
+                    usuario=request.user,
+                    nome=novo_nome,
+                    sobrenome=novo_sobrenome,
+                    sexo=novo_sexo,
+                    data_nascimento=novo_data_nascimento,
+                    cep=novo_cep,
+                    cpf=novo_cpf,
+                    endereco=novo_endereco,
+                    bairro=novo_bairro,
+                    cidade=novo_cidade,
+                    estado=novo_estado,
+                    telefone=novo_telefone,
+                    celular=novo_celular
+                )
+                cliente.save()
 
+            return render(request, 'clientes/area-cliente.html', {
+                'user': request.user,
+                'cliente': Cliente.objects.filter(usuario=request.user).first(),
+                'dados_salvos': True
+            })
+        context = {
+            'form': form
+        }
+        return render(request, 'clientes/editar-perfil.html', context=context)
 
 def carrinho(request):
     return render(request, 'clientes/carrinho.html')
-
 
 @login_required()
 def sair(request):
