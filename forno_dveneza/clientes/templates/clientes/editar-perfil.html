@@ -1,11 +1,15 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block body %}
+    <h3 class="text-center m-3 text-muted">Edite as informações do seu perfil</h3>
     <form action="{% url 'editar-perfil' %}" method="POST" class="d-flex justify-content-center">
-        <div class="w-50">
+        <div class="cliente-form">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Salvar" class="btn btn-success mt-3">
+            <div class="btn-group-form">
+                <input type="submit" value="Salvar" class="btn">
+                <input type="button" value="Cancelar" class="btn" onclick="location.href='{% url 'minha_area' %}'">
+            </div>
         </div>
     </form>
 {% endblock %}

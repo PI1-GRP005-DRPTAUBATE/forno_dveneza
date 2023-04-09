@@ -5,32 +5,78 @@
     <div class="d-flex flex-row w-100">
         <div class="d-flex flex-column flex-shrink-0 p-3" style="min-width: 280px;">
             <ul class="nav nav-pills flex-column mb-auto text-center">
-            <li>
-                <a href="#seu-perfil" class="btn w-100 mb-3" aria-current="page">
-                Perfil
-                </a>
-            </li>
-            <li>
-                <a href="#seus-pedidos" class="btn w-100">
-                Pedidos
-                </a>
-            </li>
+                <li>
+                    <a href="#seu-perfil" class="btn w-100 mb-3" aria-current="page">
+                        Perfil
+                    </a>
+                </li>
+                <li>
+                    <a href="#seus-pedidos" class="btn w-100">
+                        Pedidos
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="container w-100 mx-3">
             <div class="w-100">
                 <h4 class="my-3" id="seu-perfil">Meu perfil</h4>
-                <div class="card">
-                    <div class="card-body">
-                        <span>Nome de usuário:</span>
-                        {{ user.username }}
-                        <span>Nome:</span>
-                        {{ cliente.nome }}
-                        <span>Sobrenome:</span>
-                        {{ cliente.sobrenome }}
+                <div class="w-100 d-flex flex-wrap">
+                    <div class="info-cel">
+                       <label class="form-label">Nome</label>
+                        <p class="form-control">{{ cliente.nome }}</p>
+                    </div>
+                    <div class="info-cel">
+                       <label class="form-label">Sobrenome</label>
+                        <p class="form-control">{{ cliente.sobrenome }}</p>
+                    </div>
+                    <div class="info-cel">
+                       <label class="form-label">Nome de usuário</label>
+                        <p class="form-control">{{ user.username }}</p>
+                    </div>
+                    <div class="info-cel">
+                       <label class="form-label">Email</label>
+                        {% if user.email %}
+                            <p class="form-control">{{ user.email }}</p>
+                        {% else %}
+                            <p class="form-control">Não cadastrado</p>
+                        {% endif %}
+                    </div>
+                    <div class="info-cel">
+                        <label class="form-label">Telefone</label>
+                        {% if cliente.telefone %}
+                            <p class="form-control">{{ cliente.telefone }}</p>
+                        {% else %}
+                            <p class="form-control">Não cadastrado</p>
+                        {% endif %}
+                    </div>
+                    <div class="info-cel">
+                       <label class="form-label">Celular</label>
+                        <p class="form-control">{{ cliente.celular }}</p>
                     </div>
                 </div>
-                 <button type="submit" onclick="location.href='{% url 'editar-perfil' %}'" class="btn btn-primary">Atualizar dados</button>
+                <div class="w-100 d-flex flex-wrap">
+                    <div class="info-cel">
+                       <label class="form-label">CEP</label>
+                        <p class="form-control">{{ cliente.cep }}</p>
+                    </div>
+                    <div class="info-cel">
+                       <label class="form-label">Endereço</label>
+                        <p class="form-control">{{ cliente.endereco }}</p>
+                    </div>
+                    <div class="info-cel">
+                       <label class="form-label">Bairro</label>
+                        <p class="form-control">{{ cliente.bairro }}</p>
+                    </div>
+                    <div class="info-cel">
+                       <label class="form-label">Cidade</label>
+                        <p class="form-control">{{ cliente.cidade }}</p>
+                    </div>
+                    <div class="info-cel">
+                       <label class="form-label">Estado</label>
+                        <p class="form-control">{{ cliente.estado }}</p>
+                    </div>
+                </div>
+                <button type="submit" onclick="location.href='{% url 'editar-perfil' %}'" class="btn mb-5">Atualizar dados</button>
             </div>
             <div>
                 <h4 class="" id="seus-pedidos">Meus pedidos</h4>
