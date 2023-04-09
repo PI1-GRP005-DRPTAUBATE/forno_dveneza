@@ -8,9 +8,11 @@
         width: 100%;
         text-align: center;
     }
+
     .form-signin {
         width: 90% !important;
     }
+
     .form-group {
         display: flex;
         flex-wrap: wrap;
@@ -20,12 +22,14 @@
     .input-field {
         width: 90% !important;
     }
+
     .cardapio > .card {
         width: 100% !important;
         border: none;
         border-radius: 0;
         border-top: 1px solid rgba(0, 0, 0, 0.151);
     }
+
     .flex-row {
         flex-wrap: wrap;
     }
@@ -34,6 +38,7 @@
         margin: auto;
         width: 90%;
     }
+
     .edit-perfil-button {
         text-align: center !important;
         margin-bottom: 15px;
@@ -43,9 +48,19 @@
         width: 100%;
         text-align: center;
     }
+
     footer > .nav {
         width: 100%;
         justify-content: center !important;
+    }
+
+    .cliente-form {
+        width: 100% !important;
+        margin: 5px;
+    }
+
+    .info-cel {
+        width: 100% !important;
     }
 }
 
@@ -129,4 +144,23 @@ footer i:hover {
     transition: 0.5s;
     border-radius: 50%;
     color: #1ABC9C;
+}
+
+.cliente-form {
+    width: 50%;
+}
+
+.btn-group-form {
+    margin: 15px;
+    display: flex;
+    justify-content: end;
+}
+
+.btn-group-form > input {
+    margin-left: 15px;
+}
+
+.info-cel {
+    width: 30%;
+    margin: 10px;
 }
