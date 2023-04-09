@@ -23,11 +23,19 @@
                 <div class="w-100 d-flex flex-wrap">
                     <div class="info-cel">
                        <label class="form-label">Nome</label>
+                        {% if cliente.nome %}
                         <p class="form-control">{{ cliente.nome }}</p>
+                        {% else %}
+                            <p class="form-control text-danger">Não cadastrado</p>
+                        {% endif %}
                     </div>
                     <div class="info-cel">
                        <label class="form-label">Sobrenome</label>
-                        <p class="form-control">{{ cliente.sobrenome }}</p>
+                        {% if cliente.sobrenome %}
+                            <p class="form-control">{{ cliente.sobrenome }}</p>
+                        {% else %}
+                            <p class="form-control text-danger">Não cadastrado</p>
+                        {% endif %}
                     </div>
                     <div class="info-cel">
                        <label class="form-label">Nome de usuário</label>
@@ -38,7 +46,7 @@
                         {% if user.email %}
                             <p class="form-control">{{ user.email }}</p>
                         {% else %}
-                            <p class="form-control">Não cadastrado</p>
+                            <p class="form-control text-danger">Não cadastrado</p>
                         {% endif %}
                     </div>
                     <div class="info-cel">
@@ -46,34 +54,58 @@
                         {% if cliente.telefone %}
                             <p class="form-control">{{ cliente.telefone }}</p>
                         {% else %}
-                            <p class="form-control">Não cadastrado</p>
+                            <p class="form-control text-danger">Não cadastrado</p>
                         {% endif %}
                     </div>
                     <div class="info-cel">
                        <label class="form-label">Celular</label>
-                        <p class="form-control">{{ cliente.celular }}</p>
+                        {% if cliente.celular %}
+                            <p class="form-control">{{ cliente.celular }}</p>
+                        {% else %}
+                            <p class="form-control text-danger">Não cadastrado</p>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="w-100 d-flex flex-wrap">
                     <div class="info-cel">
                        <label class="form-label">CEP</label>
-                        <p class="form-control">{{ cliente.cep }}</p>
+                        {% if cliente.cep %}
+                            <p class="form-control">{{ cliente.cep }}</p>
+                        {% else %}
+                            <p class="form-control text-danger">Não cadastrado</p>
+                        {% endif %}
                     </div>
                     <div class="info-cel">
                        <label class="form-label">Endereço</label>
-                        <p class="form-control">{{ cliente.endereco }}</p>
+                        {% if cliente.endereco %}
+                            <p class="form-control">{{ cliente.endereco }}</p>
+                        {% else %}
+                            <p class="form-control text-danger">Não cadastrado</p>
+                        {% endif %}
                     </div>
                     <div class="info-cel">
                        <label class="form-label">Bairro</label>
-                        <p class="form-control">{{ cliente.bairro }}</p>
+                        {% if cliente.bairro %}
+                            <p class="form-control">{{ cliente.bairro }}</p>
+                        {% else %}
+                            <p class="form-control text-danger">Não cadastrado</p>
+                        {% endif %}
                     </div>
                     <div class="info-cel">
                        <label class="form-label">Cidade</label>
-                        <p class="form-control">{{ cliente.cidade }}</p>
+                        {% if cliente.cidade %}
+                            <p class="form-control">{{ cliente.cidade }}</p>
+                        {% else %}
+                            <p class="form-control text-danger">Não cadastrado</p>
+                        {% endif %}
                     </div>
                     <div class="info-cel">
                        <label class="form-label">Estado</label>
-                        <p class="form-control">{{ cliente.estado }}</p>
+                        {% if cliente.estado %}
+                            <p class="form-control">{{ cliente.estado }}</p>
+                        {% else %}
+                            <p class="form-control text-danger">Não cadastrado</p>
+                        {% endif %}
                     </div>
                 </div>
                 <button type="submit" onclick="location.href='{% url 'editar-perfil' %}'" class="btn mb-5">Atualizar dados</button>

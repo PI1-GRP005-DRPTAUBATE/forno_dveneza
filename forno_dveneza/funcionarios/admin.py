@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Funcionario
+
+@admin.register(Funcionario)
+class FuncionarioAdmin(admin.ModelAdmin):
+    list_display = ['nome', 'sobrenome', 'cargo', 'celular']

@@ -15,22 +15,24 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Cliente',
+            name='Funcionario',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nome', models.CharField(max_length=20)),
                 ('sobrenome', models.CharField(max_length=40)),
-                ('sexo', models.CharField(choices=[('F', 'Feminino'), ('M', 'Masculino'), ('N', 'Não informado')], max_length=1)),
                 ('data_nascimento', models.DateField()),
-                ('cpf', models.CharField(max_length=11)),
+                ('sexo', models.CharField(choices=[('F', 'Feminino'), ('M', 'Masculino'), ('N', 'Não informado')], max_length=1)),
+                ('cargo', models.CharField(max_length=40)),
+                ('salario', models.DecimalField(decimal_places=2, max_digits=10)),
                 ('cep', models.CharField(max_length=9)),
                 ('endereco', models.CharField(max_length=50)),
                 ('bairro', models.CharField(max_length=20)),
                 ('cidade', models.CharField(max_length=20)),
-                ('estado', models.CharField(choices=[('SP', 'São Paulo'), ('MG', 'Minas Gerais')], max_length=2)),
                 ('telefone', models.CharField(blank=True, max_length=15)),
                 ('celular', models.CharField(max_length=15)),
-                ('usuario', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Cliente')),
+                ('data_admissao', models.DateField()),
+                ('data_demissao', models.DateField(blank=True, null=True)),
+                ('usuario', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Funcionario')),
             ],
         ),
     ]
