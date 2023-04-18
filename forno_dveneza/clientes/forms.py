@@ -25,7 +25,7 @@ class ClienteForm(forms.ModelForm):
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
             'sobrenome': forms.TextInput(attrs={'class': 'form-control'}),
             'sexo': forms.Select(attrs={'class': 'form-control'}),
-            'data_nascimento': forms.DateInput(attrs={'class': 'form-control'}),
+            'data_nascimento': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'cpf': forms.TextInput(attrs={'class': 'form-control'}),
             'cep': forms.TextInput(attrs={'class': 'form-control'}),
             'endereco': forms.TextInput(attrs={'class': 'form-control'}),
