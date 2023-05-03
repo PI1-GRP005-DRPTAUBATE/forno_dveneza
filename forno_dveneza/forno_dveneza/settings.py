@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'base',
     'clientes',
     'funcionarios',
-    'produtos'
+    'produtos',
+    'cpf_field'
 ]
 
 MIDDLEWARE = [
