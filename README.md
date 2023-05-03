@@ -18,4 +18,4 @@ python manage.py makemigrations
  python manage.py migrate
  ```
 
-Observação: certificar-se de que o ambiente virtual do Python esteja ativado, caso contr
+Observação: certificar-se de que o ambiente virtual do Python esteja ativado, caso contrário os comandos não irão funcionar
