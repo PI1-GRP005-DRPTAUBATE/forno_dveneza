@@ -30,6 +30,10 @@
         border-top: 1px solid rgba(0, 0, 0, 0.151);
     }
 
+    .cardapio-img {
+        max-width: 100%;
+    }
+
     .flex-row {
         flex-wrap: wrap;
     }
@@ -121,7 +125,8 @@ form .form-secao {
 }
 
 .cardapio-img {
-    height: 100px;
+    width: 250px;
+    border-radius: 5px;
 }
 
 .carrinho {
