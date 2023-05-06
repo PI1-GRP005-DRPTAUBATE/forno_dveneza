@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os.path
+import os
 from pathlib import Path
 
 from decouple import config
@@ -84,8 +85,12 @@ WSGI_APPLICATION = 'forno_dveneza.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ['DB_FORNO_NAME'],
+        'USER': os.environ['DB_FORNO_USER'],
+        'PASSWORD': os.environ['DB_FORNO_PASSWORD'],
+        'HOST': os.environ['DB_FORNO_HOST'],
+        'PORT': '3306'
     }
 }
 
