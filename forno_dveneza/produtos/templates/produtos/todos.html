@@ -10,8 +10,8 @@
           {% if produto.id_categoria == categoria %}
             <div class="card mb-3 w-75">
               <div class="d-flex">
-                <div class="col-md-5 w-25 m-auto">
-                  <img src="{{produto.foto}}" class="img-fluid rounded-start cardapio-img" alt="...">
+                <div class="d-flex col-md-5 w-25 m-auto justify-content-center">
+                  <img src="{{produto.foto.url}}" class="cardapio-img" alt="...">
                 </div>
                 <div class="w-75 text-end">
                   <div class="card-body">
