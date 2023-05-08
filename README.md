@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ```sh
 python manage.py makemigrations
 ```
-* Aplicar as migrations com o comando (necess):
+* Aplicar as migrations com o comando (necessário apenas se estiver usando um banco de dados local):
 ```sh
  python manage.py migrate
  ```
