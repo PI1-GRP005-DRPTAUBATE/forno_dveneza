@@ -9,11 +9,11 @@ Branch com implementações iniciais do Front-end da aplicação Web.
 ```sh
 pip install -r requirements.txt
 ```
-* Criar as migrations:
+* Criar as migrations (necessário apenas se estiver usando um banco de dados local):
 ```sh
 python manage.py makemigrations
 ```
-* Aplicar as migrations com o comando:
+* Aplicar as migrations com o comando (necess):
 ```sh
  python manage.py migrate
  ```
