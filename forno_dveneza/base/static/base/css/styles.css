@@ -169,3 +169,7 @@ footer i:hover {
     width: 30%;
     margin: 10px;
 }
+
+.carrinho {
+    min-height: 80vh;
+}
