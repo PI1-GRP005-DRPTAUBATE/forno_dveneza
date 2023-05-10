@@ -18,6 +18,9 @@
                                     <p>Quantidade</p>
                                     <p>{{ item.quantidade }}</p>
                                 </div>
+                                <div>
+                                    <a href="{% url 'excluir_item' item.id %}" class="btn bg-danger">Excluir</a>
+                                </div>
                                 <div class="d-flex flex-column align-items-center">
                                     <p>Preço</p>
                                     <p>R$ {{ produto.preco_unidade }}</p>

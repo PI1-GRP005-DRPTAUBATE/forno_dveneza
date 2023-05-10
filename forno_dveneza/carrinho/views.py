@@ -13,7 +13,23 @@ def carrinho(request):
     cliente = Cliente.objects.filter(usuario=request.user).first()
     carrinho_cliente = Carrinho.objects.filter(cliente=cliente).first()
 
-    print(carrinho_cliente.itens.all())
+    total = 0
+    for item in carrinho_cliente.itens.all():
+        total += item.produto.preco_unidade
+
+    return render(request, 'carrinho/carrinho.html', context={
+        'cliente': cliente,
+        'carrinho': carrinho_cliente,
+        'produtos': produtos,
+        'preco_total': total
+    })
+
+def excluir_item(request, item_id):
+    cliente = Cliente.objects.filter(usuario=request.user).first()
+    carrinho_cliente = Carrinho.objects.filter(cliente=cliente).first()
+    produtos = Produto.objects.all()
+
+    carrinho_cliente.itens.remove(item_id)
 
     total = 0
     for item in carrinho_cliente.itens.all():
