@@ -3,6 +3,7 @@ from django.shortcuts import render
 
 from produtos.models import Produto
 from .models import Carrinho
+from .models import ItemCarrinho
 from clientes.models import Cliente
 
 # Create your views here.
@@ -30,6 +31,7 @@ def excluir_item(request, item_id):
     produtos = Produto.objects.all()
 
     carrinho_cliente.itens.remove(item_id)
+    ItemCarrinho.objects.filter(id=item_id).delete()
 
     total = 0
     for item in carrinho_cliente.itens.all():
