@@ -11,14 +11,13 @@
             <div class="card mb-3 w-75">
               <div class="d-flex">
                 <div class="d-flex col-md-5 w-25 m-auto justify-content-center">
-                  <img src="{{produto.foto.url}}" class="cardapio-img" alt="...">
+                  <img src="{{produto.foto.url}}" class="cardapio-img" alt="Imagem {{ produto.nome }}">
                 </div>
                 <div class="w-75 text-end">
                   <div class="card-body">
                     <h5 class="card-title text-start">{{ produto.nome }}</h5>
                     <p class="card-text text-start">{{ produto.descricao }}</p>
                     <p class="card-text text-start"><small>R$ {{ produto.preco_unidade }}</small></p>
-                    <button class="btn">Adicionar ao carrinho</button>
                   </div>
                 </div>
               </div>
