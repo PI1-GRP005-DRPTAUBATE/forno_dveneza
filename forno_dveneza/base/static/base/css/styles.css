@@ -66,6 +66,14 @@
     .info-cel {
         width: 100% !important;
     }
+
+    .sobre {
+    width: 95% !important;
+    }
+
+    .mapa > iframe {
+        width: 95% !important;
+    }
 }
 
 body {
@@ -168,4 +176,18 @@ footer i:hover {
 .info-cel {
     width: 30%;
     margin: 10px;
+}
+
+.sobre {
+    width: 80%;
+}
+
+.sobre strong {
+    color: #E74C3C;
+}
+
+.mapa > iframe {
+    width: 80%;
+    height: 500px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
 }
