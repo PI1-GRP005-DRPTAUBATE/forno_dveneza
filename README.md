@@ -2,18 +2,20 @@
 Branch com implementações iniciais do Front-end da aplicação Web.
 
 ### Para baixar e executar o projeto siga os seguintes passos:
-* Fazer o Download ZIP do código e extrair
-* Abrir a pasta forno_dveneza no Pycharm
-* Dar aceite configuração do ambiente virtual pelo Pycharm (se usar o VsCode terá que fazer a configuração do ambiente virtual)
-* Instalar os modulos necessários com o comando: 
+* Clonar o projeto:
+```sh
+git clone https://github.com/PI1-GRP005-DRPTAUBATE/forno_dveneza.git
+```
+* Criar o ambiente virtual (no diretório do projeto), conforme descrito <a href="https://github.com/PI1-GRP005-DRPTAUBATE/forno_dveneza/blob/front/comandos_venv.md" target="_blank">aqui</a>
+* Instalar as dependências necessárias com o comando: 
 ```sh
 pip install -r requirements.txt
 ```
-* Criar as migrations (necessário apenas se estiver usando um banco de dados local):
+* Criar as migrations:
 ```sh
 python manage.py makemigrations
 ```
-* Aplicar as migrations com o comando (necessário apenas se estiver usando um banco de dados local):
+* Aplicar as migrations com o comando:
 ```sh
  python manage.py migrate
  ```
