@@ -19,40 +19,20 @@
           <div class="container">
             <div class="navbar d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
               <a href="{% url 'index' %}" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none fs-1">
-                Forno D'Veneza
+                  <img src="{% static 'base/img/pizza.png' %}" class="mx-2">
+                  <span>Forno D'Veneza</span>
               </a>
     
               <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
                 <li>
                   <a href="{% url 'index' %}" class="nav-link text-white">
-                    Home
+                    Início
                   </a>
                 </li>
                 <li>
                   <a href="{% url 'todos_produtos' %}" class="nav-link text-white">
                     Cardápio
                   </a>
-                </li>
-                <li>
-                  <a href="{% url 'carrinho' %}" class="nav-link text-white">
-                    Carrinho
-                  </a>
-                </li>
-                  <li>
-                  <a href="{% url 'minha_area' %}" class="nav-link text-white">
-                    Minha área
-                  </a>
-                </li>
-                <li>
-                  {% if user.is_authenticated %}
-                    <a href="{% url 'sair' %}" class="nav-link text-white">
-                        Sair
-                    </a>
-                  {% else %}
-                    <a href="{% url 'login' %}" class="nav-link text-white">
-                      Entrar
-                    </a>
-                  {% endif %}
                 </li>
               </ul>
             </div>
@@ -70,8 +50,8 @@
           </div>
       
           <ul class="nav mx-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-instagram"></i></a></li>
-            <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-whatsapp"></i></a></li>
+            <li class="ms-3"><a class="text-muted" target="_blank" href="https://www.instagram.com/fornod_veneza/"><i class="bi bi-instagram"></i></a></li>
+            <li class="ms-3"><a class="text-muted" target="_blank" href="https://api.whatsapp.com/send?phone=5512981537944&text=Ol%C3%A1%20seja%20bem%20vindo%20a%20pizzaria%20Forno%20D%27%20Veneza%2C%20aguarde%20por%20favor%20um%20instante%20que%20j%C3%A1%20vamos%20te%20atender%F0%9F%98%89"><i class="bi bi-whatsapp"></i></a></li>
           </ul>
         </footer>
     </div>

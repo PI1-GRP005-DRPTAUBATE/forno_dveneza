@@ -66,6 +66,14 @@
     .info-cel {
         width: 100% !important;
     }
+
+    .sobre {
+    width: 95% !important;
+    }
+
+    .mapa > iframe {
+        width: 95% !important;
+    }
 }
 
 body {
@@ -170,6 +178,6 @@ footer i:hover {
     margin: 10px;
 }
 
+
 .carrinho {
     min-height: 80vh;
-}
