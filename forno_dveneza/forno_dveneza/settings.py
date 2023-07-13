@@ -83,12 +83,8 @@ WSGI_APPLICATION = 'forno_dveneza.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('FORNO_DVENEZA_DB_NAME'),
-        'USER': config('FORNO_DVENEZA_DB_USER'),
-        'PASSWORD': config('FORNO_DVENEZA_DB_PASSWORD'),
-        'HOST': config('FORNO_DVENEZA_DB_HOST'),
-        'PORT': '3306'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
