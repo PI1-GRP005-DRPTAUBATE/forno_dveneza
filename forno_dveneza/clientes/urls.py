@@ -6,6 +6,5 @@ urlpatterns = [
     path('logout/', views.sair, name='sair'),
     path('cadastro/', views.cadastro, name='cadastro'),
     path('minha-area/', views.minha_area, name='minha_area'),
-    path('editar-perfil', views.editar_perfil, name='editar-perfil'),
-    path('carrinho/', views.carrinho, name="carrinho")
+    path('editar-perfil/', views.editar_perfil, name='editar-perfil'),
 ]

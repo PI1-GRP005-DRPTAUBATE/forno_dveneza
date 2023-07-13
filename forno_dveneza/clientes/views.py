@@ -1,4 +1,3 @@
-from django.http.response import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import authenticate
@@ -6,8 +5,11 @@ from django.contrib.auth import login as login_django
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+
 from .models import Cliente
 from .forms import ClienteForm
+
+from carrinho.models import Carrinho
 
 
 def login(request):
@@ -129,6 +131,9 @@ def editar_perfil(request):
                 )
                 cliente.save()
 
+                carrinho = Carrinho(cliente=cliente)
+                carrinho.save()
+
             return render(request, 'clientes/area-cliente.html', {
                 'user': request.user,
                 'cliente': Cliente.objects.filter(usuario=request.user).first(),
@@ -139,8 +144,6 @@ def editar_perfil(request):
         }
         return render(request, 'clientes/editar-perfil.html', context=context)
 
-def carrinho(request):
-    return render(request, 'clientes/carrinho.html')
 
 @login_required()
 def sair(request):

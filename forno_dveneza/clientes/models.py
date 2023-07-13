@@ -12,7 +12,7 @@ class Cliente(models.Model):
     )
     ESTADO_CHOICES = (
         ('SP', 'São Paulo'),
-        ('MG', 'Minas Gerais')
+        ('NI', 'Não informado')
     )
 
     usuario = models.ForeignKey(get_user_model(), verbose_name="Cliente", on_delete=models.CASCADE)
@@ -24,11 +24,14 @@ class Cliente(models.Model):
     cpf = CPFField('cpf')
     cep = models.CharField(max_length=9, validators=[MinLengthValidator(9)])
     endereco = models.CharField(max_length=50)
+    complemento = models.CharField(max_length=40, blank=True, null=True)
+    referencia = models.CharField(max_length=40, blank=True, null=True)
     bairro = models.CharField(max_length=20)
     cidade = models.CharField(max_length=20)
     estado = models.CharField(max_length=2, choices=ESTADO_CHOICES)
     telefone = models.CharField(max_length=14, validators=[MinLengthValidator(14)], blank=True)
     celular = models.CharField(max_length=15, validators=[MinLengthValidator(15)])
+    data_cadastro = models.DateTimeField(auto_now=True)
 
 
     def __str__(self):

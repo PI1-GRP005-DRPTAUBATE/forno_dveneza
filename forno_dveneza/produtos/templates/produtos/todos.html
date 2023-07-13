@@ -18,6 +18,7 @@
                     <h5 class="card-title text-start">{{ produto.nome }}</h5>
                     <p class="card-text text-start">{{ produto.descricao }}</p>
                     <p class="card-text text-start"><small>R$ {{ produto.preco_unidade }}</small></p>
+                    <a class="btn" href="{% url 'adicionar_produto' produto.id %}">Adicionar ao carrinho</a>
                   </div>
                 </div>
               </div>
@@ -26,5 +27,19 @@
         {% endfor %}
       </section>
     {% endfor %}
+    {% if cadastrado %}
+      <div class="d-flex justify-content-center">
+        <div id="alertaProduto" class="alert alert-success w-50 text-center alert-dismissible fade show" role="alert">
+            Produto adicionado ao seu carrinho!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+    {% endif %}
   {% endif %}
+  <script>
+    var alerta = document.getElementById('alertaProduto');
+    setTimeout(function () {
+        alerta.classList.remove('show');
+    }, 8000)
+  </script>
 {% endblock body %}
