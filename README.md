@@ -6,7 +6,7 @@ Branch com implementações iniciais do Front-end da aplicação Web.
 ```sh
 git clone https://github.com/PI1-GRP005-DRPTAUBATE/forno_dveneza.git
 ```
-* Criar o ambiente virtual (no diretório do projeto), conforme descrito <a href="https://github.com/PI1-GRP005-DRPTAUBATE/forno_dveneza/blob/front/comandos_venv.md" target="_blank">aqui</a>
+* Criar o ambiente virtual (no diretório do projeto), conforme descrito <a href="https://github.com/PI1-GRP005-DRPTAUBATE/forno_dveneza/blob/dev/comandos_venv.md" target="_blank">aqui</a>
 * Instalar as dependências necessárias com o comando: 
 ```sh
 pip install -r requirements.txt
