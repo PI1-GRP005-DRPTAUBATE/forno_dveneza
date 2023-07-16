@@ -8,7 +8,7 @@ class Produto(models.Model):
     foto = models.ImageField(upload_to='images/')
     preco_unidade = models.DecimalField(max_digits=10, decimal_places=2)
     id_categoria = models.ForeignKey('Categoria', on_delete=models.PROTECT)
-    id_funcionario = models.ForeignKey(Funcionario, on_delete=models.PROTECT, null=True)
+    # id_funcionario = models.ForeignKey(Funcionario, on_delete=models.PROTECT, null=True)
     data_cadastro = models.DateTimeField(auto_now=True)
 
     def __str__(self):
