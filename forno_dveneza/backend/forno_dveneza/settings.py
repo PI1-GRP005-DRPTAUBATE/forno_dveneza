@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'carrinho',
     'pedidos',
     'cpf_field',
-    'corsheaders'
+    'corsheaders',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
