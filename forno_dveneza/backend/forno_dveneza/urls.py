@@ -21,7 +21,7 @@ from produtos.api import viewsets as produtosviewsets
 from clientes.api import viewsets as clientesviewsets
 
 route = routers.DefaultRouter()
-
+# Aqui são definidas as rotas para o acesso às viewsets criadas
 route.register(r'categorias', produtosviewsets.CategoriasViewSet, basename="Categorias")
 route.register(r'produtos', produtosviewsets.ProdutosViewSet, basename="Produtos")
 route.register(r'clientes', clientesviewsets.ClientesViewSet, basename="Clientes")

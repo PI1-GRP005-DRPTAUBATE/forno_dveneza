@@ -1,3 +1,5 @@
+# o arquivo serializers.py desempenha um papel fundamental na serialização e desserialização dos dados. A serialização refere-se ao processo de converter objetos Python em formatos de dados que possam ser facilmente armazenados, transmitidos ou exibidos, como JSON, XML, etc. A desserialização é o processo inverso, onde os dados serializados são convertidos de volta em objetos Python.
+
 from rest_framework import serializers
 from clientes import models
 from django.contrib.auth.models import User
