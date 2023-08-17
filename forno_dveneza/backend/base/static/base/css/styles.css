@@ -1,183 +1,184 @@
 @media (max-width: 600px) {
-    header .nav {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    header ul > li {
-        width: 100%;
-        text-align: center;
-    }
+  header .nav {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .form-signin {
-        width: 90% !important;
-    }
+  header ul > li {
+    width: 100%;
+    text-align: center;
+  }
 
-    .form-group {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-    }
+  .form-signin {
+    width: 90% !important;
+  }
 
-    .input-field {
-        width: 90% !important;
-    }
+  .form-group {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
 
-    .cardapio > .card {
-        width: 100% !important;
-        border: none;
-        border-radius: 0;
-        border-top: 1px solid rgba(0, 0, 0, 0.151);
-    }
+  .input-field {
+    width: 90% !important;
+  }
 
-    .cardapio-img {
-        max-width: 100%;
-    }
+  .cardapio > .card {
+    width: 100% !important;
+    border: none;
+    border-radius: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.151);
+  }
 
-    .flex-row {
-        flex-wrap: wrap;
-    }
+  .cardapio-img {
+    max-width: 100%;
+  }
 
-    .flex-row > .flex-column {
-        margin: auto;
-        width: 90%;
-    }
+  .flex-row {
+    flex-wrap: wrap;
+  }
 
-    .edit-perfil-button {
-        text-align: center !important;
-        margin-bottom: 15px;
-    }
+  .flex-row > .flex-column {
+    margin: auto;
+    width: 90%;
+  }
 
-    footer > .col-md-4 {
-        width: 100%;
-        text-align: center;
-    }
+  .edit-perfil-button {
+    text-align: center !important;
+    margin-bottom: 15px;
+  }
 
-    footer > .nav {
-        width: 100%;
-        justify-content: center !important;
-    }
+  footer > .col-md-4 {
+    width: 100%;
+    text-align: center;
+  }
 
-    .cliente-form {
-        width: 100% !important;
-        margin: 5px;
-    }
+  footer > .nav {
+    width: 100%;
+    justify-content: center !important;
+  }
 
-    .info-cel {
-        width: 100% !important;
-    }
+  .cliente-form {
+    width: 100% !important;
+    margin: 5px;
+  }
 
-    .sobre {
+  .info-cel {
+    width: 100% !important;
+  }
+
+  .sobre {
     width: 95% !important;
-    }
+  }
 
-    .mapa > iframe {
-        width: 95% !important;
-    }
+  .mapa > iframe {
+    width: 95% !important;
+  }
 }
 
 body {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
 a {
-    color: #1ABC9C;
+  color: #1abc9c;
 }
 
 header {
-    background-color: #E74C3C;
+  background-color: #e74c3c;
 }
 
 li:hover {
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.25);
-    transition: 1s;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.25);
+  transition: 1s;
 }
 
 form > i {
-    color: #1ABC9C;
+  color: #1abc9c;
 }
 
 form .form-secao {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .cadastro {
-    width: 90%;
+  width: 90%;
 }
 
 .cadastro .btn-secondary {
-    background-color: #D1D5D8;
-    border: none;
+  background-color: #d1d5d8;
+  border: none;
 }
 
 .cadastro .btn-secondary:hover {
-    background-color: #E74C3C;
+  background-color: #e74c3c;
 }
 
-.btn, .btn:hover {
-    color: #FFFFFF ;
-    background-color: #1ABC9C;
+.btn,
+.btn:hover {
+  color: #ffffff;
+  background-color: #1abc9c;
 }
 
 .btn:hover {
-    background-color: #1abc9cb2;
+  background-color: #1abc9cb2;
 }
 
 .card {
-    border-color: #e74d3c69;
+  border-color: #e74d3c69;
 }
 
 .card:hover {
-    background-color: #e74d3c0e;
+  background-color: #e74d3c0e;
 }
 
 .cardapio-img {
-    width: 250px;
-    border-radius: 5px;
+  width: 250px;
+  border-radius: 5px;
 }
 
 .carrinho {
-    min-height: 90vh;
+  min-height: 90vh;
 }
 
 footer {
-    bottom: 0;
-    width: 80%;
-    margin-left: 10%;
+  bottom: 0;
+  width: 80%;
+  margin-left: 10%;
 }
 
 footer i {
-    font-size: 1.5rem;
-    padding: 5px;
+  font-size: 1.5rem;
+  padding: 5px;
 }
 
 footer i:hover {
-    text-align: end;
-    transition: 0.5s;
-    border-radius: 50%;
-    color: #1ABC9C;
+  text-align: end;
+  transition: 0.5s;
+  border-radius: 50%;
+  color: #1abc9c;
 }
 
 .cliente-form {
-    width: 50%;
+  width: 50%;
 }
 
 .btn-group-form {
-    margin: 15px;
-    display: flex;
-    justify-content: end;
+  margin: 15px;
+  display: flex;
+  justify-content: end;
 }
 
 .btn-group-form > input {
-    margin-left: 15px;
+  margin-left: 15px;
 }
 
 .info-cel {
-    width: 30%;
-    margin: 10px;
+  width: 30%;
+  margin: 10px;
 }
 
-
 .carrinho {
-    min-height: 80vh;
+  min-height: 80vh;
+}

@@ -1,4 +1,4 @@
-import { FaWhatsapp, FaExternalLinkAlt } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 import Footer from "../../componentes/Footer";
 import Header from "../../componentes/Header";
 import bannerImage from "../../img/banner.png";

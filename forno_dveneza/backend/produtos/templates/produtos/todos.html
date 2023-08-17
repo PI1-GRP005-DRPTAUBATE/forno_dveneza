@@ -1,45 +1,45 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block body %}
-  {% if produtos %}
-  <h3 class="m-3 text-center">Cardápio</h3>
-    {% for categoria in categorias %}
-      <h4 class="m-0 mx-3">{{ categoria }}s</h4>
-      <section class="d-flex justify-content-center my-5 cardapio flex-colunm flex-wrap">
-        {% for produto in produtos %}
-          {% if produto.id_categoria == categoria %}
-            <div class="card mb-3 w-75">
-              <div class="d-flex">
-                <div class="d-flex col-md-5 w-25 m-auto justify-content-center">
-                  <img src="{{produto.foto.url}}" class="cardapio-img" alt="Imagem {{ produto.nome }}">
-                </div>
-                <div class="w-75 text-end">
-                  <div class="card-body">
-                    <h5 class="card-title text-start">{{ produto.nome }}</h5>
-                    <p class="card-text text-start">{{ produto.descricao }}</p>
-                    <p class="card-text text-start"><small>R$ {{ produto.preco_unidade }}</small></p>
-                    <a class="btn" href="{% url 'adicionar_produto' produto.id %}">Adicionar ao carrinho</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          {% endif %}
-        {% endfor %}
-      </section>
-    {% endfor %}
-    {% if cadastrado %}
-      <div class="d-flex justify-content-center">
-        <div id="alertaProduto" class="alert alert-success w-50 text-center alert-dismissible fade show" role="alert">
-            Produto adicionado ao seu carrinho!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+{% if produtos %}
+<h3 class="m-3 text-center">Cardápio</h3>
+{% for categoria in categorias %}
+<h4 class="m-0 mx-3">{{ categoria }}s</h4>
+<section class="d-flex justify-content-center my-5 cardapio flex-colunm flex-wrap">
+  {% for produto in produtos %}
+  {% if produto.id_categoria == categoria %}
+  <div class="card mb-3 w-75">
+    <div class="d-flex">
+      <div class="d-flex col-md-5 w-25 m-auto justify-content-center">
+        <img src="{{produto.foto.url}}" class="cardapio-img" alt="Imagem {{ produto.nome }}">
+      </div>
+      <div class="w-75 text-end">
+        <div class="card-body">
+          <h5 class="card-title text-start">{{ produto.nome }}</h5>
+          <p class="card-text text-start">{{ produto.descricao }}</p>
+          <p class="card-text text-start"><small>R$ {{ produto.preco_unidade }}</small></p>
+          <a class="btn" href="{% url 'adicionar_produto' produto.id %}">Adicionar ao carrinho</a>
         </div>
       </div>
-    {% endif %}
+    </div>
+  </div>
   {% endif %}
-  <script>
-    var alerta = document.getElementById('alertaProduto');
-    setTimeout(function () {
-        alerta.classList.remove('show');
-    }, 8000)
-  </script>
+  {% endfor %}
+</section>
+{% endfor %}
+{% if cadastrado %}
+<div class="d-flex justify-content-center">
+  <div id="alertaProduto" class="alert alert-success w-50 text-center alert-dismissible fade show" role="alert">
+    Produto adicionado ao seu carrinho!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+</div>
+{% endif %}
+{% endif %}
+<script>
+  var alerta = document.getElementById('alertaProduto');
+  setTimeout(function () {
+    alerta.classList.remove('show');
+  }, 8000)
+</script>
 {% endblock body %}

@@ -1,0 +1,25 @@
+.btn-carrinho {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  color: #ffffff;
+  background-color: #1abc9c;
+  cursor: pointer;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+}
+
+.btn-carrinho,
+.btn-carrinho:hover {
+  color: #ffffff;
+  background-color: #1abc9c;
+}
+
+.btn-carrinho:hover {
+  background-color: #1abc9cb2;
+}
+
+.card {
+  border-color: #e74d3c69;
+}
