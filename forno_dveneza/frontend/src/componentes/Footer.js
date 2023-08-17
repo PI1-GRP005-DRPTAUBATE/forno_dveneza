@@ -18,15 +18,15 @@ const Footer = () => {
 
   const socialIconStyle = {
     fontSize: "24px",
-    margin: "0 10px", // Espaçamento horizontal entre ícones
+    margin: "0 10px",
   };
 
   const footerSectionStyle = {
     backgroundColor: "#f1f1f1",
     height: "80px",
     display: "flex",
-    justifyContent: "center", // Centraliza horizontalmente
-    alignItems: "center", // Centraliza verticalmente
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: "5px",
   };
 
