@@ -18,9 +18,6 @@ const Cardapio = () => {
       setCadastrado(response.data.cadastrado);
     });
   }, []);
-  console.log("produtos", produtos);
-  console.log("categorias", categorias);
-  console.log("cadastrado", cadastrado);
 
   return (
     <div>
