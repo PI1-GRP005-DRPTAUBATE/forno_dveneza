@@ -10,7 +10,7 @@ from produtos.models import Produto
 
 class Carrinho(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.PROTECT)
-    itens = models.ManyToManyField('ItemCarrinho', null=True, blank=True)
+    itens = models.ManyToManyField('ItemCarrinho', blank=True)
 
     def __str__(self):
         return f'{self.cliente} {self.itens}'

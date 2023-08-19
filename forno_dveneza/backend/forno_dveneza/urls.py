@@ -19,6 +19,7 @@ from django.views.generic import TemplateView
 from rest_framework import routers
 from produtos.api import viewsets as produtosviewsets
 from clientes.api import viewsets as clientesviewsets
+from pedidos.api import viewsets as pedidosviewsets
 
 route = routers.DefaultRouter()
 # Aqui são definidas as rotas para o acesso às viewsets criadas
@@ -26,6 +27,7 @@ route.register(r'categorias', produtosviewsets.CategoriasViewSet, basename="Cate
 route.register(r'produtos', produtosviewsets.ProdutosViewSet, basename="Produtos")
 route.register(r'clientes', clientesviewsets.ClientesViewSet, basename="Clientes")
 route.register(r'usuarios', clientesviewsets.UsuariosViewSet, basename="Usuarios")
+route.register(r'pedidos', pedidosviewsets.PedidosViewSets, basename="Pedidos")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
