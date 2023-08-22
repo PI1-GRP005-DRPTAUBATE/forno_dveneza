@@ -141,3 +141,5 @@ CLOUDINARY_STORAGE = {
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ORIGIN = 'http://localhost:3000'
+CORS_ALLOW_CREDENTIALS = True
