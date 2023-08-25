@@ -28,8 +28,9 @@ route.register(r'categorias', produtosviewsets.CategoriasViewSet, basename="Cate
 route.register(r'produtos', produtosviewsets.ProdutosViewSet, basename="Produtos")
 route.register(r'clientes', clientesviewsets.ClientesViewSet, basename="Clientes")
 route.register(r'usuarios', clientesviewsets.UsuariosViewSet, basename="Usuarios")
-route.register(r'pedidos', pedidosviewsets.PedidosViewSets, basename="Pedidos")
-route.register(r'carrinho', carrinhoviewsets.CarrinhoViewsets, basename="Carrinho")
+route.register(r'pedidos', pedidosviewsets.PedidosViewSet, basename="Pedidos")
+route.register(r'carrinho', carrinhoviewsets.CarrinhoViewset, basename="Carrinho")
+route.register(r'item-carrinho', carrinhoviewsets.ItemCarrinhoViewset, basename="ItemCarrinho")
 
 urlpatterns = [
     path('admin/', admin.site.urls),

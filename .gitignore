@@ -112,4 +112,5 @@ static_collected
 # Exclude machine-specific pycharm settings
 .idea
 
+/node_modules
 aws.txt
