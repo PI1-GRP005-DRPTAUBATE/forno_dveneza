@@ -38,8 +38,7 @@ def criar_pedido(request):
             referencia=novo_referencia,
             bairro=novo_bairro,
             cidade=novo_cidade,
-            valor_total=total,
-            status='recebido'
+            valor_total=total
         )
 
         pedido.save()
