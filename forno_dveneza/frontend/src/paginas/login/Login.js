@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 import Header from "../../componentes/Header";
 import Footer from "../../componentes/Footer";
-import { useAuth } from "../../componentes/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();

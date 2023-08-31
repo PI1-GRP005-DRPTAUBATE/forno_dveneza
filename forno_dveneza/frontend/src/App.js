@@ -4,7 +4,7 @@ import Home from "./paginas/home/Home";
 import Cardapio from "./paginas/cardapio/Cardapio";
 import Login from "./paginas/login/Login";
 import Cadastro from "./paginas/cadastro/Cadastro";
-import { AuthProvider } from "./componentes/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (

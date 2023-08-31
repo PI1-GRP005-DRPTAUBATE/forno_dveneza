@@ -2,7 +2,7 @@ import "./Header.css";
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../img/pizza.png";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 const Header = () => {
   const { usuarioLogado, setUsuarioLogado } = useAuth();
