@@ -1,27 +1,11 @@
 import "./Header.css";
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import logo from "../img/pizza.png";
+import { useAuth } from "./AuthContext";
 
 const Header = () => {
-  const [authenticated, setAuthenticated] = useState(false);
-
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/usuarios/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setAuthenticated(data.authenticated);
-      })
-      .catch((error) => {
-        console.error("Error fetching authentication status:", error);
-      });
-  }, []);
+  const { usuarioLogado, setUsuarioLogado } = useAuth();
 
   return (
     <header>
@@ -58,7 +42,7 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                {authenticated ? (
+                {usuarioLogado ? (
                   <Link to="/sair" className="nav-link text-white">
                     Sair
                   </Link>

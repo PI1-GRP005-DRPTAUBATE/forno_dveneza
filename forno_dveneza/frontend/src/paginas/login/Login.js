@@ -5,20 +5,31 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 import Header from "../../componentes/Header";
 import Footer from "../../componentes/Footer";
+import { useAuth } from "../../componentes/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { setUsuarioLogado } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    Axios.post("http://127.0.0.1:8000/api/login/", { username, password })
+    setLoading(true);
+
+    Axios.post("http://127.0.0.1:8000/api-cliente/token/", {
+      username,
+      password,
+    })
       .then((response) => {
+        setLoading(false);
+        setUsuarioLogado(true);
         navigate("/");
       })
       .catch((error) => {
+        setLoading(false);
         setErrorMessage("Usuário e/ou senha incorretos!");
       });
   };
@@ -60,8 +71,12 @@ const Login = () => {
                 <input type="checkbox" value="remember-me" /> Lembrar
               </label>
             </div>
-            <button className="w-100 btn btn-lg" type="submit">
-              Entrar
+            <button
+              className="w-100 btn btn-lg"
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? "Carregando..." : "Entrar"}
             </button>
             <div className="my-3">
               <span>
