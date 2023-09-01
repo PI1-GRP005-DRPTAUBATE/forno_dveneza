@@ -9,6 +9,7 @@ class ClientesSerializer(serializers.ModelSerializer):
         model = models.Cliente
         fields = '__all__'
 
+
 class UsuariosSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
