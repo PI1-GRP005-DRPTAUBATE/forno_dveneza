@@ -5,6 +5,8 @@ import Cardapio from "./paginas/cardapio/Cardapio";
 import Login from "./paginas/login/Login";
 import Cadastro from "./paginas/cadastro/Cadastro";
 import { AuthProvider } from "./context/AuthContext";
+import Perfil from "./paginas/clientes/Perfil";
+import MinhaArea from "./paginas/clientes/MinhaArea";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
             <Route path="/cardapio" element={<Cardapio />} />
             <Route path="/login" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />
+            <Route path="/minha-area" element={<MinhaArea />} />
+            <Route path="/perfil" element={<Perfil />} />
           </Routes>
         </div>
       </Router>

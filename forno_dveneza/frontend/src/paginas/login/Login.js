@@ -10,6 +10,7 @@ import { useAuth } from "../../context/AuthContext";
 const Login = () => {
   const navigate = useNavigate();
   const { setUsuarioLogado } = useAuth();
+  const { setUserData } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,7 +27,9 @@ const Login = () => {
       .then((response) => {
         setLoading(false);
         setUsuarioLogado(true);
-        navigate("/");
+        setUserData(response.data);
+        console.log("respose.data", response);
+        navigate("/minha-area");
       })
       .catch((error) => {
         setLoading(false);
