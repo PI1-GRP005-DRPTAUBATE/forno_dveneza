@@ -15,12 +15,11 @@ class Cliente(models.Model):
         ('NI', 'Não informado')
     )
 
-    usuario = models.ForeignKey(get_user_model(), verbose_name="Cliente", on_delete=models.CASCADE)
+    usuario = models.OneToOneField(get_user_model(), verbose_name="Cliente", on_delete=models.CASCADE)
     nome = models.CharField(max_length=20)
     sobrenome = models.CharField(max_length=40)
     sexo = models.CharField(max_length=1, choices=SEXO_CHOICES)
     data_nascimento = models.DateField()
-    # cpf = models.CharField(max_length=14, validators=[MinLengthValidator(14)])
     cpf = CPFField('cpf')
     cep = models.CharField(max_length=9, validators=[MinLengthValidator(9)])
     endereco = models.CharField(max_length=50)
