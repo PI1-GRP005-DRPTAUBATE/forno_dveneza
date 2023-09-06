@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { Link } from "react-router-dom";
@@ -9,33 +9,99 @@ import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setUsuarioLogado } = useAuth();
-  const { setUserData } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const {
+    setUsuarioLogado,
+    setUserId,
+    setAccessToken,
+    accessToken,
+    setClienteId,
+    clienteId,
+  } = useAuth();
+  const { usuarioLogado } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
 
-    Axios.post("http://127.0.0.1:8000/api-cliente/token/", {
-      username,
-      password,
-    })
+    Axios.post(
+      "http://127.0.0.1:8000/api/usuario/token/",
+      `username=${username}&password=${password}`,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    )
       .then((response) => {
-        setLoading(false);
+        console.log("response autorizacao", response);
         setUsuarioLogado(true);
-        setUserData(response.data);
-        console.log("respose.data", response);
-        navigate("/minha-area");
+        setAccessToken(response.data.access);
+        console.log("accessToken", response.data.access);
+        console.log("accessToken", accessToken);
+        setLoading(false);
       })
       .catch((error) => {
         setLoading(false);
-        setErrorMessage("Usuário e/ou senha incorretos!");
+        if (error.response && error.response.status === 404) {
+          setErrorMessage("Usuário não encontrado");
+        } else {
+          setErrorMessage(
+            "Erro desconhecido. Por favor, tente novamente mais tarde."
+          );
+        }
       });
   };
+
+  useEffect(() => {
+    console.log("entrou na requisicao --> ");
+
+    if (usuarioLogado) {
+      Axios.get("http://127.0.0.1:8000/api/usuario/informacoes/", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+        .then((response) => {
+          if (response.data.id) {
+            setClienteId(response.data.id);
+            console.log(clienteId);
+          }
+        })
+        .catch((error) => {
+          if (error.response.status === 404) {
+            setClienteId(null);
+            console.log(clienteId);
+          } else {
+            setErrorMessage("Network error. Please try again later.");
+          }
+        });
+    }
+  }, [usuarioLogado, accessToken]);
+
+  useEffect(() => {
+    if (usuarioLogado) {
+      Axios.get("http://127.0.0.1:8000/api/usuarios/")
+        .then((response) => {
+          console.log("Response USUARIOS:", response);
+          const users = response.data;
+
+          const buscaUsuario = users.find((user) => user.username === username);
+
+          if (buscaUsuario) {
+            setUserId(buscaUsuario.id);
+            console.log("userId", buscaUsuario.id);
+          }
+          navigate("/minha-area");
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
+    }
+  }, [usuarioLogado, username]);
 
   return (
     <div>
