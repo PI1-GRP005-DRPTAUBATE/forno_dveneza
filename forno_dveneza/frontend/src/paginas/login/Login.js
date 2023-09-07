@@ -20,6 +20,11 @@ const Login = () => {
     accessToken,
     setClienteId,
     clienteId,
+    setUserNameLogin,
+    setEmailUsuario,
+    userId,
+    csrfToken,
+    setCsrfToken,
   } = useAuth();
   const { usuarioLogado } = useAuth();
 
@@ -68,11 +73,10 @@ const Login = () => {
         .then((response) => {
           if (response.data.id) {
             setClienteId(response.data.id);
-            console.log(clienteId);
           }
         })
         .catch((error) => {
-          if (error.response.status === 404) {
+          if (error.response && error.response.status === 404) {
             setClienteId(null);
             console.log(clienteId);
           } else {
@@ -83,25 +87,81 @@ const Login = () => {
   }, [usuarioLogado, accessToken]);
 
   useEffect(() => {
-    if (usuarioLogado) {
-      Axios.get("http://127.0.0.1:8000/api/usuarios/")
-        .then((response) => {
-          console.log("Response USUARIOS:", response);
-          const users = response.data;
+    console.log("entrou na requisicao --> ");
 
-          const buscaUsuario = users.find((user) => user.username === username);
+    const fetchData = async () => {
+      try {
+        const authResponse = await Axios.post(
+          "http://127.0.0.1:8000/api/usuario/token/",
+          `username=${username}&password=${password}`,
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        );
+
+        console.log("response autorizacao", authResponse);
+        setUsuarioLogado(true);
+        setAccessToken(authResponse.data.access);
+
+        const userInfoResponse = await Axios.get(
+          "http://127.0.0.1:8000/api/usuario/informacoes/",
+          {
+            headers: {
+              Authorization: `Bearer ${authResponse.data.access}`,
+            },
+          }
+        );
+
+        if (userInfoResponse.data.id) {
+          setClienteId(userInfoResponse.data.id);
+          const usersResponse = await Axios.get(
+            "http://127.0.0.1:8000/api/usuarios/"
+          );
+          const buscaUsuario = usersResponse.data.find(
+            (user) => user.username === username
+          );
 
           if (buscaUsuario) {
             setUserId(buscaUsuario.id);
-            console.log("userId", buscaUsuario.id);
+            setEmailUsuario(buscaUsuario.email);
+            setUserNameLogin(buscaUsuario.username);
           }
+
           navigate("/minha-area");
-        })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-        });
+        }
+      } catch (error) {
+        setLoading(false);
+        if (error.response && error.response.status === 404) {
+          setErrorMessage("Usuário não encontrado");
+        } else {
+          setErrorMessage(
+            "Erro desconhecido. Por favor, tente novamente mais tarde."
+          );
+        }
+      }
+    };
+
+    if (usuarioLogado) {
+      fetchData();
     }
   }, [usuarioLogado, username]);
+
+  const getCsrfToken = async () => {
+    try {
+      const response = await Axios.get("http://127.0.0.1:8000/admin/");
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(response.data, "text/html");
+      const csrf = doc.querySelector("input[name='csrfmiddlewaretoken']").value;
+      setCsrfToken(csrf);
+      console.log("CSRF Token:", csrf);
+    } catch (error) {
+      console.error("Error fetching CSRF token:", error);
+    }
+  };
+
+  getCsrfToken();
 
   return (
     <div>

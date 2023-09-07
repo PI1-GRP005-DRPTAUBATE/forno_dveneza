@@ -7,6 +7,10 @@ export const AuthProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState("");
   const [userId, setUserId] = useState("");
   const [clienteId, setClienteId] = useState(null);
+  const [emailUsuario, setEmailUsuario] = useState("");
+  const [userNameLogin, setUserNameLogin] = useState("");
+  const [csrfToken, setCsrfToken] = useState("");
+
   return (
     <AuthContext.Provider
       value={{
@@ -18,6 +22,12 @@ export const AuthProvider = ({ children }) => {
         setUserId,
         clienteId,
         setClienteId,
+        emailUsuario,
+        setEmailUsuario,
+        userNameLogin,
+        setUserNameLogin,
+        csrfToken,
+        setCsrfToken,
       }}
     >
       {children}
