@@ -34,7 +34,7 @@ const Footer = () => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    backgroundColor: "#bdb7b7",
     padding: "10px",
   };
 
