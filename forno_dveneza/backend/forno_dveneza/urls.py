@@ -30,6 +30,7 @@ route.register(r'clientes', clientesviewsets.ClientesViewSet, basename="Clientes
 route.register(r'usuarios', clientesviewsets.UsuariosViewSet, basename="Usuarios")
 route.register(r'pedidos', pedidosviewsets.PedidosViewSets, basename="Pedidos")
 route.register(r'carrinho', carrinhoviewsets.CarrinhoViewsets, basename="Carrinho")
+route.register(r'produtos-meio-a-meio', produtosviewsets.ProdutosMeioAMeioViewSet, basename="ProdutosMeioAMeio")
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -14,6 +14,21 @@ class Produto(models.Model):
     def __str__(self):
         return self.nome
     
+class ProdutoMeioAMeio(models.Model):
+    produto1 = models.ForeignKey('Produto', related_name="Produto1", on_delete=models.CASCADE)
+    produto2 = models.ForeignKey('Produto', related_name="Produto2", on_delete=models.CASCADE)
+
+    @property
+    def nome(self):
+        return f"{self.produto1.nome}/{self.produto2.nome}"
+    
+    @property
+    def preco(self):
+        return (self.produto1.preco_unidade + self.produto2.preco_unidade) / 2
+    
+    def __str__(self):
+        return self.nome
+    
 
 class Categoria(models.Model):
     descricao = models.CharField(max_length=20)
