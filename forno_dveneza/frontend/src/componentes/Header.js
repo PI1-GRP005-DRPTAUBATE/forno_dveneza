@@ -7,6 +7,12 @@ import { useAuth } from "../context/AuthContext";
 const Header = () => {
   const { usuarioLogado, setUsuarioLogado } = useAuth();
 
+  const Logout = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    window.location.href = "/login";
+  };
+
   return (
     <header>
       <div className="px-3 py-2">
@@ -43,7 +49,11 @@ const Header = () => {
               </li>
               <li>
                 {usuarioLogado ? (
-                  <Link to="/sair" className="nav-link text-white">
+                  <Link
+                    className="nav-link
+                   text-white"
+                    onClick={Logout}
+                  >
                     Sair
                   </Link>
                 ) : (
