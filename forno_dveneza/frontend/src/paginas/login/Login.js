@@ -42,11 +42,8 @@ const Login = () => {
       }
     )
       .then((response) => {
-        console.log("response autorizacao", response);
         setUsuarioLogado(true);
         setAccessToken(response.data.access);
-        console.log("accessToken", response.data.access);
-        console.log("accessToken", accessToken);
         setLoading(false);
       })
       .catch((error) => {
@@ -62,8 +59,6 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log("entrou na requisicao --> ");
-
     if (usuarioLogado) {
       Axios.get("http://127.0.0.1:8000/api/usuario/informacoes/", {
         headers: {
@@ -78,7 +73,6 @@ const Login = () => {
         .catch((error) => {
           if (error.response && error.response.status === 404) {
             setClienteId(null);
-            console.log(clienteId);
           } else {
             setErrorMessage("Network error. Please try again later.");
           }
@@ -87,8 +81,6 @@ const Login = () => {
   }, [usuarioLogado, accessToken]);
 
   useEffect(() => {
-    console.log("entrou na requisicao --> ");
-
     const fetchData = async () => {
       try {
         const authResponse = await Axios.post(
@@ -100,8 +92,6 @@ const Login = () => {
             },
           }
         );
-
-        console.log("response autorizacao", authResponse);
         setUsuarioLogado(true);
         setAccessToken(authResponse.data.access);
 
@@ -155,13 +145,14 @@ const Login = () => {
       const doc = parser.parseFromString(response.data, "text/html");
       const csrf = doc.querySelector("input[name='csrfmiddlewaretoken']").value;
       setCsrfToken(csrf);
-      console.log("CSRF Token:", csrf);
     } catch (error) {
       console.error("Error fetching CSRF token:", error);
     }
   };
 
-  getCsrfToken();
+  useEffect(() => {
+    getCsrfToken();
+  }, []);
 
   return (
     <div>
