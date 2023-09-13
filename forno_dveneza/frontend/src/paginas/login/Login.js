@@ -6,6 +6,7 @@ import Axios from "axios";
 import Header from "../../componentes/Header";
 import Footer from "../../componentes/Footer";
 import { useAuth } from "../../context/AuthContext";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -158,10 +159,16 @@ const Login = () => {
     <div>
       <Header />
       <section>
-        <main className="form-signin w-25 m-auto mt-5 text-center">
+        <main className="form-signin-container">
           <form onSubmit={handleSubmit}>
-            <i className="bi bi-person-circle display-1"></i>
-            <h1 className="h3 mb-3 fw-normal">Login</h1>
+            <div className="login-icon">
+              <i
+                className="bi bi-person-circle display-1 custom-icon"
+                style={{ color: "#1abc9c" }}
+              ></i>
+
+              <h1 className="h3 mb-3 fw-normal">Login</h1>
+            </div>
 
             <div className="form-floating my-2">
               <input
@@ -172,7 +179,6 @@ const Login = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
-              <label htmlFor="floatingInput">Nome de usuário</label>
             </div>
             <div className="form-floating my-2">
               <input
@@ -183,7 +189,6 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <label htmlFor="floatingPassword">Senha</label>
             </div>
 
             <div className="checkbox my-3">
@@ -192,9 +197,10 @@ const Login = () => {
               </label>
             </div>
             <button
-              className="w-100 btn btn-lg"
+              className="btn-login"
               type="submit"
               disabled={loading}
+              style={{ color: "#ffffff", fontSize: "18px" }}
             >
               {loading ? "Carregando..." : "Entrar"}
             </button>
