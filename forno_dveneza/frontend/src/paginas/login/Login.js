@@ -167,7 +167,7 @@ const Login = () => {
                 style={{ color: "#1abc9c" }}
               ></i>
 
-              <h1 className="h3 mb-3 fw-normal">Login</h1>
+              <h1 style={{ fontSize: "20px", fontWeight: "normal" }}>Login</h1>
             </div>
 
             <div className="form-floating my-2">
@@ -200,11 +200,11 @@ const Login = () => {
               className="btn-login"
               type="submit"
               disabled={loading}
-              style={{ color: "#ffffff", fontSize: "18px" }}
+              style={{ color: "#ffffff", fontSize: "18px", width: "107%" }}
             >
               {loading ? "Carregando..." : "Entrar"}
             </button>
-            <div className="my-3">
+            <div type="submit" style={{ marginTop: "15px" }}>
               <span>
                 Não tem cadastro? Clique <Link to="/cadastro">aqui</Link>
               </span>
