@@ -1,4 +1,5 @@
 import React from "react";
+import "./Footer";
 import {
   FaFacebookF,
   FaTwitter,
@@ -14,6 +15,7 @@ const Footer = () => {
     bottom: "0",
     left: 0,
     width: "100%",
+    // paddingBottom: "100px",
   };
 
   const socialIconStyle = {
@@ -40,51 +42,64 @@ const Footer = () => {
 
   return (
     <footer className="bg-light text-center text-dark" style={footerStyle}>
-      <div style={{ marginTop: "5px" }}>
+      <div style={{ marginTop: "50px" }}>
         <section style={footerSectionStyle}>
-          <a
-            className="btn btn-link text-dark"
-            href="https://www.facebook.com/favelasummit"
-            role="button"
-          >
-            <FaFacebookF style={socialIconStyle} />
-          </a>
+          <div className="social-icons">
+            <a
+              className="btn btn-link text-dark social-icon"
+              href="https://www.facebook.com/favelasummit"
+              role="button"
+            >
+              <FaFacebookF style={socialIconStyle} />
+            </a>
 
-          <a className="btn btn-link text-dark" href="#!" role="button">
-            <FaTwitter style={socialIconStyle} />
-          </a>
+            <a
+              className="btn btn-link text-dark social-icon"
+              href="#!"
+              role="button"
+            >
+              <FaTwitter style={socialIconStyle} />
+            </a>
 
-          <a className="btn btn-link text-dark" href="#!" role="button">
-            <FaGoogle style={socialIconStyle} />
-          </a>
+            <a
+              className="btn btn-link text-dark social-icon"
+              href="#!"
+              role="button"
+            >
+              <FaGoogle style={socialIconStyle} />
+            </a>
 
-          <a
-            className="btn btn-link text-dark"
-            href="https://www.instagram.com/accounts/login/two_factor?next=%2F"
-            role="button"
-          >
-            <FaInstagram style={socialIconStyle} />
-          </a>
+            <a
+              className="btn btn-link text-dark social-icon"
+              href="https://www.instagram.com/accounts/login/two_factor?next=%2F"
+              role="button"
+            >
+              <FaInstagram style={socialIconStyle} />
+            </a>
 
-          <a
-            className="btn btn-link text-dark"
-            href="https://www.linkedin.com/company/favelasummit"
-            role="button"
-          >
-            <FaLinkedinIn style={socialIconStyle} />
-          </a>
+            <a
+              className="btn btn-link text-dark social-icon"
+              href="https://www.linkedin.com/company/favelasummit"
+              role="button"
+            >
+              <FaLinkedinIn style={socialIconStyle} />
+            </a>
 
-          <a
-            className="btn btn-link text-dark"
-            href="https://github.com/annaberto/projeto-integrador-univesp"
-            role="button"
-          >
-            <FaGithub style={socialIconStyle} />
-          </a>
+            <a
+              className="btn btn-link text-dark social-icon"
+              href="https://github.com/annaberto/projeto-integrador-univesp"
+              role="button"
+            >
+              <FaGithub style={socialIconStyle} />
+            </a>
+          </div>
         </section>
       </div>
 
-      <div className="text-center text-dark p-3" style={footerTextDivStyle}>
+      <div
+        className="text-center text-dark p-3 footer-text"
+        style={footerTextDivStyle}
+      >
         <p style={{ margin: 0 }}>© {new Date().getFullYear()}</p>
         <p style={{ margin: 0 }}>Forno D`Veneza</p>
       </div>

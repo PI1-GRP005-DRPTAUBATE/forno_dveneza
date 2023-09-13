@@ -1,25 +1,58 @@
-.btn-carrinho {
-  width: 150px;
-  height: 50px;
+.card-produto {
+  width: 80%;
+  height: 200px;
   display: flex;
-  color: #ffffff;
-  background-color: #1abc9c;
-  cursor: pointer;
+  border: 1px solid #f11f0769;
+  margin: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
   align-items: center;
-  transition: background-color 0.3s ease;
-  border-radius: 5px;
 }
 
-.btn-carrinho,
+.card-img {
+  margin: 20px;
+  width: 150px;
+  margin-right: 50px;
+}
+
+.card-info {
+  flex-grow: 1;
+}
+
 .btn-carrinho:hover {
   color: #ffffff;
-  background-color: #1abc9c;
-}
-
-.btn-carrinho:hover {
   background-color: #1abc9cb2;
 }
 
-.card {
-  border-color: #e74d3c69;
+.btn-carrinho {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1abc9c;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  /* height: 25%;
+  width: 25%; */
+  height: 50px;
+  width: 250px;
+  border-radius: 5px;
+}
+
+.btn-carrinho-text {
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.cardapio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.m-0.mx-3 {
+  margin-top: 20px;
+  text-align: flex-start;
+  margin-left: 50px;
+  font-size: 15px;
+  font-weight: 500;
 }
