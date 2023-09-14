@@ -9,12 +9,18 @@
   justify-content: center;
   background-color: #1abc9c;
   margin-bottom: 10px;
-  height: 50px;
+  height: 40px;
   width: 250px;
   border-radius: 5px;
+  text-decoration: none;
 }
 
 .btn-minha-area-text {
   color: #ffffff;
   font-size: 18px;
+  margin-top: 15px;
+}
+
+.link-button {
+  text-decoration: none;
 }

@@ -1,7 +1,9 @@
 {
   "dependencies": {
     "axios": "^1.4.0",
+    "bootstrap": "^5.3.1",
     "bootstrap-icons": "^1.11.0",
+    "react-bootstrap": "^2.8.0",
     "react-router-dom": "^6.15.0"
   }
 }
