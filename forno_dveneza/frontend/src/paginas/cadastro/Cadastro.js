@@ -103,7 +103,7 @@ const Cadastro = () => {
             <button
               className="btn-login"
               type="submit"
-              style={{ marginBottom: "20px", width: "107%" }}
+              style={{ marginBottom: "20px", width: "100%" }}
             >
               Cadastrar
             </button>

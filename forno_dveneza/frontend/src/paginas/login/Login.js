@@ -200,7 +200,7 @@ const Login = () => {
               className="btn-login"
               type="submit"
               disabled={loading}
-              style={{ color: "#ffffff", fontSize: "18px", width: "107%" }}
+              style={{ color: "#ffffff", fontSize: "18px" }}
             >
               {loading ? "Carregando..." : "Entrar"}
             </button>

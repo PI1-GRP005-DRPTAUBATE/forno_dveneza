@@ -20,7 +20,7 @@ const Home = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            marginTop: "25px",
+            marginTop: "-40px",
             padding: "20px",
             paddingBottom: "25px",
           }}
@@ -71,12 +71,12 @@ const Home = () => {
 
             <div className="d-flex flex-column my-3">
               <h3 className="m-5 text-center">Faça seu pedido</h3>
-              <div className="d-flex justify-content-around">
+              <div>
                 <a
                   href="https://api.whatsapp.com/send?phone=5512981537944"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ marginRight: "70px" }}
+                  style={{ marginRight: "100px" }}
                 >
                   <FaWhatsapp size={30} />
                 </a>
@@ -84,7 +84,6 @@ const Home = () => {
                   href="https://www.ifood.com.br/delivery/jacarei-sp/forno-d-veneza-jardim-santa-maria/689feec4-172b-4898-b85f-e4cf86f4ad41?utm_medium=share"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ marginRight: "10px" }}
                 >
                   <img
                     src={ifoodIconImage}

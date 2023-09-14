@@ -15,7 +15,6 @@ const Footer = () => {
     bottom: "0",
     left: 0,
     width: "100%",
-    // paddingBottom: "100px",
   };
 
   const socialIconStyle = {
@@ -29,7 +28,6 @@ const Footer = () => {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: "5px",
   };
 
   const footerTextDivStyle = {
@@ -42,7 +40,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-light text-center text-dark" style={footerStyle}>
-      <div style={{ marginTop: "50px" }}>
+      <div>
         <section style={footerSectionStyle}>
           <div className="social-icons">
             <a
