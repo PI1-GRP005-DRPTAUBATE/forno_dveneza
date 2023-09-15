@@ -7,6 +7,7 @@ import Cadastro from "./paginas/cadastro/Cadastro";
 import { AuthProvider } from "./context/AuthContext";
 import Perfil from "./paginas/clientes/Perfil";
 import MinhaArea from "./paginas/clientes/MinhaArea";
+import Carrinho from "./paginas/carrinho/Carrinho";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/cadastro" element={<Cadastro />} />
             <Route path="/minha-area" element={<MinhaArea />} />
             <Route path="/perfil" element={<Perfil />} />
+            <Route path="/carrinho" element={<Carrinho />} />
           </Routes>
         </div>
       </Router>
