@@ -1,4 +1,5 @@
 import "./Home.css";
+import React from "react";
 import { FaWhatsapp, FaExternalLinkAlt } from "react-icons/fa";
 import Footer from "../../componentes/Footer";
 import Header from "../../componentes/Header";

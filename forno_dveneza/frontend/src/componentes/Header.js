@@ -5,7 +5,7 @@ import logo from "../img/pizza.png";
 import { useAuth } from "../context/AuthContext";
 
 const Header = () => {
-  const { usuarioLogado, setUsuarioLogado } = useAuth();
+  const { usuarioLogado } = useAuth();
 
   const Logout = () => {
     localStorage.removeItem("access_token");

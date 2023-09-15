@@ -1,4 +1,5 @@
 module.exports = {
+  testEnvironment: "jsdom",
   testEnvironmentOptions: {
     url: "https://jestjs.io",
   },
@@ -6,5 +7,8 @@ module.exports = {
   moduleNameMapper: {
     "\\.(css|less)$": "identity-obj-proxy",
   },
-  testEnvironment: "jsdom",
+  transform: {
+    "^.+\\.(js|jsx)$": "babel-jest",
+    "\\.(jpg|jpeg|png|gif|webp|svg)$": "jest-transform-stub",
+  },
 };
