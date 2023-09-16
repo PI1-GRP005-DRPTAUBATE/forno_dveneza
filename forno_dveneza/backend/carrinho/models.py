@@ -9,7 +9,7 @@ from produtos.models import Produto
 # Create your models here.
 
 class Carrinho(models.Model):
-    cliente = models.ForeignKey(Cliente, on_delete=models.PROTECT)
+    cliente = models.OneToOneField(Cliente, on_delete=models.PROTECT)
     itens = models.ManyToManyField('ItemCarrinho', blank=True)
 
     def __str__(self):
