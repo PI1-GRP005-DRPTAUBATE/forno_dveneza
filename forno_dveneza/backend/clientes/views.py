@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
+from django.http import Http404
 
 from .models import Cliente
 from .api.serializers import ClientesSerializer
@@ -32,9 +33,12 @@ class ClienteView(generics.RetrieveAPIView):
 
     def get_object(self):
         user = self.request.user
-        cliente = Cliente.objects.get(usuario=user)
-        return cliente
-        
+        try:
+            cliente = Cliente.objects.get(usuario=user)
+            return cliente
+        except Cliente.DoesNotExist:
+            raise Http404("Cliente not found for this user.")
+   
 class ClienteCreateView(generics.CreateAPIView):
     queryset = Cliente.objects.all()
     serializer_class = ClientesSerializer

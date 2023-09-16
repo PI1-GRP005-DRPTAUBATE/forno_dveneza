@@ -6,6 +6,7 @@ import Axios from "axios";
 import Header from "../../componentes/Header";
 import Footer from "../../componentes/Footer";
 import { useAuth } from "../../context/AuthContext";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -42,11 +43,8 @@ const Login = () => {
       }
     )
       .then((response) => {
-        console.log("response autorizacao", response);
         setUsuarioLogado(true);
         setAccessToken(response.data.access);
-        console.log("accessToken", response.data.access);
-        console.log("accessToken", accessToken);
         setLoading(false);
       })
       .catch((error) => {
@@ -62,8 +60,6 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log("entrou na requisicao --> ");
-
     if (usuarioLogado) {
       Axios.get("http://127.0.0.1:8000/api/usuario/informacoes/", {
         headers: {
@@ -78,7 +74,6 @@ const Login = () => {
         .catch((error) => {
           if (error.response && error.response.status === 404) {
             setClienteId(null);
-            console.log(clienteId);
           } else {
             setErrorMessage("Network error. Please try again later.");
           }
@@ -87,8 +82,6 @@ const Login = () => {
   }, [usuarioLogado, accessToken]);
 
   useEffect(() => {
-    console.log("entrou na requisicao --> ");
-
     const fetchData = async () => {
       try {
         const authResponse = await Axios.post(
@@ -100,8 +93,6 @@ const Login = () => {
             },
           }
         );
-
-        console.log("response autorizacao", authResponse);
         setUsuarioLogado(true);
         setAccessToken(authResponse.data.access);
 
@@ -155,22 +146,29 @@ const Login = () => {
       const doc = parser.parseFromString(response.data, "text/html");
       const csrf = doc.querySelector("input[name='csrfmiddlewaretoken']").value;
       setCsrfToken(csrf);
-      console.log("CSRF Token:", csrf);
     } catch (error) {
       console.error("Error fetching CSRF token:", error);
     }
   };
 
-  getCsrfToken();
+  useEffect(() => {
+    getCsrfToken();
+  }, []);
 
   return (
     <div>
       <Header />
       <section>
-        <main className="form-signin w-25 m-auto mt-5 text-center">
+        <main className="form-signin-container">
           <form onSubmit={handleSubmit}>
-            <i className="bi bi-person-circle display-1"></i>
-            <h1 className="h3 mb-3 fw-normal">Login</h1>
+            <div className="login-icon">
+              <i
+                className="bi bi-person-circle display-1 custom-icon"
+                style={{ color: "#1abc9c" }}
+              ></i>
+
+              <h1 style={{ fontSize: "20px", fontWeight: "normal" }}>Login</h1>
+            </div>
 
             <div className="form-floating my-2">
               <input
@@ -181,7 +179,6 @@ const Login = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
-              <label htmlFor="floatingInput">Nome de usuário</label>
             </div>
             <div className="form-floating my-2">
               <input
@@ -192,7 +189,6 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <label htmlFor="floatingPassword">Senha</label>
             </div>
 
             <div className="checkbox my-3">
@@ -201,13 +197,14 @@ const Login = () => {
               </label>
             </div>
             <button
-              className="w-100 btn btn-lg"
+              className="btn-login"
               type="submit"
               disabled={loading}
+              style={{ color: "#ffffff", fontSize: "18px" }}
             >
               {loading ? "Carregando..." : "Entrar"}
             </button>
-            <div className="my-3">
+            <div type="submit" style={{ marginTop: "15px" }}>
               <span>
                 Não tem cadastro? Clique <Link to="/cadastro">aqui</Link>
               </span>

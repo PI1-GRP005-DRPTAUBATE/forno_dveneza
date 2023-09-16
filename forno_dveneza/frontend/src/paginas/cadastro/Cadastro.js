@@ -57,51 +57,53 @@ const Cadastro = () => {
     <div>
       <Header />
       <section>
-        <main className="form-signin w-25 m-auto mt-5 text-center">
+        <main className="form-cadastro-container">
           <form onSubmit={handleSubmit}>
-            <i className="bi bi-person-circle display-1"></i>
-            <h1 className="h3 mb-3 fw-normal">Cadastro de usuário</h1>
+            <div className="login-icon">
+              <i
+                className="bi bi-person-circle display-1 custom-icon"
+                style={{ color: "#1abc9c" }}
+              ></i>
 
+              <h1 style={{ fontSize: "20px", fontWeight: "normal" }}>
+                {" "}
+                Cadastro de usuário
+              </h1>
+            </div>
             <div className="form-floating my-2">
               <input
                 type="text"
-                className="form-control"
-                id="floatingInput"
+                id="usernameInput"
                 placeholder="Nome de usuário"
                 name="usuario"
                 value={formData.usuario}
                 onChange={handleChange}
               />
-              <label htmlFor="floatingInput">Nome de usuário</label>
             </div>
             <div className="form-floating my-2">
               <input
                 type="email"
-                className="form-control"
-                id="floatingInput"
+                id="emailInput"
                 placeholder="Email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
               />
-              <label htmlFor="floatingInput">Email</label>
             </div>
             <div className="form-floating my-2">
               <input
                 type="password"
-                className="form-control"
                 id="floatingPassword"
-                placeholder="Password"
+                placeholder="Senha"
                 name="senha"
                 value={formData.senha}
                 onChange={handleChange}
               />
-              <label htmlFor="floatingPassword">Senha</label>
             </div>
             <button
-              className="w-100 btn btn-lg"
+              className="btn-login"
               type="submit"
-              style={{ marginBottom: "20px" }}
+              style={{ marginBottom: "20px", width: "100%" }}
             >
               Cadastrar
             </button>

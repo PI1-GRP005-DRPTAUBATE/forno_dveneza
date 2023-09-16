@@ -14,80 +14,97 @@ const Cardapio = () => {
     Axios.get("http://127.0.0.1:8000/api/produtos/").then((response) => {
       console.log("API Response:", response.data);
       setProdutos(response.data);
-      setCategorias(response.data.map((product) => product.id_categoria));
       setCadastrado(response.data.cadastrado);
+      Axios.get("http://127.0.0.1:8000/api/categorias/").then(
+        (responseCategoria) => {
+          console.log(
+            "API responseCategoria CATEGORIAS:",
+            responseCategoria.data
+          );
+          setCategorias(responseCategoria.data.map((categoria) => categoria));
+          console.log("categorias", categorias);
+        }
+      );
     });
   }, []);
 
   return (
-    <div>
+    <div className="centered-content" style={{ marginBottom: "200px" }}>
       <Header />
-      <h3
-        className="cardapio-titulo"
-        style={{ textAlign: "center", fontSize: "26px" }}
-      >
-        Cardápio
-      </h3>
-      {categorias.length > 0 &&
-        categorias.map((categoria) => (
-          <div key={categoria}>
-            <h4 className="m-0 mx-3">{categoria}s</h4>
-            <section className="d-flex justify-content-center my-5 cardapio flex-column flex-wrap">
-              {produtos.map(
-                (produto) =>
-                  produto.id_categoria === categoria && (
-                    <div key={produto.id} className="card mb-3 w-75">
-                      <div className="d-flex">
-                        <div className="d-flex col-md-5 w-25 m-auto justify-content-center">
+      <div style={{ padding: "40px" }}>
+        <h3 className="cardapio-titulo" style={{ textAlign: "center" }}>
+          Cardápio
+        </h3>
+      </div>
+
+      <div className="centered-content">
+        {categorias.length > 0 &&
+          categorias.map((categoria) => (
+            <div key={categoria.id}>
+              <h4 className="m-0 mx-3">{categoria.descricao}</h4>
+              <section className="d-flex flex-wrap ">
+                {produtos.map(
+                  (produto) =>
+                    produto.id_categoria === categoria.id && (
+                      <div
+                        key={produto.id}
+                        className="card-produto mb-4 justify-content-around"
+                      >
+                        <div
+                          className="card-img mx-2"
+                          style={{ maxWidth: "100px" }}
+                        >
                           <img
                             src={produto.foto.url}
                             className="cardapio-img"
                             alt={`Imagem ${produto.nome}`}
                           />
                         </div>
-                        <div className="w-75 text-end">
-                          <div class="card-body">
-                            <h5 className="card-title text-start">
-                              {produto.nome}
-                            </h5>
-                            <p className="card-text text-start">
-                              {produto.descricao}
-                            </p>
-                            <p className="card-text text-start">
-                              <small>R$ {produto.preco_unidade}</small>
-                            </p>
-                            <Link
-                              to={`adicionar_produto/${produto.id}`}
-                              className="btn-carrinho"
-                            >
+                        <div className="card-info mx-2">
+                          <h5 className="card-title">{produto.nome}</h5>
+                          <p className="card-text">{produto.descricao}</p>
+                          <p className="card-text">
+                            <small>R$ {produto.preco_unidade}</small>
+                          </p>
+                        </div>
+                        <div
+                          className="btn-cardapio"
+                          style={{ justifyContent: "center" }}
+                        >
+                          <Link
+                            to={`adicionar_produto/${produto.id}`}
+                            className="link-button"
+                          >
+                            <p className="btn-cardapio-text">
                               Adicionar ao carrinho
-                            </Link>
-                          </div>
+                            </p>
+                          </Link>
                         </div>
                       </div>
-                    </div>
-                  )
-              )}
-            </section>
+                    )
+                )}
+              </section>{" "}
+            </div>
+          ))}
+        {cadastrado && (
+          <div className="d-flex justify-content-center">
+            <div
+              id="alertaProduto"
+              className="alert alert-success w-50 text-center alert-dismissible fade show"
+              role="alert"
+            >
+              Produto adicionado ao seu carrinho!
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
           </div>
-        ))}
-      {cadastrado && (
-        <div className="d-flex justify-content-center">
-          <div
-            id="alertaProduto"
-            className="alert alert-success w-50 text-center alert-dismissible fade show"
-            role="alert"
-          >
-            Produto adicionado ao seu carrinho!
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-            ></button>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
+
       <Footer />
     </div>
   );
