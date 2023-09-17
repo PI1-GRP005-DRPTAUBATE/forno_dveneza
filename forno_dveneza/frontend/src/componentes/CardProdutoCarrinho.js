@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 const CardProdutoCarrinho = ({
   produto,
   quantidade,
@@ -12,8 +11,8 @@ const CardProdutoCarrinho = ({
   item,
 }) => {
   return (
-    <div className="card-produto mb-4 justify-content-around">
-      <div className="card-img mx-2" style={{ maxWidth: "100px" }}>
+    <div className="card-produto-carrinho justify-content-around">
+      <div className="card-img " style={{ maxWidth: "100px" }}>
         {produto.foto && produto.foto.url ? (
           <img
             src={produto.foto.url}
@@ -30,23 +29,33 @@ const CardProdutoCarrinho = ({
         <p className="card-text">{produto.descricao}</p>
       </div>
       <div className="quantidade-produto">
+        <p>Quantidade</p>
         <button onClick={onDecrement}>-</button>
-        <input type="text" value={quantidade} readOnly />
+        <input
+          type="text"
+          value={quantidade}
+          style={{ width: "50px" }}
+          readOnly
+        />
         <button onClick={() => adicionarProdutoAoCarrinho(produto)}>+</button>
       </div>
-      <div className="btn-cardapio" style={{ justifyContent: "center" }}>
+      <div
+        className="btn-carrinho"
+        style={{ justifyContent: "center", marginTop: "35px" }}
+      >
         <Link
           className="link-button"
           onClick={() => {
             excluirProduto();
           }}
         >
-          <p className="btn-cardapio-text">Excluir produto</p>
+          <p className="btn-carrinho-text">Excluir</p>
         </Link>
       </div>
-      <p className="card-text">
-        <small>R$ {produto.preco_unidade * quantidade}</small>
-      </p>
+      <div>
+        <p className="card-text">Preço</p>
+        <p>R$ {produto.preco_unidade * quantidade}</p>
+      </div>
     </div>
   );
 };

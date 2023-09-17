@@ -59,13 +59,13 @@ const Carrinho = () => {
   const produtosUnicos = agruparProdutos();
   const totalCompra = calcularTotal(produtosUnicos);
   return (
-    <div>
+    <div className="centered-content" style={{ marginBottom: "200px" }}>
       <Header />
-      <div style={{ textAlign: "center", marginTop: "5px" }}>
+      <div style={{ textAlign: "center", padding: "40px" }}>
         <h2>Seu carrinho de compras</h2>
       </div>
       {produtosUnicos.length ? (
-        <div>
+        <div className="centered-content">
           {produtosUnicos.map((item) => (
             <CardProdutoCarrinho
               key={item.produto.id}
@@ -78,8 +78,18 @@ const Carrinho = () => {
               excluirProduto={() => excluirProduto(item.produto.id)}
             />
           ))}
-          <div>
-            <p> Preço total: R$ {totalCompra.toFixed(2)}</p>
+          <div className="checkout-carrinho">
+            <p style={{ marginRight: "250px" }}>
+              Preço total: R$ {totalCompra.toFixed(2)}
+            </p>
+            <div className="btn-container-carrinho">
+              <Link to={"/cardapio"} className="btn-carrinho-checkout">
+                <p>Continue comprando</p>
+              </Link>
+              <Link to={"/finalizar-compra"} className="btn-carrinho-checkout">
+                <p>Finalizar compra</p>
+              </Link>
+            </div>
           </div>
         </div>
       ) : (
@@ -90,7 +100,6 @@ const Carrinho = () => {
           </Link>
         </div>
       )}
-
       <Footer />
     </div>
   );
