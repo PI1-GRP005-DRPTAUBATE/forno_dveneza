@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
-import "./Cardapio.css";
 import { Link } from "react-router-dom";
+import "./Cardapio.css";
 import Axios from "axios";
 import Header from "../../componentes/Header";
 import Footer from "../../componentes/Footer";
+import { useCarrinho } from "../../context/CarrinhoContext";
+import CardProduto from "../../componentes/CardProduto";
 
 const Cardapio = () => {
   const [produtos, setProdutos] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [cadastrado, setCadastrado] = useState(false);
+  const [alertaVisivel, setAlertaVisivel] = useState(false);
+  const { adicionarProdutoAoCarrinho } = useCarrinho();
 
   useEffect(() => {
     Axios.get("http://127.0.0.1:8000/api/produtos/").then((response) => {
@@ -28,6 +32,13 @@ const Cardapio = () => {
     });
   }, []);
 
+  const alertaCarrinho = () => {
+    setAlertaVisivel(true);
+    setTimeout(() => {
+      setAlertaVisivel(false);
+    }, 3000);
+  };
+
   return (
     <div className="centered-content" style={{ marginBottom: "200px" }}>
       <Header />
@@ -46,48 +57,21 @@ const Cardapio = () => {
                 {produtos.map(
                   (produto) =>
                     produto.id_categoria === categoria.id && (
-                      <div
+                      <CardProduto
                         key={produto.id}
-                        className="card-produto mb-4 justify-content-around"
-                      >
-                        <div
-                          className="card-img mx-2"
-                          style={{ maxWidth: "100px" }}
-                        >
-                          <img
-                            src={produto.foto.url}
-                            className="cardapio-img"
-                            alt={`Imagem ${produto.nome}`}
-                          />
-                        </div>
-                        <div className="card-info mx-2">
-                          <h5 className="card-title">{produto.nome}</h5>
-                          <p className="card-text">{produto.descricao}</p>
-                          <p className="card-text">
-                            <small>R$ {produto.preco_unidade}</small>
-                          </p>
-                        </div>
-                        <div
-                          className="btn-cardapio"
-                          style={{ justifyContent: "center" }}
-                        >
-                          <Link
-                            to={`adicionar_produto/${produto.id}`}
-                            className="link-button"
-                          >
-                            <p className="btn-cardapio-text">
-                              Adicionar ao carrinho
-                            </p>
-                          </Link>
-                        </div>
-                      </div>
+                        produto={produto}
+                        adicionarProdutoAoCarrinho={adicionarProdutoAoCarrinho}
+                        alertaCarrinho={alertaCarrinho}
+                      />
                     )
                 )}
               </section>{" "}
             </div>
           ))}
-        {cadastrado && (
-          <div className="d-flex justify-content-center">
+      </div>
+      {alertaVisivel && (
+        <div className="overlay">
+          <div className="alert-container">
             <div
               id="alertaProduto"
               className="alert alert-success w-50 text-center alert-dismissible fade show"
@@ -99,11 +83,12 @@ const Cardapio = () => {
                 className="btn-close"
                 data-bs-dismiss="alert"
                 aria-label="Close"
+                onClick={() => setAlertaVisivel(false)}
               ></button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       <Footer />
     </div>
