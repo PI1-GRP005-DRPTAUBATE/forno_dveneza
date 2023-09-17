@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-container {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.btn-carrinho-checkout {
+  background-color: #1abc9c;
+  padding: 10px 20px;
+  margin: 0 5px;
+  text-decoration: none;
+  color: #fff;
+}
+.btn-container-finalizar-compra > * {
+  margin-left: 10px;
+}
+
+.btn-container-finalizar-compra {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
