@@ -12,6 +12,7 @@ const FinalizarCompra = () => {
   const [cidade, setCidade] = useState("");
   const [referencia, setReferencia] = useState("");
   const [complemento, setComplemento] = useState("");
+  const [formaDePagamento, setFormaDePagamento] = useState("");
   const [alertaVisivel, setAlertaVisivel] = useState(false);
   const {
     userId,
@@ -35,13 +36,13 @@ const FinalizarCompra = () => {
               },
             }
           );
-
           setCep(response.data.cep || "");
           setEndereco(response.data.endereco || "");
           setBairro(response.data.bairro || "");
           setCidade(response.data.cidade || "");
           setReferencia(response.data.referencia || "");
           setComplemento(response.data.complemento || "");
+          setFormaDePagamento(response.data.formaDePagamento || "");
         } catch (error) {
           console.error("Error fetching user data:", error);
         }
@@ -64,6 +65,7 @@ const FinalizarCompra = () => {
           cidade,
           complemento,
           referencia,
+          formaDePagamento,
         },
         {
           headers: {
@@ -90,6 +92,24 @@ const FinalizarCompra = () => {
     );
   };
 
+  const renderFormadePagamento = () => {
+    return (
+      <div style={{ marginTop: "15px" }}>
+        <label className="form-label">Forma de pagamento</label>
+        <select
+          className="form-select"
+          value={formaDePagamento}
+          onChange={(e) => setFormaDePagamento(e.target.value)}
+        >
+          <option value="">Selecione a forma de pagamento</option>
+          <option value="dinheiro">Dinheiro</option>
+          <option value="cartao">Cartão</option>
+          <option value="pix">Pix</option>
+        </select>
+      </div>
+    );
+  };
+
   return (
     <div>
       <Header />
@@ -107,6 +127,7 @@ const FinalizarCompra = () => {
           {renderUserInfo("Referência", referencia, setReferencia)}
           {renderUserInfo("Bairro", bairro, setBairro)}
           {renderUserInfo("Cidade", cidade, setCidade)}
+          {renderFormadePagamento()}
           <div className="btn-container-carrinho" style={{ marginTop: "30px" }}>
             <button
               type="submit"
