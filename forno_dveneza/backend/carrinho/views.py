@@ -8,6 +8,8 @@ from .models import Carrinho, ItemCarrinho
 from produtos.models import Produto
 from clientes.models import Cliente
 
+from .api.serializers import ItemCarrinhoSerializer
+
 class AdicionarProdutoCarrinho(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -51,6 +53,23 @@ class ExcluirProdutoCarrinho(APIView):
 
         item_carrinho.delete()
         return Response({"Mensagem": "Item removido do carrinho com sucesso."}, status=status.HTTP_204_NO_CONTENT)
+    
+class ProdutoCarrinho(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ItemCarrinhoSerializer
+
+    def get_object(self):
+        try:
+            cliente = Cliente.objects.get(usuario=self.request.user)
+        except Cliente.DoesNotExist:
+            return Response({"Erro": "Cliente não encontrado"}, status=status.HTTP_404_NOT_FOUND)
+        
+        item_id = self.request.data.get('item_id')
+        
+        carrinho = Carrinho.objects.get(cliente=cliente)
+        item_carrinho = carrinho.itens.get(id=item_id)
+
+        return item_carrinho
         
 class ListaProdutosCarrinho(APIView):
     permission_classes = [IsAuthenticated]
