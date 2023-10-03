@@ -9,6 +9,8 @@ const CardProdutoCarrinho = ({
   alertaCarrinho,
   excluirProduto,
   item,
+  borda,
+  pizzaMeia,
 }) => {
   return (
     <div className="card-produto-carrinho justify-content-around">
@@ -27,6 +29,13 @@ const CardProdutoCarrinho = ({
       <div className="card-info mx-2">
         <h5 className="card-title">{produto.nome}</h5>
         <p className="card-text">{produto.descricao}</p>
+
+        {produto.categoria === "Pizza" && (
+          <p>Tipo: {pizzaMeia ? "Meia" : "Inteira"}</p>
+        )}
+        {produto.categoria === "Pizza" && (
+          <p>Borda: {borda ? "Rechada" : "Simples"}</p>
+        )}
       </div>
       <div className="quantidade-produto">
         <p>Quantidade</p>

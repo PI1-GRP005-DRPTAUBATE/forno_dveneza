@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useCarrinho } from "../../context/CarrinhoContext";
 import CardProdutoCarrinho from "../../componentes/CardProdutoCarrinho";
 
-const Carrinho = () => {
+const Carrinho = ({ pizzaMeia, borda }) => {
   const {
     produtosCarrinho,
     excluirProduto,
@@ -72,8 +72,14 @@ const Carrinho = () => {
               produto={item.produto}
               quantidade={item.quantidade}
               onDecrement={() => decrementQuantity(item.produto.id)}
+              borda={item.borda}
+              pizzaMeia={item.pizzaMeia}
               adicionarProdutoAoCarrinho={() =>
-                adicionarProdutoAoCarrinho(item.produto)
+                adicionarProdutoAoCarrinho(
+                  item.produto,
+                  item.pizzaMeia,
+                  item.borda
+                )
               }
               excluirProduto={() => excluirProduto(item.produto.id)}
             />

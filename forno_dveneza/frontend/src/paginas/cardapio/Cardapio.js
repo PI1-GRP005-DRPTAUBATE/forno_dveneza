@@ -7,9 +7,10 @@ import Footer from "../../componentes/Footer";
 import { useCarrinho } from "../../context/CarrinhoContext";
 import CardProduto from "../../componentes/CardProduto";
 
-const Cardapio = () => {
+const Cardapio = ({ borda, pizzaMeia }) => {
   const [produtos, setProdutos] = useState([]);
   const [categorias, setCategorias] = useState([]);
+  const [categoria, setCategoria] = useState([]);
   const [cadastrado, setCadastrado] = useState(false);
   const [alertaVisivel, setAlertaVisivel] = useState(false);
   const { adicionarProdutoAoCarrinho } = useCarrinho();
@@ -26,7 +27,9 @@ const Cardapio = () => {
             responseCategoria.data
           );
           setCategorias(responseCategoria.data.map((categoria) => categoria));
-          console.log("categorias", categorias);
+          setCategoria(
+            responseCategoria.data.map((categoria) => categoria.descricao)
+          );
         }
       );
     });
@@ -60,8 +63,11 @@ const Cardapio = () => {
                       <CardProduto
                         key={produto.id}
                         produto={produto}
-                        adicionarProdutoAoCarrinho={adicionarProdutoAoCarrinho}
+                        adicionarProdutoAoCarrinho={() =>
+                          adicionarProdutoAoCarrinho(produto, pizzaMeia, borda)
+                        }
                         alertaCarrinho={alertaCarrinho}
+                        categoria={categoria.descricao}
                       />
                     )
                 )}

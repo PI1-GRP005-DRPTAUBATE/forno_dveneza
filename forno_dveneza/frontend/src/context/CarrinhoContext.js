@@ -15,7 +15,7 @@ export function CarrinhoProvider({ children }) {
     localStorage.setItem("carrinho", JSON.stringify(produtosCarrinho));
   }, [produtosCarrinho]);
 
-  const adicionarProdutoAoCarrinho = (produto) => {
+  const adicionarProdutoAoCarrinho = (produto, pizzaMeia, borda) => {
     const carrinhoAtualizado = [...produtosCarrinho];
     const index = carrinhoAtualizado.findIndex(
       (item) => item.produto.id === produto.id
@@ -24,7 +24,12 @@ export function CarrinhoProvider({ children }) {
     if (index !== -1) {
       carrinhoAtualizado[index].quantidade += 1;
     } else {
-      carrinhoAtualizado.push({ produto, quantidade: 1 });
+      carrinhoAtualizado.push({
+        produto,
+        quantidade: 1,
+        pizzaMeia,
+        borda,
+      });
     }
 
     setProdutosCarrinho(carrinhoAtualizado);
