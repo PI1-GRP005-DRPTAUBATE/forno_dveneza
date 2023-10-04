@@ -10,6 +10,7 @@ import MinhaArea from "./paginas/clientes/MinhaArea";
 import Carrinho from "./paginas/carrinho/Carrinho";
 import { CarrinhoProvider } from "./context/CarrinhoContext";
 import FinalizarCompra from "./paginas/pedido/FinalizarCompra";
+import MeusPedidos from "./paginas/clientes/MeusPedidos";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path="/perfil" element={<Perfil />} />
               <Route path="/cardapio" element={<Cardapio />} />
               <Route path="/carrinho" element={<Carrinho />} />
+              <Route path="/pedidos" element={<MeusPedidos />} />
               <Route path="/finalizar-compra" element={<FinalizarCompra />} />
             </Routes>
           </div>
