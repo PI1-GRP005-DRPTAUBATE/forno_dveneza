@@ -4,6 +4,7 @@ import Footer from "../../componentes/Footer";
 import { Link } from "react-router-dom";
 import { useCarrinho } from "../../context/CarrinhoContext";
 import CardProdutoCarrinho from "../../componentes/CardProdutoCarrinho";
+import "./Carrinho.css";
 
 const Carrinho = ({ pizzaMeia, borda }) => {
   const {
@@ -65,29 +66,29 @@ const Carrinho = ({ pizzaMeia, borda }) => {
         <h2>Seu carrinho de compras</h2>
       </div>
       {produtosUnicos.length ? (
-        <div className="centered-content">
-          {produtosUnicos.map((item) => (
-            <CardProdutoCarrinho
-              key={item.produto.id}
-              produto={item.produto}
-              quantidade={item.quantidade}
-              onDecrement={() => decrementQuantity(item.produto.id)}
-              borda={item.borda}
-              pizzaMeia={item.pizzaMeia}
-              adicionarProdutoAoCarrinho={() =>
-                adicionarProdutoAoCarrinho(
-                  item.produto,
-                  item.pizzaMeia,
-                  item.borda
-                )
-              }
-              excluirProduto={() => excluirProduto(item.produto.id)}
-            />
-          ))}
+        <div>
+          <div className="centered-content">
+            {produtosUnicos.map((item) => (
+              <CardProdutoCarrinho
+                key={item.produto.id}
+                produto={item.produto}
+                quantidade={item.quantidade}
+                onDecrement={() => decrementQuantity(item.produto.id)}
+                borda={item.borda}
+                pizzaMeia={item.pizzaMeia}
+                adicionarProdutoAoCarrinho={() =>
+                  adicionarProdutoAoCarrinho(
+                    item.produto,
+                    item.pizzaMeia,
+                    item.borda
+                  )
+                }
+                excluirProduto={() => excluirProduto(item.produto.id)}
+              />
+            ))}
+          </div>
           <div className="checkout-carrinho">
-            <p style={{ marginRight: "250px" }}>
-              Preço total: R$ {totalCompra.toFixed(2)}
-            </p>
+            <p>Preço total: R$ {totalCompra.toFixed(2)}</p>
             <div className="btn-container-carrinho">
               <Link to={"/cardapio"} className="btn-carrinho-checkout">
                 <p>Continue comprando</p>

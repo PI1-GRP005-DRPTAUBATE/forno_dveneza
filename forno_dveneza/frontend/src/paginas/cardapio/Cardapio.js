@@ -19,6 +19,8 @@ const Cardapio = ({ borda, pizzaMeia }) => {
     Axios.get("http://127.0.0.1:8000/api/produtos/").then((response) => {
       console.log("API Response:", response.data);
       setProdutos(response.data);
+      console.log("url foto", response.data);
+
       setCadastrado(response.data.cadastrado);
       Axios.get("http://127.0.0.1:8000/api/categorias/").then(
         (responseCategoria) => {
@@ -54,9 +56,12 @@ const Cardapio = ({ borda, pizzaMeia }) => {
       <div className="centered-content">
         {categorias.length > 0 &&
           categorias.map((categoria) => (
-            <div key={categoria.id}>
+            <div
+              key={categoria.id}
+              style={{ marginLeft: "200px", marginRight: "300px" }}
+            >
               <h4 className="m-0 mx-3">{categoria.descricao}</h4>
-              <section className="d-flex flex-wrap ">
+              <section className="d-flex flex-wrap">
                 {produtos.map(
                   (produto) =>
                     produto.id_categoria === categoria.id && (

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Image } from "cloudinary-react";
+import { extrairPublicId } from "../validacoes/extrairPublicId";
 
 const CardProduto = ({
   produto,
@@ -10,13 +12,19 @@ const CardProduto = ({
   const [pizzaMeia, setPizzaMeia] = useState(false);
   const [borda, setBorda] = useState(false);
 
+  const url = produto.foto;
+  const publicId = url ? extrairPublicId(url) : null;
+
+  console.log(url);
+  console.log("publicId", publicId);
   return (
     <div className="card-produto mb-4 justify-content-around">
-      <div className="card-img mx-2" style={{ maxWidth: "100px" }}>
-        <img
-          src={produto.foto.url}
-          className="cardapio-img"
+      <div className="card-img mx-2">
+        <Image
+          cloudName="dfjghzyfb"
+          publicId={publicId}
           alt={`Imagem ${produto.nome}`}
+          className="cardapio-img"
         />
       </div>
       <div className="card-info mx-2">
@@ -27,7 +35,7 @@ const CardProduto = ({
         </p>
         {categoria === "Pizza" && (
           <div>
-            <label style={{ marginLeft: "0px" }}>
+            <label>
               Tipo de Pizza:
               <select
                 value={pizzaMeia ? "Meia" : "Inteira"}
@@ -52,7 +60,7 @@ const CardProduto = ({
           </div>
         )}
       </div>
-      <div className="btn-cardapio" style={{ justifyContent: "center" }}>
+      <div className="btn-cardapio">
         <Link
           className="link-button"
           onClick={() => {

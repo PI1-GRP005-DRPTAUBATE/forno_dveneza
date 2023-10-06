@@ -60,6 +60,7 @@ const MeusPedidos = ({ pedido }) => {
                   </p>
                 ))}
                 <p className="pedido-total">Total: R$ {pedido.total}</p>
+                <p>Status do Pedido: {pedido.status}</p>
               </div>
             ))}
           </div>
@@ -87,6 +88,7 @@ const MeusPedidos = ({ pedido }) => {
                 ))}
                 <p className="pedido-item"> Data do pedido: {pedido.data}</p>
                 <p className="pedido-total">Total: R$ {pedido.total}</p>
+                <p>Status do Pedido: {pedido.status}</p>
               </div>
             ))}
           </div>

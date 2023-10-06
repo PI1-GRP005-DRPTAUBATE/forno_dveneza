@@ -1,0 +1,10 @@
+.checkout-carrinho {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 10px;
+  margin-left: 110px;
+}
+.btn-container-carrinho {
+  margin-left: -10px;
+}
