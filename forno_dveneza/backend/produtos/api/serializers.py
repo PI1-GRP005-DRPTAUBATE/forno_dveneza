@@ -6,6 +6,11 @@ class ProdutosSerializer(serializers.ModelSerializer):
         model = models.Produto
         fields = '__all__'
 
+class ProdutosMeioAMeioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.ProdutoMeioAMeio
+        fields = '__all__'
+
 class CategoriasSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Categoria

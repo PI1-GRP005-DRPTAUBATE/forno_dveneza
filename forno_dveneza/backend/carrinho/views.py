@@ -1,45 +1,122 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
+from .models import Carrinho, ItemCarrinho
 from produtos.models import Produto
-from .models import Carrinho
-from .models import ItemCarrinho
 from clientes.models import Cliente
 
-# Create your views here.
+from .api.serializers import ItemCarrinhoSerializer
 
-@login_required(login_url='login')
-def carrinho(request):
-    produtos = Produto.objects.all()
-    cliente = Cliente.objects.filter(usuario=request.user).first()
-    carrinho_cliente = Carrinho.objects.filter(cliente=cliente).first()
+class AdicionarProdutoCarrinho(APIView):
+    permission_classes = [IsAuthenticated]
 
-    total = 0
-    for item in carrinho_cliente.itens.all():
-        total += item.produto.preco_unidade
+    def post(self, request):
+        try:
+            cliente = Cliente.objects.get(usuario=request.user)
+        except Cliente.DoesNotExist:
+            return Response({"Erro": "Cliente não encontrado"})
+        
+        carrinho = Carrinho.objects.get(cliente=cliente)
+        
+        produto_id = request.data.get('produto_id')
+        quantidade = request.data.get('quantidade')
 
-    return render(request, 'carrinho/carrinho.html', context={
-        'cliente': cliente,
-        'carrinho': carrinho_cliente,
-        'produtos': produtos,
-        'preco_total': total
-    })
+        try:
+            produto = Produto.objects.get(pk=produto_id)
+        except Produto.DoesNotExist:
+            return Response({"Erro": "Produto não encontrado"}, status=status.HTTP_404_NOT_FOUND)
+        
+        item_carrinho, created = ItemCarrinho.objects.get_or_create(produto=produto, quantidade=quantidade)
+        carrinho.itens.add(item_carrinho)
 
-def excluir_item(request, item_id):
-    cliente = Cliente.objects.filter(usuario=request.user).first()
-    carrinho_cliente = Carrinho.objects.filter(cliente=cliente).first()
-    produtos = Produto.objects.all()
+        return Response({"Mensagem": "Produto adicionado ao carrinho com sucesso"})
+    
+class ExcluirProdutoCarrinho(APIView):
+    permission_classes = [IsAuthenticated]
 
-    carrinho_cliente.itens.remove(item_id)
-    ItemCarrinho.objects.filter(id=item_id).delete()
+    def delete(self, request):
+        try:
+            cliente = Cliente.objects.get(usuario=request.user)
+        except Cliente.DoesNotExist:
+            return Response({"Erro": "Cliente não encontrado"})
+        
+        carrinho = Carrinho.objects.get(cliente=cliente)
+        item_id = request.data.get('item_id')
 
-    total = 0
-    for item in carrinho_cliente.itens.all():
-        total += item.produto.preco_unidade
+        try:
+            item_carrinho = carrinho.itens.get(id=item_id)
+        except ItemCarrinho.DoesNotExist:
+            return Response({'Erro:', 'Item do carrinho não encontrado.'}, status=status.HTTP_404_NOT_FOUND)
 
-    return render(request, 'carrinho/carrinho.html', context={
-        'cliente': cliente,
-        'carrinho': carrinho_cliente,
-        'produtos': produtos,
-        'preco_total': total
-    })
+        item_carrinho.delete()
+        return Response({"Mensagem": "Item removido do carrinho com sucesso."}, status=status.HTTP_204_NO_CONTENT)
+    
+class ProdutoCarrinho(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ItemCarrinhoSerializer
+
+    def get_object(self):
+        try:
+            cliente = Cliente.objects.get(usuario=self.request.user)
+        except Cliente.DoesNotExist:
+            return Response({"Erro": "Cliente não encontrado"}, status=status.HTTP_404_NOT_FOUND)
+        
+        item_id = self.request.data.get('item_id')
+        
+        carrinho = Carrinho.objects.get(cliente=cliente)
+        item_carrinho = carrinho.itens.get(id=item_id)
+
+        return item_carrinho
+        
+class ListaProdutosCarrinho(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        try:
+            cliente = Cliente.objects.get(usuario=request.user)
+        except Cliente.DoesNotExist:
+            return Response({"Erro": "Cliente não encontrado"}, status=status.HTTP_404_NOT_FOUND)
+        
+        carrinho = Carrinho.objects.get(cliente=cliente)
+        itens_carrinho = carrinho.itens.all()
+        produtos_carrinho = []
+
+        for item in itens_carrinho:
+            produto_info = {
+                'item_id': item.id,
+                'produto_id': item.produto.id,
+                'nome': item.produto.nome,
+                'descricao': item.produto.descricao,
+                'url_imagem': item.produto.foto.url,
+                'quantidade': item.quantidade,
+                'preco_unidade': item.produto.preco_unidade,
+            }
+            produtos_carrinho.append(produto_info)
+
+        return Response(produtos_carrinho, status=status.HTTP_200_OK)
+    
+class AlterarQuantidadeProduto(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request):
+        try:
+            cliente = Cliente.objects.get(usuario=request.user)
+        except Cliente.DoesNotExist:
+            return Response({"Erro": "Cliente não encontrado"})
+        
+        carrinho = Carrinho.objects.get(cliente=cliente)
+        item_id = request.data.get('item_id')
+        nova_quantidade = request.data.get('quantidade')
+
+        try:
+            item_carrinho = carrinho.itens.get(id=item_id)
+        except ItemCarrinho.DoesNotExist:
+            return Response({"Erro": "Item do carrinho não encontrado."}, status=status.HTTP_404_NOT_FOUND)
+        
+        item_carrinho.quantidade = nova_quantidade
+        item_carrinho.save()
+
+        return Response({"Mensagem": "Quantidade de produto alterada com sucesso."}, status=status.HTTP_204_NO_CONTENT)

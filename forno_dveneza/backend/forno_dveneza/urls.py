@@ -29,13 +29,15 @@ route.register(r'produtos', produtosviewsets.ProdutosViewSet, basename="Produtos
 route.register(r'clientes', clientesviewsets.ClientesViewSet, basename="Clientes")
 route.register(r'usuarios', clientesviewsets.UsuariosViewSet, basename="Usuarios")
 route.register(r'pedidos', pedidosviewsets.PedidosViewSets, basename="Pedidos")
-route.register(r'carrinho', carrinhoviewsets.CarrinhoViewsets, basename="Carrinho")
+route.register(r'produtos-meio-a-meio', produtosviewsets.ProdutosMeioAMeioViewSet, basename="ProdutosMeioAMeio")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(route.urls)),
-    path('api/usuario/', include('clientes.urls'))
+    path('api/usuario/', include('clientes.urls')),
+    path('api/carrinho/', include('carrinho.urls')),
+    path('api/pedido/', include('pedidos.urls'))
 ]
 
 urlpatterns += [

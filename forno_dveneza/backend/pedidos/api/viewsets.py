@@ -3,5 +3,5 @@ from pedidos.api import serializers
 from pedidos import models
 
 class PedidosViewSets(viewsets.ModelViewSet):
-    serializer_class = serializers.PedidosSerializers
+    serializer_class = serializers.PedidosSerializer
     queryset = models.Pedido.objects.all()
