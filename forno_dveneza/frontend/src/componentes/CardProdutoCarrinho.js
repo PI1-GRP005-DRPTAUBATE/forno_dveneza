@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
-
 import { extrairPublicId } from "../validacoes/extrairPublicId";
 
 const CardProdutoCarrinho = ({
@@ -22,16 +21,12 @@ const CardProdutoCarrinho = ({
   return (
     <div className="card-produto-carrinho justify-content-around">
       <div className="card-img " style={{ maxWidth: "100px" }}>
-        {produto.foto && produto.foto.url ? (
-          <Image
-            cloudName="dfjghzyfb"
-            publicId={publicId}
-            alt={`Imagem ${produto.nome}`}
-            className="cardapio-img"
-          />
-        ) : (
-          <p>Imagem não disponível</p>
-        )}
+        <Image
+          cloudName="dfjghzyfb"
+          publicId={publicId}
+          alt={`Imagem ${produto.nome}`}
+          className="cardapio-img"
+        />
       </div>
 
       <div className="card-info mx-2">
