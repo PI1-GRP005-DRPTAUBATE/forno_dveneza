@@ -2,6 +2,7 @@ from clientes.models import Cliente
 from pedidos.models import Pedido, ItemPedido
 from pedidos.api.serializers import PedidosSerializer, ItemPedidoSerializer
 
+from django.http import Http404
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.views import APIView
@@ -58,4 +59,19 @@ class ListarPedidosView(generics.ListAPIView):
             return Response({"Erro": "Cliente não encontrado!"}, status=status.HTTP_404_NOT_FOUND)
         
         return Pedido.objects.filter(cliente=cliente)
-        
+
+class InformacoesPedidoView(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = PedidosSerializer
+
+    def get_object(self):
+        try:
+            cliente = Cliente.objects.get(usuario=self.request.user)
+            pedido_id = self.kwargs.get('id')
+            try:
+                pedido = Pedido.objects.get(cliente=cliente, id=pedido_id)
+                return pedido
+            except Pedido.DoesNotExist:
+                raise Http404('Pedido não encontrado!')
+        except Cliente.DoesNotExist:
+            raise Http404('Cliente não encontrado!')
