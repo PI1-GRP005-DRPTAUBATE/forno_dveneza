@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, List
 
 from django.db import models
 
@@ -21,4 +21,4 @@ class ItemCarrinho(models.Model):
     quantidade = models.IntegerField()
 
     def __str__(self):
-        return f'{self.produto} {self.quantidade}'
+        return f'{self.produto} - {self.quantidade}'

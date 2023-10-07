@@ -1,7 +1,13 @@
 from django.contrib import admin
 
-from .models import Pedido
+from .models import Pedido, ItemPedido
 
-@admin.register(Pedido)
+class ItemPedidoInline(admin.StackedInline):
+    model = ItemPedido
+    extra = 0
+
 class PedidoAdmin(admin.ModelAdmin):
-    list_display = ['cliente', 'endereco', 'data_compra']
+    inlines = [ItemPedidoInline]
+    list_display = ['id', 'cliente', 'data_compra']
+
+admin.site.register(Pedido, PedidoAdmin)

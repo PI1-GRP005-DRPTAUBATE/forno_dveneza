@@ -1,50 +1,61 @@
-from django.shortcuts import render
-
-from carrinho.models import Carrinho
 from clientes.models import Cliente
-from pedidos.forms import PedidoForm
-from pedidos.models import Pedido
+from pedidos.models import Pedido, ItemPedido
+from pedidos.api.serializers import PedidosSerializer, ItemPedidoSerializer
 
-def criar_pedido(request):
-    cliente = Cliente.objects.filter(usuario=request.user).first()
-    carrinho_cliente = Carrinho.objects.filter(cliente=cliente).first()
+from rest_framework import generics
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+    
+class CriarPedidoView(APIView):
+    permission_classes = [IsAuthenticated]
 
-    form = PedidoForm(instance=cliente)
+    def post(self, request, format=None):
+        try:
+            cliente = Cliente.objects.get(usuario=request.user)
+        except Cliente.DoesNotExist:
+            return Response({"Erro": "Cliente não encontrado!"}, status=status.HTTP_404_NOT_FOUND)
+        
+        itens = request.data.get('itens', [])
+        item_pedido_serializer = ItemPedidoSerializer(data=itens, many=True)
 
-    if request.method == 'GET':
-        return render(request, 'pedido/pedido.html', context={
-            'form': form
-        })
-    else:
-        form = PedidoForm(request.POST)
-        if form.is_valid():
-            novo_cep = form.cleaned_data['cep']
-            novo_endereco = form.cleaned_data['endereco']
-            novo_complemento = form.cleaned_data['complemento']
-            novo_referencia = form.cleaned_data['referencia']
-            novo_bairro = form.cleaned_data['bairro']
-            novo_cidade = form.cleaned_data['cidade']
+        if item_pedido_serializer.is_valid():
+            pedido = Pedido(
+                cliente=cliente,
+                cep=cliente.cep,
+                endereco=cliente.endereco,
+                complemento=cliente.complemento,
+                referencia=cliente.referencia,
+                bairro=cliente.bairro,
+                cidade=cliente.cidade,
+                metodo_de_pagamento=request.data.get('metodo_de_pagamento', ''),
+                troco=request.data.get('troco', 0),
+            )
+            pedido.save()
 
-        total = 0
-        for item in carrinho_cliente.itens.all():
-            total += item.produto.preco_unidade
+            for item_data in item_pedido_serializer.validated_data:
+                item_pedido = ItemPedido.objects.create(
+                    pedido=pedido,
+                    produto=item_data['produto'],
+                    quantidade=item_data['quantidade']
+                )
 
+            return Response(status=status.HTTP_201_CREATED)
+        else:
+            print(item_pedido_serializer.errors)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+class ListarPedidosView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Pedido.objects.all()
+    serializer_class = PedidosSerializer
 
-        pedido = Pedido(
-            cliente=carrinho_cliente.cliente,
-            cep=novo_cep,
-            endereco=novo_endereco,
-            complemento=novo_complemento,
-            referencia=novo_referencia,
-            bairro=novo_bairro,
-            cidade=novo_cidade,
-            valor_total=total
-        )
-
-        pedido.save()
-        pedido.itens.set(list(carrinho_cliente.itens.all()))
-        pedido.save()
-
-        carrinho_cliente.itens.clear()
-
-        return render(request, 'pedido/sucesso.html')
+    def get_queryset(self):
+        try:
+            cliente = Cliente.objects.get(usuario=self.request.user)
+        except Cliente.DoesNotExist:
+            return Response({"Erro": "Cliente não encontrado!"}, status=status.HTTP_404_NOT_FOUND)
+        
+        return Pedido.objects.filter(cliente=cliente)
+        
