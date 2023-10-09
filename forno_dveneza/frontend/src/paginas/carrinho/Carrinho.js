@@ -59,6 +59,25 @@ const Carrinho = ({ pizzaMeia, borda }) => {
 
   const produtosUnicos = agruparProdutos();
   const totalCompra = calcularTotal(produtosUnicos);
+
+  // const renderFormadePagamento = () => {
+  //   return (
+  //     <div style={{ marginTop: "15px" }}>
+  //       <label className="form-label">Forma de pagamento</label>
+  //       <select
+  //         className="form-select"
+  //         value={formaDePagamento}
+  //         onChange={(e) => setFormaDePagamento(e.target.value)}
+  //       >
+  //         <option value="">Selecione a forma de pagamento</option>
+  //         <option value="dinheiro">Dinheiro</option>
+  //         <option value="cartao">Cartão</option>
+  //         <option value="pix">Pix</option>
+  //       </select>
+  //     </div>
+  //   );
+  // };
+
   return (
     <div className="centered-content" style={{ marginBottom: "200px" }}>
       <Header />

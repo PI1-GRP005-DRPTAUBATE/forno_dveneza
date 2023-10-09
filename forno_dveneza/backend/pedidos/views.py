@@ -8,7 +8,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-    
+
 class CriarPedidoView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -19,6 +19,8 @@ class CriarPedidoView(APIView):
             return Response({"Erro": "Cliente não encontrado!"}, status=status.HTTP_404_NOT_FOUND)
         
         itens = request.data.get('itens', [])
+        print("Dados do Pedido:", request.data)
+
         item_pedido_serializer = ItemPedidoSerializer(data=itens, many=True)
 
         if item_pedido_serializer.is_valid():
@@ -41,11 +43,18 @@ class CriarPedidoView(APIView):
                     produto=item_data['produto'],
                     quantidade=item_data['quantidade']
                 )
+                print("ItemPedido criado:", item_pedido)
+            itens = request.data.get('itens', [])
+            print("Itens recebidos:", itens)
+
+            print("pedido", pedido)
 
             return Response(status=status.HTTP_201_CREATED)
         else:
             print(item_pedido_serializer.errors)
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
         
 class ListarPedidosView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]

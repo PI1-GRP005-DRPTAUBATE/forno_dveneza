@@ -4,92 +4,53 @@ import { useAuth } from "../../context/AuthContext";
 import Header from "../../componentes/Header";
 import Footer from "../../componentes/Footer";
 import { Link } from "react-router-dom";
+import { useCarrinho } from "../../context/CarrinhoContext";
 
 const FinalizarCompra = () => {
-  const [cep, setCep] = useState("");
-  const [endereco, setEndereco] = useState("");
-  const [bairro, setBairro] = useState("");
-  const [cidade, setCidade] = useState("");
-  const [referencia, setReferencia] = useState("");
-  const [complemento, setComplemento] = useState("");
   const [formaDePagamento, setFormaDePagamento] = useState("");
   const [alertaVisivel, setAlertaVisivel] = useState(false);
-  const {
-    userId,
-    usuarioLogado,
-    accessToken,
-    clienteId,
-    userNameLogin,
-    emailUsuario,
-    csrfToken,
-  } = useAuth();
+  const { accessToken, csrfToken } = useAuth();
+  const { produtosCarrinho, formaDePagamentoCarrinho } = useCarrinho();
+  let itens = "";
 
-  useEffect(() => {
-    if (usuarioLogado && clienteId) {
-      const fetchData = async () => {
-        try {
-          const response = await Axios.get(
-            `http://127.0.0.1:8000/api/usuario/informacoes/`,
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-              },
-            }
-          );
-          setCep(response.data.cep || "");
-          setEndereco(response.data.endereco || "");
-          setBairro(response.data.bairro || "");
-          setCidade(response.data.cidade || "");
-          setReferencia(response.data.referencia || "");
-          setComplemento(response.data.complemento || "");
-          setFormaDePagamento(response.data.formaDePagamento || "");
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        }
-      };
-      fetchData();
-    }
-  }, [usuarioLogado, userId]);
+  console.log("produtosCarrinho", produtosCarrinho);
 
-  const handleSubmit = async (e) => {
+  const handleSubmitPedido = async (e) => {
     e.preventDefault();
-    if (clienteId != null) {
-      setAlertaVisivel(true);
+
+    console.log("Tentando enviar o pedido...");
+
+    try {
+      const dadosPedido = {
+        itens: [
+          { produto: 1, quantidade: 3 },
+          { produto: 3, quantidade: 4 },
+        ],
+        metodo_de_pagamento: formaDePagamento || "",
+      };
 
       const response = await Axios.post(
-        `http://127.0.0.1:8000/api/usuario/novo-cliente/`,
-        {
-          cep,
-          endereco,
-          bairro,
-          cidade,
-          complemento,
-          referencia,
-          formaDePagamento,
-        },
+        "http://127.0.0.1:8000/api/pedido/novo-pedido/",
+        dadosPedido,
         {
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
+            "X-CSRFToken": csrfToken,
           },
         }
       );
-    }
-  };
 
-  const renderUserInfo = (label, value, setValue, readOnly = false) => {
-    return (
-      <div className="form-container">
-        <label className="form-label">{label}</label>
-        <input
-          type="text"
-          className="form-control"
-          placeholder={value ? value : "Não cadastrado"}
-          value={value}
-          onChange={setValue ? (e) => setValue(e.target.value) : undefined}
-          readOnly={readOnly}
-        />
-      </div>
-    );
+      console.log("Resposta do servidor:", response.data);
+      console.log("Dados do Pedido:", dadosPedido);
+
+      console.log("PEDIDO FEITO");
+      // Limpar ou atualizar o estado do carrinho após o pedido bem-sucedido
+      // Exemplo: clearCarrinho() ou updateCarrinho([])
+    } catch (error) {
+      console.error("Erro ao enviar pedido:", error);
+    }
+    setAlertaVisivel(true);
   };
 
   const renderFormadePagamento = () => {
@@ -104,7 +65,6 @@ const FinalizarCompra = () => {
           <option value="">Selecione a forma de pagamento</option>
           <option value="dinheiro">Dinheiro</option>
           <option value="cartao">Cartão</option>
-          <option value="pix">Pix</option>
         </select>
       </div>
     );
@@ -120,20 +80,14 @@ const FinalizarCompra = () => {
         className="form-container"
         style={{ width: "400px", margin: "30px auto 0" }}
       >
-        <form onSubmit={handleSubmit}>
-          {renderUserInfo("CEP", cep, setCep)}
-          {renderUserInfo("Endereço", endereco, setEndereco)}
-          {renderUserInfo("Complemento", complemento, setComplemento)}
-          {renderUserInfo("Referência", referencia, setReferencia)}
-          {renderUserInfo("Bairro", bairro, setBairro)}
-          {renderUserInfo("Cidade", cidade, setCidade)}
+        <form>
           {renderFormadePagamento()}
           <div className="btn-container-carrinho" style={{ marginTop: "30px" }}>
             <button
               type="submit"
               className="btn-carrinho-checkout"
-              onClick={handleSubmit}
               style={{ boxShadow: "none" }}
+              onClick={handleSubmitPedido}
             >
               <p> Confirmar pedido </p>
             </button>

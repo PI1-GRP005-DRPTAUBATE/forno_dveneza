@@ -10,6 +10,7 @@ export function CarrinhoProvider({ children }) {
   const carrinhoInicial = JSON.parse(localStorage.getItem("carrinho")) || [];
 
   const [produtosCarrinho, setProdutosCarrinho] = useState(carrinhoInicial);
+  const [formaDePagamentoCarrinho, setFormaDePagamento] = useState("");
 
   useEffect(() => {
     localStorage.setItem("carrinho", JSON.stringify(produtosCarrinho));
@@ -42,6 +43,10 @@ export function CarrinhoProvider({ children }) {
     setProdutosCarrinho(novoCarrinho);
   };
 
+  const pagamento = (pagamento) => {
+    setFormaDePagamento(pagamento);
+  };
+
   return (
     <CarrinhoContext.Provider
       value={{
@@ -49,6 +54,9 @@ export function CarrinhoProvider({ children }) {
         setProdutosCarrinho,
         adicionarProdutoAoCarrinho,
         excluirProduto,
+        pagamento,
+        formaDePagamentoCarrinho,
+        setFormaDePagamento,
       }}
     >
       {children}
