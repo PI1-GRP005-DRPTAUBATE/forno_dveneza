@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../componentes/Header";
 import Footer from "../../componentes/Footer";
 import { Link } from "react-router-dom";
@@ -6,12 +6,14 @@ import { useCarrinho } from "../../context/CarrinhoContext";
 import CardProdutoCarrinho from "../../componentes/CardProdutoCarrinho";
 import "./Carrinho.css";
 
-const Carrinho = ({ pizzaMeia, borda }) => {
+const Carrinho = () => {
   const {
     produtosCarrinho,
     excluirProduto,
     adicionarProdutoAoCarrinho,
     setProdutosCarrinho,
+    setTotalPedido,
+    totalPedido,
   } = useCarrinho();
 
   const calcularTotal = (produtosCarrinho) => {
@@ -20,7 +22,7 @@ const Carrinho = ({ pizzaMeia, borda }) => {
     produtosCarrinho.forEach((item) => {
       total += item.produto.preco_unidade * item.quantidade;
     });
-
+    setTotalPedido(total);
     return total;
   };
   const decrementQuantity = (produtoId) => {

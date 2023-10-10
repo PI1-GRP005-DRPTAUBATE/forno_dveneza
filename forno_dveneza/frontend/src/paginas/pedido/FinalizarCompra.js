@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Axios from "axios";
 import { useAuth } from "../../context/AuthContext";
 import Header from "../../componentes/Header";
@@ -10,23 +10,29 @@ const FinalizarCompra = () => {
   const [formaDePagamento, setFormaDePagamento] = useState("");
   const [alertaVisivel, setAlertaVisivel] = useState(false);
   const { accessToken, csrfToken } = useAuth();
-  const { produtosCarrinho, formaDePagamentoCarrinho } = useCarrinho();
-  let itens = "";
+  const { produtosCarrinho, limparCarrinho, totalPedido } = useCarrinho();
 
   console.log("produtosCarrinho", produtosCarrinho);
+  console.log("total", totalPedido);
 
   const handleSubmitPedido = async (e) => {
     e.preventDefault();
 
-    console.log("Tentando enviar o pedido...");
-
     try {
       const dadosPedido = {
-        itens: [
-          { produto: 1, quantidade: 3 },
-          { produto: 3, quantidade: 4 },
+        // itens_pedido: produtosCarrinho.map((item) => ({
+        //   produto: item.produto.id,
+        //   quantidade: item.quantidade,
+        // })),
+        // metodo_de_pagamento: formaDePagamento || "",
+        // valor_total: totalPedido,
+
+        itens_pedido: [
+          { produto: 1, quantidade: 2 },
+          { produto: 2, quantidade: 1 },
         ],
-        metodo_de_pagamento: formaDePagamento || "",
+        metodo_de_pagamento: produtosCarrinho.metodo_de_pagamento,
+        valor_total: totalPedido,
       };
 
       const response = await Axios.post(
@@ -45,12 +51,12 @@ const FinalizarCompra = () => {
       console.log("Dados do Pedido:", dadosPedido);
 
       console.log("PEDIDO FEITO");
-      // Limpar ou atualizar o estado do carrinho após o pedido bem-sucedido
-      // Exemplo: clearCarrinho() ou updateCarrinho([])
+      // limparCarrinho();
+      setAlertaVisivel(true);
     } catch (error) {
       console.error("Erro ao enviar pedido:", error);
+      setAlertaVisivel(true);
     }
-    setAlertaVisivel(true);
   };
 
   const renderFormadePagamento = () => {

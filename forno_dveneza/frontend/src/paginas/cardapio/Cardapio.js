@@ -17,17 +17,11 @@ const Cardapio = ({ borda, pizzaMeia }) => {
 
   useEffect(() => {
     Axios.get("http://127.0.0.1:8000/api/produtos/").then((response) => {
-      console.log("API Response:", response.data);
       setProdutos(response.data);
-      console.log("url foto", response.data);
 
       setCadastrado(response.data.cadastrado);
       Axios.get("http://127.0.0.1:8000/api/categorias/").then(
         (responseCategoria) => {
-          console.log(
-            "API responseCategoria CATEGORIAS:",
-            responseCategoria.data
-          );
           setCategorias(responseCategoria.data.map((categoria) => categoria));
           setCategoria(
             responseCategoria.data.map((categoria) => categoria.descricao)

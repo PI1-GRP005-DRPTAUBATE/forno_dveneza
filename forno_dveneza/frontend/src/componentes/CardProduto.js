@@ -15,8 +15,6 @@ const CardProduto = ({
   const url = produto.foto;
   const publicId = url ? extrairPublicId(url) : null;
 
-  console.log(url);
-  console.log("publicId", publicId);
   return (
     <div className="card-produto mb-4 justify-content-around">
       <div className="card-img mx-2">

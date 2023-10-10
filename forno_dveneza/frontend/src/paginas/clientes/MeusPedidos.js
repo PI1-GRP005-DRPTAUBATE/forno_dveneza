@@ -8,6 +8,7 @@ import { useAuth } from "../../context/AuthContext";
 const MeusPedidos = () => {
   const [pedidos, setPedidos] = useState([]);
   const { accessToken, csrfToken } = useAuth();
+  const [categorias, setCategorias] = useState([]);
 
   function formatarData(dataString) {
     const data = new Date(dataString);
@@ -18,9 +19,18 @@ const MeusPedidos = () => {
   }
 
   useEffect(() => {
+    Axios.get("http://127.0.0.1:8000/api/categorias/")
+      .then((responseCategoria) => {
+        setCategorias(responseCategoria.data);
+      })
+      .catch((error) => {
+        console.error("Erro ao obter categorias:", error);
+      });
+  }, []);
+
+  useEffect(() => {
     Axios.get("http://127.0.0.1:8000/api/pedido/todos-pedidos/", {
       headers: {
-        // "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
         "X-CSRFToken": csrfToken,
       },
@@ -28,7 +38,8 @@ const MeusPedidos = () => {
       .then((response) => {
         console.log("RESPONSE PEDIDOS", response);
         setPedidos(response.data);
-        console.log("response.data.get", response.data.get("itens", []));
+        console.log("itens response", response.data[0].itens_pedido);
+        console.log("itens response", response.data[0].itens_pedido);
       })
       .catch((error) => {
         console.error("Erro ao obter pedidos:", error);
@@ -45,10 +56,12 @@ const MeusPedidos = () => {
               <div key={pedido.id} className="pedido-container">
                 <h4 className="pedido-header">Número do Pedido: {pedido.id}</h4>
                 <p>Itens do Pedido</p>
-                {pedido.itens ? (
-                  pedido.itens.map((item) => (
-                    <p key={item.id} className="pedido-item">
-                      {item.nome} - Quantidade: {item.quantidade}
+                {pedido.itens_pedido.length > 0 ? (
+                  pedido.itens_pedido.map((item) => (
+                    <p key={item.produto} className="pedido-item">
+                      {categorias.find((cat) => cat.id === item.produto)
+                        ?.descricao || "Categoria não encontrada"}{" "}
+                      - Quantidade: {item.quantidade}
                     </p>
                   ))
                 ) : (
@@ -60,8 +73,10 @@ const MeusPedidos = () => {
                 <p className="data">
                   Método de pagamento: {pedido.metodo_de_pagamento}
                 </p>
-                <p className="pedido-total">Total: R$ {pedido.valor_total}</p>
-                <p>Status do Pedido: {pedido.status}</p>
+                <p>Total: R$ {pedido.valor_total}</p>
+                <p className="pedido-total">
+                  Status do Pedido: {pedido.status}
+                </p>
               </div>
             ))}
           </div>
@@ -80,4 +95,5 @@ const MeusPedidos = () => {
     </div>
   );
 };
+
 export default MeusPedidos;
