@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { useAuth } from "../../context/AuthContext";
 import Header from "../../componentes/Header";
@@ -11,27 +12,18 @@ const FinalizarCompra = () => {
   const [alertaVisivel, setAlertaVisivel] = useState(false);
   const { accessToken, csrfToken } = useAuth();
   const { produtosCarrinho, limparCarrinho, totalPedido } = useCarrinho();
-
-  console.log("produtosCarrinho", produtosCarrinho);
-  console.log("total", totalPedido);
+  const navigate = useNavigate();
 
   const handleSubmitPedido = async (e) => {
     e.preventDefault();
 
     try {
       const dadosPedido = {
-        // itens_pedido: produtosCarrinho.map((item) => ({
-        //   produto: item.produto.id,
-        //   quantidade: item.quantidade,
-        // })),
-        // metodo_de_pagamento: formaDePagamento || "",
-        // valor_total: totalPedido,
-
-        itens_pedido: [
-          { produto: 1, quantidade: 2 },
-          { produto: 2, quantidade: 1 },
-        ],
-        metodo_de_pagamento: produtosCarrinho.metodo_de_pagamento,
+        itens_pedido: produtosCarrinho.map((item) => ({
+          produto: item.produto.id,
+          quantidade: item.quantidade,
+        })),
+        metodo_de_pagamento: formaDePagamento || "",
         valor_total: totalPedido,
       };
 
@@ -47,12 +39,11 @@ const FinalizarCompra = () => {
         }
       );
 
-      console.log("Resposta do servidor:", response.data);
-      console.log("Dados do Pedido:", dadosPedido);
-
-      console.log("PEDIDO FEITO");
-      // limparCarrinho();
+      limparCarrinho();
       setAlertaVisivel(true);
+      setTimeout(() => {
+        navigate("/pedidos");
+      }, 2000);
     } catch (error) {
       console.error("Erro ao enviar pedido:", error);
       setAlertaVisivel(true);

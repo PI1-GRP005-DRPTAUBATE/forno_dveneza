@@ -18,10 +18,11 @@ class CriarPedidoView(APIView):
         except Cliente.DoesNotExist:
             return Response({"Erro": "Cliente não encontrado!"}, status=status.HTTP_404_NOT_FOUND)
         
-        itens = request.data.get('itens', [])
+        itens_pedido = request.data.get('itens_pedido', [])  
         print("Dados do Pedido:", request.data)
 
-        item_pedido_serializer = ItemPedidoSerializer(data=itens, many=True)
+        item_pedido_serializer = ItemPedidoSerializer(data=itens_pedido, many=True)
+
 
         if item_pedido_serializer.is_valid():
             pedido = Pedido(
