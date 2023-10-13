@@ -35,3 +35,11 @@ class Cliente(models.Model):
 
     def __str__(self):
         return f"{self.nome} {self.sobrenome}"
+
+class PasswordResetToken(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    token = models.UUIDField(editable=False, unique=True)
+    created_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.token)
