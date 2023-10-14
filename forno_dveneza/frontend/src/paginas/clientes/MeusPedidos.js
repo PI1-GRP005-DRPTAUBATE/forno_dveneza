@@ -46,6 +46,47 @@ const MeusPedidos = () => {
       });
   }, [accessToken, csrfToken]);
 
+  useEffect(() => {
+    Axios.get("http://127.0.0.1:8000/api/pedido/todos-pedidos/", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "X-CSRFToken": csrfToken,
+      },
+    })
+      .then(async (response) => {
+        const pedidosComProdutos = await Promise.all(
+          response.data.map(async (pedido) => {
+            const itensComNomes = await Promise.all(
+              pedido.itens_pedido.map(async (item) => {
+                try {
+                  const responseProduto = await Axios.get(
+                    `http://127.0.0.1:8000/api/produtos/${item.produto}/`
+                  );
+                  return {
+                    ...item,
+                    nomeProduto: responseProduto.data.nome,
+                  };
+                } catch (error) {
+                  console.error("Erro ao obter informações do produto:", error);
+                  return item;
+                }
+              })
+            );
+
+            return {
+              ...pedido,
+              itens_pedido: itensComNomes,
+            };
+          })
+        );
+
+        setPedidos(pedidosComProdutos);
+      })
+      .catch((error) => {
+        console.error("Erro ao obter pedidos:", error);
+      });
+  }, [accessToken, csrfToken]);
+
   return (
     <div>
       <Header />
@@ -58,15 +99,19 @@ const MeusPedidos = () => {
                 <p>Itens do Pedido</p>
                 {pedido.itens_pedido.length > 0 ? (
                   pedido.itens_pedido.map((item) => (
-                    <p key={item.produto} className="pedido-item">
+                    <div key={item.produto} className="pedido-item">
                       {categorias.find((cat) => cat.id === item.produto)
                         ?.descricao || "Categoria não encontrada"}{" "}
-                      - Quantidade: {item.quantidade}
-                    </p>
+                      <p>
+                        {" "}
+                        {item.nomeProduto} - Quantidade: {item.quantidade}
+                      </p>
+                    </div>
                   ))
                 ) : (
                   <p className="pedido-item">Sem itens</p>
                 )}
+
                 <p className="data">
                   Data do pedido: {formatarData(pedido.data_compra)}
                 </p>
