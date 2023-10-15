@@ -15,3 +15,8 @@ class CategoriasSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Categoria
         fields = '__all__'
+
+class BordaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Borda
+        fields = '__all__'

@@ -12,8 +12,16 @@ class ProdutosMeioAMeioViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ProdutosMeioAMeioSerializer
     queryset = models.ProdutoMeioAMeio.objects.all()
 
+    http_method_names = ['get']
+
 class CategoriasViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.CategoriasSerializer
     queryset = models.Categoria.objects.all()
+
+    http_method_names = ['get']
+
+class BordasViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.BordaSerializer
+    queryset = models.Borda.objects.all()
 
     http_method_names = ['get']
