@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from clientes.models import Cliente
-from produtos.models import Produto
+from produtos.models import Produto, Borda
 
 
 class Pedido(models.Model):
@@ -37,6 +37,7 @@ class Pedido(models.Model):
 class ItemPedido(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, blank=True, null=True)
     produto = models.ForeignKey(Produto, on_delete=models.PROTECT)
+    borda = models.ForeignKey(Borda, on_delete=models.PROTECT, null=True)
     quantidade = models.IntegerField(null=False, default=1)
 
     def __str__(self):
@@ -45,8 +46,8 @@ class ItemPedido(models.Model):
 @receiver(post_save, sender=ItemPedido)
 def atualizar_valor_total_pedido(sender, instance, **kwargs):
     pedido = instance.pedido
-    print(pedido)
     itens_pedido = ItemPedido.objects.filter(pedido=pedido)
-    valor_total = sum(item.quantidade * item.produto.preco_unidade for item in itens_pedido)
+    valor_total = sum((item.quantidade * item.produto.preco_unidade) + 
+                      (item.quantidade * (item.borda.preco_extra if item.borda is not None else 0)) for item in itens_pedido)
     pedido.valor_total = valor_total
     pedido.save()

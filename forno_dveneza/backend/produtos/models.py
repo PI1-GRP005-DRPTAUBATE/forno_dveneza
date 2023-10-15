@@ -10,7 +10,6 @@ class Produto(models.Model):
     id_categoria = models.ForeignKey('Categoria', on_delete=models.PROTECT)
     # id_funcionario = models.ForeignKey(Funcionario, on_delete=models.PROTECT, null=True)
     data_cadastro = models.DateTimeField(auto_now=True)
-    borda = models.ForeignKey('Borda', on_delete=models.PROTECT, null=True)
 
     @property
     def preco_unidade_com_borda(self):
