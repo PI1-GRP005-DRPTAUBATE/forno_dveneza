@@ -11,12 +11,6 @@ class Produto(models.Model):
     # id_funcionario = models.ForeignKey(Funcionario, on_delete=models.PROTECT, null=True)
     data_cadastro = models.DateTimeField(auto_now=True)
 
-    @property
-    def preco_unidade_com_borda(self):
-        if self.borda:
-            return self.preco_unidade + self.borda.preco_extra
-        return self.preco_unidade
-
     def __str__(self):
         return self.nome
     

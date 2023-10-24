@@ -46,8 +46,6 @@ class CriarPedidoView(APIView):
         else:
             print(item_pedido_serializer.errors)
             return Response(status=status.HTTP_400_BAD_REQUEST)
-
-
         
 class ListarPedidosView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
