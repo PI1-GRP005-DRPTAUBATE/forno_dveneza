@@ -46,3 +46,11 @@
   border: 1px solid #ccc;
   margin-bottom: 5px;
 }
+
+.form-floating input {
+  color: #000 !important;
+}
+
+.form-floating label {
+  display: none;
+}

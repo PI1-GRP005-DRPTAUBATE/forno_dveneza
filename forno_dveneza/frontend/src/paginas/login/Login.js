@@ -171,9 +171,9 @@ const Login = () => {
             </div>
 
             <div className="form-floating my-2">
+              <label for="usernameInput">Entre com o nome de usuário</label>
               <input
                 type="text"
-                className="form-control"
                 id="floatingInput"
                 placeholder="Nome de usuário"
                 value={username}
@@ -181,9 +181,9 @@ const Login = () => {
               />
             </div>
             <div className="form-floating my-2">
+              <label for="floatingPassword">Entre com a sua senha</label>
               <input
                 type="password"
-                className="form-control"
                 id="floatingPassword"
                 placeholder="Senha"
                 value={password}

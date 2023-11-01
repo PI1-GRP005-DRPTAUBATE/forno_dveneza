@@ -71,6 +71,7 @@ const Cadastro = () => {
               </h1>
             </div>
             <div className="form-floating my-2">
+              <label for="usernameInput">Entre com o nome de usuário</label>
               <input
                 type="text"
                 id="usernameInput"
@@ -81,6 +82,7 @@ const Cadastro = () => {
               />
             </div>
             <div className="form-floating my-2">
+              <label for="emailInput">Entre com o seu email</label>
               <input
                 type="email"
                 id="emailInput"
@@ -91,6 +93,7 @@ const Cadastro = () => {
               />
             </div>
             <div className="form-floating my-2">
+              <label for="floatingPassword">Entre com a sua senha</label>
               <input
                 type="password"
                 id="floatingPassword"
