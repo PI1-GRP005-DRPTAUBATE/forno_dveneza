@@ -10,6 +10,8 @@ const Home = () => {
   const mainContentStyle = {
     marginBottom: "300px",
   };
+  const bannerWidth = 800;
+  const bannerHeight = 400;
   return (
     <div className="home-container" style={mainContentStyle}>
       <Header />
@@ -67,6 +69,8 @@ const Home = () => {
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
+                width={bannerWidth}
+                height={bannerHeight}
               ></iframe>
             </div>
 
