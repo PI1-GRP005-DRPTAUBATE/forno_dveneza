@@ -124,7 +124,9 @@ const MeusPedidos = () => {
                 </p>
                 <p>Total: R$ {pedido.valor_total}</p>
                 <p className="pedido-total">
-                  Status do Pedido: {pedido.status}
+                  Status do Pedido:{" "}
+                  {pedido.status.charAt(0).toUpperCase() +
+                    pedido.status.slice(1).replace(/_/g, " ")}
                 </p>
               </div>
             ))}
