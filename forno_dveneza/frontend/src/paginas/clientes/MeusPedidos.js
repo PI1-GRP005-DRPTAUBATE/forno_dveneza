@@ -80,6 +80,10 @@ const MeusPedidos = () => {
           })
         );
 
+        pedidosComProdutos.sort(
+          (a, b) => new Date(b.data_compra) - new Date(a.data_compra)
+        );
+
         setPedidos(pedidosComProdutos);
       })
       .catch((error) => {
