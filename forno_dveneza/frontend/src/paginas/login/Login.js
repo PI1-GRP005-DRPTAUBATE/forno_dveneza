@@ -10,10 +10,11 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [nomeDeUsuario, setNomeDeUsuario] = useState("");
+  const [senha, setSenha] = useState("");
+  const [carregando, setCarregando] = useState(false);
+  const [mensagemSucesso, setMensagemSucesso] = useState("");
+  const [mensagemErro, setMensagemErro] = useState("");
   const {
     setUsuarioLogado,
     setUserId,
@@ -21,7 +22,7 @@ const Login = () => {
     accessToken,
     setClienteId,
     clienteId,
-    setUserNameLogin,
+    setNomeDeUsuarioLogin,
     setEmailUsuario,
     userId,
     csrfToken,
@@ -31,11 +32,11 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
+    setCarregando(true);
 
     Axios.post(
       "http://127.0.0.1:8000/api/usuario/token/",
-      `username=${username}&password=${password}`,
+      `username=${nomeDeUsuario}&password=${senha}`,
       {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -45,16 +46,39 @@ const Login = () => {
       .then((response) => {
         setUsuarioLogado(true);
         setAccessToken(response.data.access);
-        setLoading(false);
+        setCarregando(false);
+        setMensagemSucesso("Login bem-sucedido!");
+
+        setTimeout(() => {
+          setMensagemSucesso("");
+        }, 2000);
+
+        setTimeout(() => {
+          navigate("/minha-area");
+        }, 2000);
       })
       .catch((error) => {
-        setLoading(false);
-        if (error.response && error.response.status === 404) {
-          setErrorMessage("Usuário não encontrado");
+        setCarregando(false);
+        if (error.response && error.response.status === 401) {
+          setMensagemErro("Usuário e/ou senha incorreto(s)");
+
+          setTimeout(() => {
+            setMensagemErro("");
+          }, 3000);
+        } else if (error.response && error.response.status === 404) {
+          setMensagemErro("Nome de usuário ou senha incorretos");
+
+          setTimeout(() => {
+            setMensagemErro("");
+          }, 3000);
         } else {
-          setErrorMessage(
+          setMensagemErro(
             "Erro desconhecido. Por favor, tente novamente mais tarde."
           );
+
+          setTimeout(() => {
+            setMensagemErro("");
+          }, 3000);
         }
       });
   };
@@ -75,84 +99,30 @@ const Login = () => {
           if (error.response && error.response.status === 404) {
             setClienteId(null);
           } else {
-            setErrorMessage("Network error. Please try again later.");
+            setMensagemErro(
+              "Erro na rede. Por favor, tente novamente mais tarde."
+            );
           }
         });
     }
   }, [usuarioLogado, accessToken]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const obterTokenCSRF = async () => {
       try {
-        const authResponse = await Axios.post(
-          "http://127.0.0.1:8000/api/usuario/token/",
-          `username=${username}&password=${password}`,
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        setUsuarioLogado(true);
-        setAccessToken(authResponse.data.access);
-
-        const userInfoResponse = await Axios.get(
-          "http://127.0.0.1:8000/api/usuario/informacoes/",
-          {
-            headers: {
-              Authorization: `Bearer ${authResponse.data.access}`,
-            },
-          }
-        );
-
-        if (userInfoResponse.data.id) {
-          setClienteId(userInfoResponse.data.id);
-          const usersResponse = await Axios.get(
-            "http://127.0.0.1:8000/api/usuarios/"
-          );
-          const buscaUsuario = usersResponse.data.find(
-            (user) => user.username === username
-          );
-
-          if (buscaUsuario) {
-            setUserId(buscaUsuario.id);
-            setEmailUsuario(buscaUsuario.email);
-            setUserNameLogin(buscaUsuario.username);
-          }
-
-          navigate("/minha-area");
-        }
+        const response = await Axios.get("http://127.0.0.1:8000/admin/");
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(response.data, "text/html");
+        const csrf = doc.querySelector(
+          "input[name='csrfmiddlewaretoken']"
+        ).value;
+        setCsrfToken(csrf);
       } catch (error) {
-        setLoading(false);
-        if (error.response && error.response.status === 404) {
-          setErrorMessage("Usuário não encontrado");
-        } else {
-          setErrorMessage(
-            "Erro desconhecido. Por favor, tente novamente mais tarde."
-          );
-        }
+        console.error("Erro ao buscar o token CSRF:", error);
       }
     };
 
-    if (usuarioLogado) {
-      fetchData();
-    }
-  }, [usuarioLogado, username]);
-
-  const getCsrfToken = async () => {
-    try {
-      const response = await Axios.get("http://127.0.0.1:8000/admin/");
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(response.data, "text/html");
-      const csrf = doc.querySelector("input[name='csrfmiddlewaretoken']").value;
-      setCsrfToken(csrf);
-    } catch (error) {
-      console.error("Error fetching CSRF token:", error);
-    }
-  };
-
-  useEffect(() => {
-    getCsrfToken();
+    obterTokenCSRF();
   }, []);
 
   return (
@@ -176,8 +146,8 @@ const Login = () => {
                 className="form-control"
                 id="floatingInput"
                 placeholder="Nome de usuário"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={nomeDeUsuario}
+                onChange={(e) => setNomeDeUsuario(e.target.value)}
               />
             </div>
             <div className="form-floating my-2">
@@ -186,8 +156,8 @@ const Login = () => {
                 className="form-control"
                 id="floatingPassword"
                 placeholder="Senha"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
               />
             </div>
 
@@ -199,10 +169,10 @@ const Login = () => {
             <button
               className="btn-login"
               type="submit"
-              disabled={loading}
+              disabled={carregando}
               style={{ color: "#ffffff", fontSize: "18px" }}
             >
-              {loading ? "Carregando..." : "Entrar"}
+              {carregando ? "Carregando..." : "Entrar"}
             </button>
             <div type="submit" style={{ marginTop: "15px" }}>
               <span>
@@ -211,9 +181,15 @@ const Login = () => {
             </div>
           </form>
         </main>
-        {errorMessage && (
+        {mensagemSucesso && (
           <div className="my-3 text-center">
-            <span className="text-danger">{errorMessage}</span>
+            <span className="text-success">{mensagemSucesso}</span>
+          </div>
+        )}
+
+        {mensagemErro && (
+          <div className="my-3 text-center">
+            <span className="text-danger">{mensagemErro}</span>
           </div>
         )}
       </section>
