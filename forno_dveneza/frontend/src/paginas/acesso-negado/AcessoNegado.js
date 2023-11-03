@@ -3,22 +3,24 @@ import { Link } from "react-router-dom";
 
 const estiloContainer = {
   textAlign: "center",
-  margin: "20px",
+  margin: "20px auto",
   padding: "20px",
-  border: "1px solid #ccc",
+  border: "1px solid #fa7f72",
   borderRadius: "5px",
   backgroundColor: "#f8f8f8",
+  width: "300px",
 };
 
 const estiloTitulo = {
   fontSize: "24px",
   color: "#fa7f72",
+  marginBottom: "10px",
 };
 
 const estiloMensagem = {
   fontSize: "18px",
   color: "#333",
-  margin: "10px 0",
+  marginBottom: "20px",
 };
 
 const estiloLink = {
@@ -29,16 +31,16 @@ const estiloLink = {
   borderRadius: "5px",
 };
 
-const estiloLinkHover = {
-  backgroundColor: "#0056b3",
-};
-
 const AcessoNegado = () => {
   return (
-    <div>
-      <p>Você precisa estar logado para acessar esta área.</p>
-      <p>Faça login para poder acessar!</p>
-      <Link to="/login">Login</Link>
+    <div style={estiloContainer}>
+      <p style={estiloTitulo}>Acesso Negado</p>
+      <p style={estiloMensagem}>
+        Para acessar esta área, você precisa fazer o login.
+      </p>
+      <Link to="/login" style={estiloLink}>
+        Fazer Login
+      </Link>
     </div>
   );
 };
