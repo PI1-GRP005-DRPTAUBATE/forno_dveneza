@@ -10,6 +10,7 @@ import { useCarrinho } from "../../context/CarrinhoContext";
 const FinalizarCompra = () => {
   const [formaDePagamento, setFormaDePagamento] = useState("");
   const [alertaVisivel, setAlertaVisivel] = useState(false);
+  const [valorTroco, setValorTroco] = useState("");
   const { accessToken, csrfToken } = useAuth();
   const { produtosCarrinho, limparCarrinho, totalPedido } = useCarrinho();
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const FinalizarCompra = () => {
         })),
         metodo_de_pagamento: formaDePagamento || "",
         valor_total: totalPedido,
+        valor_troco: formaDePagamento === "dinheiro" ? valorTroco : null,
       };
 
       const response = await Axios.post(
@@ -79,6 +81,18 @@ const FinalizarCompra = () => {
       >
         <form>
           {renderFormadePagamento()}
+          <div style={{ marginTop: "15px" }}>
+            <label className="form-label">Valor do Troco</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Valor do Troco"
+              value={valorTroco}
+              onChange={(e) => setValorTroco(e.target.value)}
+              disabled={formaDePagamento !== "dinheiro"}
+            />
+          </div>
+
           <div className="btn-container-carrinho" style={{ marginTop: "30px" }}>
             <button
               type="submit"
