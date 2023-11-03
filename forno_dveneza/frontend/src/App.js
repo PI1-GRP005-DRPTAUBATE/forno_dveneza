@@ -11,6 +11,7 @@ import Carrinho from "./paginas/carrinho/Carrinho";
 import { CarrinhoProvider } from "./context/CarrinhoContext";
 import FinalizarCompra from "./paginas/pedido/FinalizarCompra";
 import MeusPedidos from "./paginas/clientes/MeusPedidos";
+import PrivateRoute from "./context/PrivateRoute";
 
 function App() {
   return (
@@ -22,12 +23,40 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/cadastro" element={<Cadastro />} />
-              <Route path="/minha-area" element={<MinhaArea />} />
               <Route path="/perfil" element={<Perfil />} />
               <Route path="/cardapio" element={<Cardapio />} />
-              <Route path="/carrinho" element={<Carrinho />} />
-              <Route path="/pedidos" element={<MeusPedidos />} />
-              <Route path="/finalizar-compra" element={<FinalizarCompra />} />
+              <Route
+                path="/minha-area"
+                element={
+                  <PrivateRoute>
+                    <MinhaArea />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/carrinho"
+                element={
+                  <PrivateRoute>
+                    <Carrinho />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/pedidos"
+                element={
+                  <PrivateRoute>
+                    <MeusPedidos />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/finalizar-compra"
+                element={
+                  <PrivateRoute>
+                    <FinalizarCompra />
+                  </PrivateRoute>
+                }
+              />
             </Routes>
           </div>
         </Router>
