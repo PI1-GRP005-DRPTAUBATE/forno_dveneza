@@ -82,10 +82,11 @@ const FinalizarCompra = () => {
         <form>
           {renderFormadePagamento()}
           <div style={{ marginTop: "15px" }}>
-            <label className="form-label">Valor do Troco</label>
+            <label for="campoTroco" className="form-label">Valor do Troco</label>
             <input
               type="text"
               className="form-control"
+              id="campoTroco"
               placeholder="Valor do Troco"
               value={valorTroco}
               onChange={(e) => setValorTroco(e.target.value)}

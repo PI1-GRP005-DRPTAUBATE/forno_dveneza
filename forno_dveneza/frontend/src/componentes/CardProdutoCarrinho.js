@@ -19,7 +19,7 @@ const CardProdutoCarrinho = ({
   const publicId = url ? extrairPublicId(url) : null;
 
   return (
-    <div className="card-produto-carrinho justify-content-around">
+    <div className="card-produto-carrinho justify-content-around rounded">
       <div className="card-img " style={{ maxWidth: "100px" }}>
         <Image
           cloudName="dfjghzyfb"
@@ -41,19 +41,22 @@ const CardProdutoCarrinho = ({
         )}
       </div>
       <div className="quantidade-produto">
-        <p>Quantidade</p>
-        <button onClick={onDecrement}>-</button>
+        <p className="text-center">Quantidade</p>
+        <button className="btn border" onClick={onDecrement}>-</button>
+        <label for="quantidadeProdutoInput" style={{display: "none"}}>Quantidade do produto {produto.nome}</label>
         <input
+          className="border border-0 mx-1"
+          id="quantidadeProdutoInput"
           type="text"
           value={quantidade}
-          style={{ width: "50px" }}
+          style={{ width: "50px", textAlign: "center"}}
           readOnly
         />
-        <button onClick={() => adicionarProdutoAoCarrinho(produto)}>+</button>
+        <button className="btn border" onClick={() => adicionarProdutoAoCarrinho(produto)}>+</button>
       </div>
       <div
         className="btn-carrinho"
-        style={{ justifyContent: "center", marginTop: "35px" }}
+        style={{ justifyContent: "center", marginTop: "45px" }}
       >
         <Link
           className="link-button"

@@ -9,14 +9,14 @@ const CardProduto = ({
   alertaCarrinho,
   categoria,
 }) => {
-  const [pizzaMeia, setPizzaMeia] = useState(false);
+  // const [pizzaMeia, setPizzaMeia] = useState(false);
   const [borda, setBorda] = useState(false);
 
   const url = produto.foto;
   const publicId = url ? extrairPublicId(url) : null;
 
   return (
-    <div className="card-produto mb-4 justify-content-around">
+    <div className="card-produto mb-4 justify-content-around rounded">
       <div className="card-img mx-2">
         <Image
           cloudName="dfjghzyfb"
@@ -33,7 +33,7 @@ const CardProduto = ({
         </p>
         {categoria === "Pizza" && (
           <div>
-            <label>
+            {/* <label>
               Tipo de Pizza:
               <select
                 value={pizzaMeia ? "Meia" : "Inteira"}
@@ -43,13 +43,15 @@ const CardProduto = ({
                 <option value="Inteira">Inteira</option>
                 <option value="Meia">Meia</option>
               </select>
-            </label>
-            <label style={{ marginTop: "10px" }}>
+            </label> */}
+            <label for="selecaoTipoBorda" style={{ marginTop: "10px" }} className="d-flex align-items-center">
               Borda:
               <select
+                id="selecaoTipoBorda"
                 value={borda ? "Recheada" : "Simples"}
                 onChange={(e) => setBorda(e.target.value === "Recheada")}
                 style={{ marginLeft: "10px" }}
+                className="form-select"
               >
                 <option value="Recheada">Recheada</option>
                 <option value="Simples">Simples</option>

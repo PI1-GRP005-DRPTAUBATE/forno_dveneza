@@ -30,7 +30,7 @@ const Home = () => {
         >
           <img
             src={bannerImage}
-            alt="banner forno d`veneza"
+            alt="Imagem de logo da pizzaria, que possui na esquerda um desenho de um pizzaiolo segurando uma pizza e na direita uma imagem de uma pizza"
             className="img-fluid rounded my-5 m-auto d-block"
           />
           <div style={{ textAlign: "center" }}>
@@ -83,7 +83,7 @@ const Home = () => {
                   rel="noopener noreferrer"
                   style={{ marginRight: "100px" }}
                 >
-                  <FaWhatsapp size={30} />
+                  <FaWhatsapp size={50} />
                 </a>
                 <a
                   href="https://www.ifood.com.br/delivery/jacarei-sp/forno-d-veneza-jardim-santa-maria/689feec4-172b-4898-b85f-e4cf86f4ad41?utm_medium=share"

@@ -130,8 +130,9 @@ const Perfil = () => {
   const renderUserInfo = (label, value, setValue, readOnly = false) => {
     return (
       <div className="info-cel" style={{ marginTop: "15px" }}>
-        <label className="form-label">{label}</label>
+        <label for={label} className="form-label">{label}</label>
         <input
+          id={label}
           type="text"
           className="form-control"
           placeholder={value ? value : "Não cadastrado"}
@@ -146,8 +147,9 @@ const Perfil = () => {
   const renderSexo = () => {
     return (
       <div className="info-cel" style={{ marginTop: "15px" }}>
-        <label className="form-label">Sexo</label>
+        <label for="sexoSelect" className="form-label">Sexo</label>
         <select
+          id="sexoSelect"
           className="form-select"
           value={sexo}
           onChange={(e) => setSexo(e.target.value)}
@@ -164,8 +166,9 @@ const Perfil = () => {
   const renderEstado = () => {
     return (
       <div className="info-cel" style={{ marginTop: "15px" }}>
-        <label className="form-label">Estado</label>
+        <label for="selectEstado" className="form-label">Estado</label>
         <select
+          id="selectEstado"
           className="form-select"
           value={cidade}
           onChange={(e) => setEstado(e.target.value)}

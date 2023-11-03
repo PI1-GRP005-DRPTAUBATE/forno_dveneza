@@ -23,7 +23,7 @@ const Header = () => {
                 to="/"
                 className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none fs-1 logo-container"
               >
-                <img src={logo} alt="Logo" className="mx-2" />
+                <img src={logo} alt="Desenho de uma fatia de pizza" className="mx-2" />
                 <span className="logo-text">Forno D'Veneza</span>
               </Link>
 
