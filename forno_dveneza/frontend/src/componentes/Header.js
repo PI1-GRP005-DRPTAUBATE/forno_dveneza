@@ -10,6 +10,7 @@ const Header = () => {
   const Logout = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
+    localStorage.removeItem("accessToken");
     window.location.href = "/login";
   };
 

@@ -28,7 +28,19 @@ const Login = () => {
     csrfToken,
     setCsrfToken,
   } = useAuth();
+  
   const { usuarioLogado } = useAuth();
+  const recuperarTokenDeAcesso = () => {
+    const storedAccessToken = localStorage.getItem('accessToken');
+    if (storedAccessToken) {
+      setAccessToken(storedAccessToken);
+      setUsuarioLogado(true);
+    }
+  };
+  useEffect(() => {
+    recuperarTokenDeAcesso();
+  }, []);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,6 +58,9 @@ const Login = () => {
       .then((response) => {
         setUsuarioLogado(true);
         setAccessToken(response.data.access);
+
+        localStorage.setItem('accessToken', response.data.access);
+
         setCarregando(false);
         setMensagemSucesso("Login bem-sucedido!");
 
