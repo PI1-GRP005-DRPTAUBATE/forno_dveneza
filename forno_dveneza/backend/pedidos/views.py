@@ -18,6 +18,8 @@ class CriarPedidoView(APIView):
         except Cliente.DoesNotExist:
             return Response({"Erro": "Cliente não encontrado!"}, status=status.HTTP_404_NOT_FOUND)
         
+        print(request.data)
+        
         itens_pedido = request.data.get('itens_pedido', [])
         item_pedido_serializer = ItemPedidoSerializer(data=itens_pedido, many=True)
 
@@ -31,7 +33,7 @@ class CriarPedidoView(APIView):
                 bairro=cliente.bairro,
                 cidade=cliente.cidade,
                 metodo_de_pagamento=request.data.get('metodo_de_pagamento', ''),
-                troco=request.data.get('troco', 0),
+                troco=request.data.get('valor_troco', 0),
             )
             pedido.save()
             for item_data in item_pedido_serializer.validated_data:
