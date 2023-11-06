@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Header from "../../componentes/Header";
+import Footer from "../../componentes/Footer";
 
 const estiloContainer = {
   textAlign: "center",
@@ -33,15 +35,19 @@ const estiloLink = {
 
 const AcessoNegado = () => {
   return (
-    <div style={estiloContainer}>
-      <p style={estiloTitulo}>Acesso Negado</p>
-      <p style={estiloMensagem}>
-        Para acessar esta área, você precisa fazer o login.
-      </p>
-      <Link to="/login" style={estiloLink}>
-        Fazer Login
-      </Link>
-    </div>
+    <>
+      <Header />
+      <div style={estiloContainer}>
+        <p style={estiloTitulo}>Acesso Negado</p>
+        <p style={estiloMensagem}>
+          Para acessar esta área, você precisa fazer o login.
+        </p>
+        <Link to="/login" style={estiloLink}>
+          Fazer Login
+        </Link>
+      </div>
+      <Footer />
+    </>
   );
 };
 

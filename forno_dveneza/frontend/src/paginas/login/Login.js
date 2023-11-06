@@ -176,11 +176,11 @@ const Login = () => {
               />
             </div>
 
-            <div className="checkbox my-3">
+            {/* <div className="checkbox my-3">
               <label>
                 <input type="checkbox" value="remember-me" /> Lembrar
               </label>
-            </div>
+            </div> */}
             <button
               className="btn-login"
               type="submit"

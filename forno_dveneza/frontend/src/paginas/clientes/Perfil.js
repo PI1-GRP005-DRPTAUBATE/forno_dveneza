@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
+import { jwtDecode } from 'jwt-decode';
 import { useAuth } from "../../context/AuthContext";
 import "./MinhaArea.css";
 const Perfil = () => {
@@ -30,6 +31,29 @@ const Perfil = () => {
 
   useEffect(() => {
     if (usuarioLogado && clienteId) {
+      const accessToken = localStorage.getItem('accessToken');
+      const decodedToken = jwtDecode(accessToken);
+      const decodedUserId = decodedToken.user_id;
+
+      const fetchUserData = async () => {
+        try {
+          const response = await Axios.get(
+            `http://127.0.0.1:8000/api/usuarios/${decodedUserId}/`,
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
+          );
+          setNomeUsuario(response.data.username);
+          setEmail(response.data.email);
+          setUsuario(decodedUserId);
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      };
+      fetchUserData();
+
       const fetchData = async () => {
         try {
           const response = await Axios.get(
@@ -50,9 +74,6 @@ const Perfil = () => {
           setBairro(response.data.bairro || "");
           setCidade(response.data.cidade || "");
           setEstado(response.data.estado || "");
-          setNomeUsuario(response.data.username || "");
-          setEmail(response.data.email || "");
-          setUsuario(userId);
           setSexo(response.data.sexo || "");
           setDataNascimento(response.data.data_nascimento || "");
           setCpf(response.data.cpf || "");
@@ -62,7 +83,33 @@ const Perfil = () => {
       };
       fetchData();
     }
-  }, [usuarioLogado, userId]);
+  }, []);
+
+  useEffect(() => {
+    if (usuarioLogado && !clienteId) {
+      const accessToken = localStorage.getItem('accessToken');
+      const decodedToken = jwtDecode(accessToken);
+      const decodedUserId = decodedToken.user_id;
+      const fetchData = async () => {
+        try {
+          const response = await Axios.get(
+            `http://127.0.0.1:8000/api/usuarios/${decodedUserId}/`,
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
+          );
+          setNomeUsuario(response.data.username);
+          setEmail(response.data.email);
+          setUsuario(decodedUserId);
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      };
+      fetchData();
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -120,7 +167,7 @@ const Perfil = () => {
             },
           }
         );
-        console.log(" TOKEN", csrfToken);
+        window.alert("Dados atualizados com sucesso!")
       }
     } catch (error) {
       console.error("Error:", error.response);
@@ -210,7 +257,7 @@ const Perfil = () => {
               {renderUserInfo("Nome", nome, setNome)}
               {renderUserInfo("CPF", cpf, setCpf)}
 
-              {renderUserInfo("Email", emailUsuario, null)}
+              {renderUserInfo("Email", email, null)}
               {renderUserInfo("CEP", cep, setCep)}
               {renderUserInfo("Cidade", cidade, setCidade)}
             </div>
@@ -227,10 +274,10 @@ const Perfil = () => {
               )}
             </div>
             <div className="col-md-4">
-              {renderUserInfo("Nome de usuário", userNameLogin, null)}
+              {renderUserInfo("Nome de usuário", nomeUsuario)}
               {renderUserInfo("Celular", celular, setCelular)}
               {renderUserInfo("Bairro", bairro, setBairro)}
-              {renderUserInfo("Usuario", userId, null)}
+              {renderUserInfo("Usuario", usuario, null)}
               {renderSexo()}
             </div>
           </div>
@@ -242,14 +289,14 @@ const Perfil = () => {
             >
               <p className="btn-minha-area-text">Atualizar dados</p>
             </button>
-            <button
+            {/* <button
               type="submit"
               className="btn-minha-area"
               onClick={deletarUsuario}
               style={{ height: "40px", width: "150px", fontSize: "16px" }}
             >
               <p className="btn-minha-area-text">Deletar usuário</p>
-            </button>
+            </button> */}
           </div>
         </form>
       </div>

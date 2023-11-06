@@ -2,6 +2,7 @@ import Axios from "axios";
 import Header from "../../componentes/Header";
 import Footer from "../../componentes/Footer";
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./MeusPedidos.css";
 import { useAuth } from "../../context/AuthContext";
 
@@ -36,10 +37,8 @@ const MeusPedidos = () => {
       },
     })
       .then((response) => {
-        console.log("RESPONSE PEDIDOS", response);
+
         setPedidos(response.data);
-        console.log("itens response", response.data[0].itens_pedido);
-        console.log("itens response", response.data[0].itens_pedido);
       })
       .catch((error) => {
         console.error("Erro ao obter pedidos:", error);
@@ -95,7 +94,7 @@ const MeusPedidos = () => {
     <div>
       <Header />
       <div style={{ marginTop: "10px", marginBottom: "100px" }}>
-        {pedidos ? (
+        {pedidos.length > 0 ? (
           <div className="centered-content">
             {pedidos.map((pedido) => (
               <div key={pedido.id} className="pedido-container">
@@ -119,7 +118,7 @@ const MeusPedidos = () => {
                 <p className="data">
                   Data do pedido: {formatarData(pedido.data_compra)}
                 </p>
-                <p className="data">
+                <p className="data text-capitalize">
                   Método de pagamento: {pedido.metodo_de_pagamento}
                 </p>
                 <p>Total: R$ {pedido.valor_total}</p>
@@ -139,6 +138,11 @@ const MeusPedidos = () => {
               Você ainda não tem pedidos feitos. Acesse o cardápio e faça seu
               primeiro pedido com a gente!
             </h3>
+            <div style={{ textAlign: "center", marginTop: "5px", fontSize: "1.5rem" }}>
+          <Link to={"/cardapio"}>
+            <p>Acesse o cardápio</p>
+          </Link>
+        </div>
           </div>
         )}
       </div>

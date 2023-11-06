@@ -20,12 +20,13 @@ const CardProdutoCarrinho = ({
 
   return (
     <div className="card-produto-carrinho justify-content-around rounded">
-      <div className="card-img " style={{ maxWidth: "100px" }}>
+      <div className="card-img " style={{ maxWidth: "200px" }}>
         <Image
           cloudName="dfjghzyfb"
           publicId={publicId}
           alt={`Imagem ${produto.nome}`}
           className="cardapio-img"
+          style={{ minWidth:"150px", minHeight:"150px" }}
         />
       </div>
 
