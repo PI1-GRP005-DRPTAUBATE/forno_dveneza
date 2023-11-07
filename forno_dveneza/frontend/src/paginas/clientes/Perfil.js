@@ -140,6 +140,7 @@ const Perfil = () => {
             },
           }
         );
+        window.alert("Dados atualizados com sucesso!")
       } else {
         const response = await Axios.put(
           `http://127.0.0.1:8000/api/usuario/editar-cliente/${clienteId}/`,

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./Cadastro.css";
+import { Link } from "react-router-dom";
 import Header from "../../componentes/Header";
 import Footer from "../../componentes/Footer";
+
 
 const Cadastro = () => {
   const [formData, setFormData] = useState({
@@ -38,10 +40,8 @@ const Cadastro = () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         if (data.username && data.username.length > 0) {
-          setErrorMessage(data.username[0]);
-          setAvisoMessage("");
-        } else {
           setAvisoMessage("Usuário cadastrado com sucesso");
           setErrorMessage("");
         }
@@ -117,7 +117,10 @@ const Cadastro = () => {
             )}
             {avisoMessage && (
               <div className="my-3 text-center">
-                <span className="text-success">{avisoMessage}</span>
+                <span className="text-success">{avisoMessage}</span> <hr />
+                <Link to="/login" className="btn-login">
+                  Fazer Login
+                </Link>
               </div>
             )}
           </form>

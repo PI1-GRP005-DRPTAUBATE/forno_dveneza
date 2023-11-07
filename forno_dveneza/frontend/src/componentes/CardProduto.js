@@ -23,6 +23,7 @@ const CardProduto = ({
           publicId={publicId}
           alt={`Imagem ${produto.nome}`}
           className="cardapio-img"
+          style={{ minWidth:"150px", minHeight:"150px" }}
         />
       </div>
       <div className="card-info mx-2">
@@ -44,7 +45,7 @@ const CardProduto = ({
                 <option value="Meia">Meia</option>
               </select>
             </label> */}
-            <label for="selecaoTipoBorda" style={{ marginTop: "10px" }} className="d-flex align-items-center">
+            {/* <label for="selecaoTipoBorda" style={{ marginTop: "10px" }} className="d-flex align-items-center">
               Borda:
               <select
                 id="selecaoTipoBorda"
@@ -56,7 +57,7 @@ const CardProduto = ({
                 <option value="Recheada">Recheada</option>
                 <option value="Simples">Simples</option>
               </select>
-            </label>
+            </label> */}
           </div>
         )}
       </div>
