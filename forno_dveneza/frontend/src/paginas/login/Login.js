@@ -47,7 +47,7 @@ const Login = () => {
     setCarregando(true);
 
     Axios.post(
-      "http://127.0.0.1:8000/api/usuario/token/",
+      "https://fornodveneza.pythonanywhere.com/api/usuario/token/",
       `username=${nomeDeUsuario}&password=${senha}`,
       {
         headers: {

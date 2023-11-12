@@ -20,7 +20,7 @@ const MeusPedidos = () => {
   }
 
   useEffect(() => {
-    Axios.get("http://127.0.0.1:8000/api/categorias/")
+    Axios.get("https://fornodveneza.pythonanywhere.com/api/categorias/")
       .then((responseCategoria) => {
         setCategorias(responseCategoria.data);
       })
@@ -30,7 +30,7 @@ const MeusPedidos = () => {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://127.0.0.1:8000/api/pedido/todos-pedidos/", {
+    Axios.get("https://fornodveneza.pythonanywhere.com/api/pedido/todos-pedidos/", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "X-CSRFToken": csrfToken,
@@ -46,7 +46,7 @@ const MeusPedidos = () => {
   }, [accessToken, csrfToken]);
 
   useEffect(() => {
-    Axios.get("http://127.0.0.1:8000/api/pedido/todos-pedidos/", {
+    Axios.get("https://fornodveneza.pythonanywhere.com/api/pedido/todos-pedidos/", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "X-CSRFToken": csrfToken,
@@ -59,7 +59,7 @@ const MeusPedidos = () => {
               pedido.itens_pedido.map(async (item) => {
                 try {
                   const responseProduto = await Axios.get(
-                    `http://127.0.0.1:8000/api/produtos/${item.produto}/`
+                    `https://fornodveneza.pythonanywhere.com/api/produtos/${item.produto}/`
                   );
                   return {
                     ...item,

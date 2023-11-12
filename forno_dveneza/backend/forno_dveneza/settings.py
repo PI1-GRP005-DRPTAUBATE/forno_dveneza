@@ -13,6 +13,7 @@ import os.path
 from pathlib import Path
 from datetime import timedelta
 from decouple import config
+import cloudinary
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -155,6 +156,13 @@ STATICFILES_DIRS = [BASE_DIR / 'build/static']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Configurações do Cloudinary
+cloudinary.config(
+    cloud_name='dfjghzyfb',
+    api_key='855839977565449',
+    api_secret='QNRMEYMyTtUe3TYhHg5G6MeE6VE',
+    api_proxy='http://proxy.server:3128'
+)
+
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': config('CLOUD_NAME'),
     'API_KEY': config('API_KEY'),

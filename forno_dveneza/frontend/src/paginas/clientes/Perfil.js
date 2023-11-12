@@ -30,7 +30,7 @@ const Perfil = () => {
   } = useAuth();
 
   useEffect(() => {
-    if (usuarioLogado && clienteId) {
+    if (localStorage.getItem('accessToken')) {
       const accessToken = localStorage.getItem('accessToken');
       const decodedToken = jwtDecode(accessToken);
       const decodedUserId = decodedToken.user_id;
@@ -38,7 +38,7 @@ const Perfil = () => {
       const fetchUserData = async () => {
         try {
           const response = await Axios.get(
-            `http://127.0.0.1:8000/api/usuarios/${decodedUserId}/`,
+            `https://fornodveneza.pythonanywhere.com/api/usuarios/${decodedUserId}/`,
             {
               headers: {
                 Authorization: `Bearer ${accessToken}`,
@@ -57,7 +57,7 @@ const Perfil = () => {
       const fetchData = async () => {
         try {
           const response = await Axios.get(
-            `http://127.0.0.1:8000/api/usuario/informacoes/`,
+            `https://fornodveneza.pythonanywhere.com/api/usuario/informacoes/`,
             {
               headers: {
                 Authorization: `Bearer ${accessToken}`,
@@ -65,6 +65,7 @@ const Perfil = () => {
             }
           );
 
+          localStorage.setItem("idCliente", response.data.id ?? null);
           setNome(response.data.nome || "");
           setSobrenome(response.data.sobrenome || "");
           setTelefone(response.data.telefone || "");
@@ -85,38 +86,38 @@ const Perfil = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (usuarioLogado && !clienteId) {
-      const accessToken = localStorage.getItem('accessToken');
-      const decodedToken = jwtDecode(accessToken);
-      const decodedUserId = decodedToken.user_id;
-      const fetchData = async () => {
-        try {
-          const response = await Axios.get(
-            `http://127.0.0.1:8000/api/usuarios/${decodedUserId}/`,
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-              },
-            }
-          );
-          setNomeUsuario(response.data.username);
-          setEmail(response.data.email);
-          setUsuario(decodedUserId);
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        }
-      };
-      fetchData();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (usuarioLogado && !clienteId) {
+  //     const accessToken = localStorage.getItem('accessToken');
+  //     const decodedToken = jwtDecode(accessToken);
+  //     const decodedUserId = decodedToken.user_id;
+  //     const fetchData = async () => {
+  //       try {
+  //         const response = await Axios.get(
+  //           `https://fornodveneza.pythonanywhere.com/api/usuarios/${decodedUserId}/`,
+  //           {
+  //             headers: {
+  //               Authorization: `Bearer ${accessToken}`,
+  //             },
+  //           }
+  //         );
+  //         setNomeUsuario(response.data.username);
+  //         setEmail(response.data.email);
+  //         setUsuario(decodedUserId);
+  //       } catch (error) {
+  //         console.error("Error fetching user data:", error);
+  //       }
+  //     };
+  //     fetchData();
+  //   }
+  // }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (clienteId === null) {
+      if (localStorage.getItem('idCliente') === null) {
         const response = await Axios.post(
-          `http://127.0.0.1:8000/api/usuario/novo-cliente/`,
+          `https://fornodveneza.pythonanywhere.com/api/usuario/novo-cliente/`,
           {
             nome,
             sobrenome,
@@ -143,7 +144,7 @@ const Perfil = () => {
         window.alert("Dados atualizados com sucesso!")
       } else {
         const response = await Axios.put(
-          `http://127.0.0.1:8000/api/usuario/editar-cliente/${clienteId}/`,
+          `https://fornodveneza.pythonanywhere.com/api/usuario/editar-cliente/${localStorage.getItem('idCliente')}/`,
           {
             nome,
             sobrenome,
@@ -232,7 +233,7 @@ const Perfil = () => {
   const deletarUsuario = async () => {
     try {
       const response = await Axios.delete(
-        `http://127.0.0.1:8000/api/usuario/deletar-cliente/${clienteId}/`,
+        `https://fornodveneza.pythonanywhere.com/api/usuario/deletar-cliente/${clienteId}/`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

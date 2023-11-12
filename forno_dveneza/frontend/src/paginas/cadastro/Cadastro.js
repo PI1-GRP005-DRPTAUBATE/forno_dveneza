@@ -30,7 +30,7 @@ const Cadastro = () => {
       password: formData.senha,
     };
 
-    fetch("http://127.0.0.1:8000/api/usuarios/", {
+    fetch("https://fornodveneza.pythonanywhere.com/api/usuarios/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

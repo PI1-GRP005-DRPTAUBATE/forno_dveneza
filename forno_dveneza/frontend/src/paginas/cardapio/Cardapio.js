@@ -16,11 +16,11 @@ const Cardapio = ({ borda, pizzaMeia }) => {
   const { adicionarProdutoAoCarrinho } = useCarrinho();
 
   useEffect(() => {
-    Axios.get("http://127.0.0.1:8000/api/produtos/").then((response) => {
+    Axios.get("https://fornodveneza.pythonanywhere.com/api/produtos/").then((response) => {
       setProdutos(response.data);
 
       setCadastrado(response.data.cadastrado);
-      Axios.get("http://127.0.0.1:8000/api/categorias/").then(
+      Axios.get("https://fornodveneza.pythonanywhere.com/api/categorias/").then(
         (responseCategoria) => {
           setCategorias(responseCategoria.data.map((categoria) => categoria));
           setCategoria(

@@ -30,7 +30,7 @@ const FinalizarCompra = () => {
       };
 
       const response = await Axios.post(
-        "http://127.0.0.1:8000/api/pedido/novo-pedido/",
+        "https://fornodveneza.pythonanywhere.com/api/pedido/novo-pedido/",
         dadosPedido,
         {
           headers: {
