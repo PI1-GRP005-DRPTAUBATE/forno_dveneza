@@ -23,7 +23,7 @@ const Home = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            marginTop: "-40px",
+            marginTop: "50px",
             padding: "20px",
             paddingBottom: "25px",
           }}
