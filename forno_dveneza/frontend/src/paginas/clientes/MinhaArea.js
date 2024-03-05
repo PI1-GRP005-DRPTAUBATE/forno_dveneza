@@ -4,14 +4,18 @@ import Footer from "../../componentes/Footer";
 import Header from "../../componentes/Header";
 import "./MinhaArea.css";
 import Perfil from "./Perfil";
-import { Container, Row, Col } from "react-bootstrap";
 
 const MinhaArea = () => {
   return (
     <div>
       <Header />
-
-      <div className="d-flex w-100">
+      <div
+        className="d-flex w-100 flex-column flex-md-row"
+        style={{
+          margin: "20px",
+          marginTop: "100px",
+        }}
+      >
         <div className="col-md-3">
           <div
             className="d-flex flex-column align-items-center"
