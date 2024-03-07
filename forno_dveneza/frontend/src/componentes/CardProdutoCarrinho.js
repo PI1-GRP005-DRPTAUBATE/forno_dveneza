@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
 import { extrairPublicId } from "../validacoes/extrairPublicId";
+import "./CardProdutoCarrinho.css";
 
 const CardProdutoCarrinho = ({
   produto,
@@ -15,11 +16,25 @@ const CardProdutoCarrinho = ({
   borda,
   pizzaMeia,
 }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const url = produto.foto;
   const publicId = url ? extrairPublicId(url) : null;
 
   return (
-    <div className="card-produto-carrinho justify-content-around">
+    <div className="card-produto mb-4 justify-content-around">
       <div className="card-img " style={{ maxWidth: "100px" }}>
         <Image
           cloudName="dfjghzyfb"
@@ -28,7 +43,6 @@ const CardProdutoCarrinho = ({
           className="cardapio-img"
         />
       </div>
-
       <div className="card-info mx-2">
         <h5 className="card-title">{produto.nome}</h5>
         <p className="card-text">{produto.descricao}</p>
@@ -40,7 +54,7 @@ const CardProdutoCarrinho = ({
           <p>Borda: {borda ? "Rechada" : "Simples"}</p>
         )}
       </div>
-      <div className="quantidade-produto">
+      <div className="quantidade-produto" style={{ marginLeft: "22px" }}>
         <p>Quantidade</p>
         <button onClick={onDecrement}>-</button>
         <input
@@ -51,10 +65,20 @@ const CardProdutoCarrinho = ({
         />
         <button onClick={() => adicionarProdutoAoCarrinho(produto)}>+</button>
       </div>
-      <div
-        className="btn-carrinho"
-        style={{ justifyContent: "center", marginTop: "35px" }}
-      >
+      {isMobile ? (
+        <div className="card-text-preco" style={{ marginLeft: "-150px" }}>
+          <p className="card-text-preco">Preço</p>
+          <p className="card-text-preco">
+            R$ {produto.preco_unidade * quantidade}
+          </p>
+        </div>
+      ) : (
+        <div>
+          <p className="card-text">Preço</p>
+          <p>R$ {produto.preco_unidade * quantidade}</p>
+        </div>
+      )}
+      <div className="btn-carrinho">
         <Link
           className="link-button"
           onClick={() => {
@@ -63,10 +87,6 @@ const CardProdutoCarrinho = ({
         >
           <p className="btn-carrinho-text">Excluir</p>
         </Link>
-      </div>
-      <div>
-        <p className="card-text">Preço</p>
-        <p>R$ {produto.preco_unidade * quantidade}</p>
       </div>
     </div>
   );

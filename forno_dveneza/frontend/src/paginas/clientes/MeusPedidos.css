@@ -51,3 +51,9 @@
 .btn-action:hover {
   background-color: #149f83;
 }
+
+@media (max-width: 767px) {
+  body {
+    overflow-x: hidden;
+  }
+}

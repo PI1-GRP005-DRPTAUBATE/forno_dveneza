@@ -1,4 +1,6 @@
-Perfil.css .container-mobile {
+/* Perfil.css  */
+
+.container-mobile {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,5 +34,8 @@ Perfil.css .container-mobile {
   .form-container {
     width: 100%;
     max-width: 300px;
+  }
+  body {
+    overflow-x: hidden;
   }
 }

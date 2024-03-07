@@ -42,9 +42,7 @@ const Cardapio = ({ borda, pizzaMeia }) => {
     <div className="centered-content" style={{ marginBottom: "200px" }}>
       <Header />
       <div style={{ padding: "40px" }}>
-        <h3 className="cardapio-titulo" style={{ textAlign: "center" }}>
-          Cardápio
-        </h3>
+        <h3 className="cardapio-titulo">Cardápio</h3>
       </div>
 
       <div className="centered-content">
@@ -52,7 +50,7 @@ const Cardapio = ({ borda, pizzaMeia }) => {
           categorias.map((categoria) => (
             <div
               key={categoria.id}
-              style={{ marginLeft: "200px", marginRight: "300px" }}
+              style={{ marginLeft: "20px", marginRight: "20px" }}
             >
               <h4 className="m-0 mx-3">{categoria.descricao}</h4>
               <section className="d-flex flex-wrap">
@@ -94,7 +92,6 @@ const Cardapio = ({ borda, pizzaMeia }) => {
           </div>
         </div>
       )}
-
       <Footer />
     </div>
   );

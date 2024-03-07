@@ -94,7 +94,7 @@ const MeusPedidos = () => {
   return (
     <div>
       <Header />
-      <div style={{ marginTop: "10px", marginBottom: "100px" }}>
+      <div style={{ marginTop: "100px", marginBottom: "100px" }}>
         {pedidos ? (
           <div className="centered-content">
             {pedidos.map((pedido) => (

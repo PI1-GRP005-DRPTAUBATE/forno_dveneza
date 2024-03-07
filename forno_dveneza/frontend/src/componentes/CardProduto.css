@@ -1,0 +1,25 @@
+/* CardProduto.css */
+
+@media (max-width: 768px) {
+  .card-produto {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 20px;
+    width: 95%;
+    max-width: 700px;
+    height: auto;
+    border: 1px solid #f11f0769;
+    margin: 10px auto 20px;
+    padding: 20px;
+  }
+  .card-img {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-img img {
+    width: 100%;
+    height: auto;
+  }
+}

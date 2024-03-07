@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../componentes/Header";
 import Footer from "../../componentes/Footer";
 import { Link } from "react-router-dom";
@@ -16,6 +16,20 @@ const Carrinho = () => {
     totalPedido,
   } = useCarrinho();
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const calcularTotal = (produtosCarrinho) => {
     let total = 0;
 
@@ -25,6 +39,7 @@ const Carrinho = () => {
     setTotalPedido(total);
     return total;
   };
+
   const decrementQuantity = (produtoId) => {
     const novoCarrinho = [...produtosCarrinho];
     const index = novoCarrinho.findIndex(
@@ -62,28 +77,10 @@ const Carrinho = () => {
   const produtosUnicos = agruparProdutos();
   const totalCompra = calcularTotal(produtosUnicos);
 
-  // const renderFormadePagamento = () => {
-  //   return (
-  //     <div style={{ marginTop: "15px" }}>
-  //       <label className="form-label">Forma de pagamento</label>
-  //       <select
-  //         className="form-select"
-  //         value={formaDePagamento}
-  //         onChange={(e) => setFormaDePagamento(e.target.value)}
-  //       >
-  //         <option value="">Selecione a forma de pagamento</option>
-  //         <option value="dinheiro">Dinheiro</option>
-  //         <option value="cartao">Cartão</option>
-  //         <option value="pix">Pix</option>
-  //       </select>
-  //     </div>
-  //   );
-  // };
-
   return (
-    <div className="centered-content" style={{ marginBottom: "200px" }}>
+    <div className="centered-content">
       <Header />
-      <div style={{ textAlign: "center", padding: "40px" }}>
+      <div style={{ textAlign: "center", marginTop: "150px" }}>
         <h2>Seu carrinho de compras</h2>
       </div>
       {produtosUnicos.length ? (
@@ -121,7 +118,13 @@ const Carrinho = () => {
           </div>
         </div>
       ) : (
-        <div style={{ textAlign: "center", marginTop: "5px" }}>
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "5px",
+            marginBottom: "50px",
+          }}
+        >
           <p>Seu carrinho de compras está vazio!</p>
           <Link to={"/cardapio"}>
             <p>Acesse o cardápio</p>

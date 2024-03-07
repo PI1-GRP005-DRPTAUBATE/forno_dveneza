@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
 import { extrairPublicId } from "../validacoes/extrairPublicId";
+import "./CardProduto.css";
 
 const CardProduto = ({
   produto,

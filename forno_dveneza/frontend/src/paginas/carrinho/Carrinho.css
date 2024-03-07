@@ -1,3 +1,5 @@
+/* Carrinho.css */
+
 .checkout-carrinho {
   display: flex;
   flex-direction: column;
@@ -7,4 +9,13 @@
 }
 .btn-container-carrinho {
   margin-left: -10px;
+}
+
+@media (max-width: 767px) {
+  .btn-container-carrinho {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
 }

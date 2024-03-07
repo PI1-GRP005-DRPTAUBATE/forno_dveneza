@@ -159,3 +159,9 @@
   justify-content: center;
   align-items: center;
 }
+
+@media (max-width: 767px) {
+  .cardapio-titulo {
+    margin-top: 50px;
+  }
+}
