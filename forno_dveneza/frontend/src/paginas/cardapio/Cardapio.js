@@ -39,13 +39,19 @@ const Cardapio = ({ borda, pizzaMeia }) => {
   };
 
   return (
-    <div className="centered-content" style={{ marginBottom: "200px" }}>
+    <div>
       <Header />
-      <div style={{ padding: "40px" }}>
-        <h3 className="cardapio-titulo">Cardápio</h3>
+      <div style={{ marginTop: "150px" }}>
+        <h3
+          className="cardapio-titulo"
+          className="centered-content"
+          style={{ marginLeft: "10px" }}
+        >
+          Cardápio
+        </h3>
       </div>
 
-      <div className="centered-content">
+      <div style={{ marginTop: "50px", marginBottom: "100px" }}>
         {categorias.length > 0 &&
           categorias.map((categoria) => (
             <div
@@ -72,27 +78,31 @@ const Cardapio = ({ borda, pizzaMeia }) => {
             </div>
           ))}
       </div>
-      {alertaVisivel && (
-        <div className="overlay">
-          <div className="alert-container">
-            <div
-              id="alertaProduto"
-              className="alert alert-success w-50 text-center alert-dismissible fade show"
-              role="alert"
-            >
-              Produto adicionado ao seu carrinho!
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-                onClick={() => setAlertaVisivel(false)}
-              ></button>
+      <div>
+        {alertaVisivel && (
+          <div className="overlay">
+            <div className="alert-container">
+              <div
+                id="alertaProduto"
+                className="alert alert-success w-50 text-center alert-dismissible fade show"
+                role="alert"
+              >
+                Produto adicionado ao seu carrinho!
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                  onClick={() => setAlertaVisivel(false)}
+                ></button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-      <Footer />
+        )}
+      </div>
+      <div style={{ marginBottom: "100px", marginTop: "100px" }}>
+        <Footer />
+      </div>
     </div>
   );
 };

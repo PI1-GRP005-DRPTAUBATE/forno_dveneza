@@ -78,14 +78,20 @@ const Carrinho = () => {
   const totalCompra = calcularTotal(produtosUnicos);
 
   return (
-    <div className="centered-content">
+    <div>
       <Header />
       <div style={{ textAlign: "center", marginTop: "150px" }}>
         <h2>Seu carrinho de compras</h2>
       </div>
       {produtosUnicos.length ? (
-        <div>
-          <div className="centered-content">
+        <div
+          className="centered-content"
+          // style={{ marginLeft: "-30px" }}
+        >
+          <div
+            className={"centered-content"}
+            style={isMobile ? { marginLeft: "-40px" } : {}}
+          >
             {produtosUnicos.map((item) => (
               <CardProdutoCarrinho
                 key={item.produto.id}

@@ -54,7 +54,7 @@ const CardProdutoCarrinho = ({
           <p>Borda: {borda ? "Rechada" : "Simples"}</p>
         )}
       </div>
-      <div className="quantidade-produto" style={{ marginLeft: "22px" }}>
+      <div className="quantidade-produto" style={{ marginLeft: "45px" }}>
         <p>Quantidade</p>
         <button onClick={onDecrement}>-</button>
         <input
@@ -66,7 +66,7 @@ const CardProdutoCarrinho = ({
         <button onClick={() => adicionarProdutoAoCarrinho(produto)}>+</button>
       </div>
       {isMobile ? (
-        <div className="card-text-preco" style={{ marginLeft: "-150px" }}>
+        <div className="card-text-preco">
           <p className="card-text-preco">Preço</p>
           <p className="card-text-preco">
             R$ {produto.preco_unidade * quantidade}

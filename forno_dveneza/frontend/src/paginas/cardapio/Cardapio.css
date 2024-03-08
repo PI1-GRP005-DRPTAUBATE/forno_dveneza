@@ -161,7 +161,7 @@
 }
 
 @media (max-width: 767px) {
-  .cardapio-titulo {
-    margin-top: 50px;
+  .col-md-3 {
+    margin-left: -100px;
   }
 }
